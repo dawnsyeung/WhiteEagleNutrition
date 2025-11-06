@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">White Eagle Nutrition Logo</title>
+  <desc id="desc">Stylized feather forming a circular emblem</desc>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2b5f4c" />
+      <stop offset="100%" stop-color="#f2a365" />
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="56" fill="#f6f5f3" stroke="#2b5f4c" stroke-width="4" />
+  <path
+    d="M38 84c28-8 48-28 50-50 0-2-2-6-8-6-22 0-46 24-46 52 0 4 2 6 4 6z"
+    fill="url(#grad)"
+    stroke="#224b3d"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M42 72c10-18 28-34 44-40"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="4"
+    stroke-linecap="round"
+    opacity="0.7"
+  />
+</svg>
