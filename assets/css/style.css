@@ -349,9 +349,21 @@ img {
 
 .species-grid__items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.6rem;
   margin-top: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .species-grid__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .species-grid__items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .species-card {
