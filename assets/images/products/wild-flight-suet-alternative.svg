@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Stylized bluebird perched on a feeder</title>
+  <desc id="desc">Abstract illustration with cool gradient tones evoking an energetic wild bird in flight.</desc>
+  <defs>
+    <linearGradient id="bird-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eef7ff" />
+      <stop offset="50%" stop-color="#a8d8ff" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <linearGradient id="bird-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <linearGradient id="bird-wing" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#facc15" />
+      <stop offset="100%" stop-color="#f97316" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bird-bg)" rx="48" />
+  <ellipse cx="390" cy="470" rx="260" ry="110" fill="#1d4a89" opacity="0.35" />
+  <path
+    d="M220 320c40-70 152-120 238-84 60 26 92 92 60 142-27 42-94 60-142 40-58-24-78-92-30-126"
+    fill="url(#bird-body)"
+  />
+  <path
+    d="M328 280c32-24 106-34 154 12 36 34 30 84-20 114"
+    fill="none"
+    stroke="url(#bird-wing)"
+    stroke-width="38"
+    stroke-linecap="round"
+    opacity="0.75"
+  />
+  <circle cx="468" cy="292" r="16" fill="#0f172a" />
+  <circle cx="462" cy="288" r="6" fill="#facc15" />
+  <path
+    d="M186 416c80-46 204-46 278 18"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="20"
+    stroke-linecap="round"
+    opacity="0.35"
+  />
+  <rect x="520" y="340" width="120" height="160" rx="24" fill="#fbbf24" opacity="0.75" />
+  <rect x="540" y="360" width="80" height="120" rx="18" fill="#f97316" opacity="0.85" />
+  <circle cx="560" cy="408" r="10" fill="#fde68a" opacity="0.9" />
+  <circle cx="584" cy="432" r="8" fill="#fde68a" opacity="0.9" />
+  <circle cx="566" cy="458" r="7" fill="#fde68a" opacity="0.9" />
+  <path
+    d="M308 246c-40-14-68-42-66-70 2-26 36-42 76-34 32 7 54 30 48 52"
+    fill="none"
+    stroke="#1d4ed8"
+    stroke-width="22"
+    stroke-linecap="round"
+    opacity="0.45"
+  />
+</svg>
