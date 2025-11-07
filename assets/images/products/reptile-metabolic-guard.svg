@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Stylized reptile resting on a rock</title>
+  <desc id="desc">Illustrated BSFL nutrition concept art for reptiles with warm gradient background.</desc>
+  <defs>
+    <linearGradient id="reptile-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7f2ff" />
+      <stop offset="50%" stop-color="#d4c4ff" />
+      <stop offset="100%" stop-color="#5a4eff" />
+    </linearGradient>
+    <linearGradient id="reptile-body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1bb980" />
+      <stop offset="100%" stop-color="#0c7c52" />
+    </linearGradient>
+    <linearGradient id="reptile-highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f9f871" />
+      <stop offset="100%" stop-color="#f5b756" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#reptile-bg)" rx="48" />
+  <ellipse cx="400" cy="430" rx="260" ry="110" fill="#2b214f" opacity="0.35" />
+  <path
+    d="M190 380c40-90 170-150 272-108 66 27 99 95 87 150-8 36-32 66-66 80-34 14-76 12-100-12-28-28-28-79 16-108 54-35 37-110-30-120-56-8-128 36-146 118z"
+    fill="url(#reptile-body)"
+  />
+  <path
+    d="M265 360c22-46 90-68 134-40 36 22 31 74-12 92-40 16-22 62 10 65"
+    fill="none"
+    stroke="#0a5e3f"
+    stroke-width="16"
+    stroke-linecap="round"
+    opacity="0.65"
+  />
+  <circle cx="504" cy="320" r="20" fill="#111827" />
+  <circle cx="497" cy="315" r="6" fill="#f9f871" />
+  <path
+    d="M540 356c32 0 68 50 64 90-4 38-52 64-92 52"
+    fill="none"
+    stroke="url(#reptile-highlight)"
+    stroke-width="20"
+    stroke-linecap="round"
+    opacity="0.8"
+  />
+  <path
+    d="M320 470c-46 16-92-2-110-34-16-30-6-66 26-84"
+    fill="none"
+    stroke="#f5f5ff"
+    stroke-width="18"
+    stroke-linecap="round"
+    opacity="0.55"
+  />
+</svg>
