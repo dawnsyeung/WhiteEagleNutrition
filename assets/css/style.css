@@ -208,7 +208,7 @@ img {
 .hero__copy h1 {
   font-size: clamp(2.3rem, 3rem, 4rem);
   line-height: 1.1;
-  margin-bottom: 1rem;
+  margin-bottom: 1.4rem;
 }
 
 .hero__copy p {
@@ -406,7 +406,7 @@ img {
 
 .product-card__badge {
   position: absolute;
-  top: 1.2rem;
+  top: 0.85rem;
   left: 2rem;
   background: var(--color-primary);
   color: #fff;
