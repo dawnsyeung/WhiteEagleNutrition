@@ -167,41 +167,60 @@
     });
   };
 
-  const setupProductSearch = () => {
-    const searchInput = qs('[data-product-search]');
+  const setupProductFiltering = () => {
     const products = qsa('[data-product-card]');
+    if (!products.length) return;
 
-    if (!searchInput || !products.length) return;
+    const searchInput = qs('[data-product-search]');
+    const buttons = qsa('.chip[data-filter]');
 
-    const filterProducts = () => {
-      const term = searchInput.value.trim().toLowerCase();
+    const initialFilterButton =
+      buttons.find((button) => button.classList.contains('is-active')) ||
+      buttons.find((button) => button.getAttribute('aria-selected') === 'true');
+
+    let activeFilter = initialFilterButton?.getAttribute('data-filter') || 'all';
+    let searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+    const applyFilters = () => {
       products.forEach((product) => {
-        const matches = product.textContent.toLowerCase().includes(term);
-        product.style.display = matches ? '' : 'none';
+        const categoryAttr = product.getAttribute('data-category') || '';
+        const categories = categoryAttr.split(' ').filter(Boolean);
+        const matchesFilter = activeFilter === 'all' || categories.includes(activeFilter);
+        const matchesSearch = !searchTerm || product.textContent.toLowerCase().includes(searchTerm);
+        product.style.display = matchesFilter && matchesSearch ? '' : 'none';
       });
     };
 
-    searchInput.addEventListener('input', filterProducts);
-  };
+    if (searchInput) {
+      const handleSearch = () => {
+        searchTerm = searchInput.value.trim().toLowerCase();
+        applyFilters();
+      };
 
-  const setupProductFilters = () => {
-    const buttons = qsa('.chip[data-filter]');
-    const products = qsa('[data-product-card]');
-    if (!buttons.length || !products.length) return;
+      searchInput.addEventListener('input', handleSearch);
+      searchInput.addEventListener('search', handleSearch);
+    }
 
+    if (buttons.length) {
       buttons.forEach((button) => {
         button.addEventListener('click', () => {
-          const selected = button.getAttribute('data-filter');
-          buttons.forEach((btn) => btn.classList.toggle('is-active', btn === button));
+          const selected = button.getAttribute('data-filter') || 'all';
+          if (selected === activeFilter) return;
 
-          products.forEach((product) => {
-            const categoryAttr = product.getAttribute('data-category') || 'all';
-            const categories = categoryAttr.split(' ').filter(Boolean);
-            const matches = selected === 'all' || categories.includes(selected);
-            product.style.display = matches ? '' : 'none';
+          activeFilter = selected;
+
+          buttons.forEach((btn) => {
+            const isActive = btn === button;
+            btn.classList.toggle('is-active', isActive);
+            btn.setAttribute('aria-selected', String(isActive));
           });
+
+          applyFilters();
         });
       });
+    }
+
+    applyFilters();
   };
 
   const setupAccordions = () => {
@@ -244,8 +263,7 @@
     setupNavigation();
     setupCart();
     setupProductButtons();
-    setupProductSearch();
-    setupProductFilters();
+    setupProductFiltering();
     setupAccordions();
     setupBundleButton();
     updateYear();
