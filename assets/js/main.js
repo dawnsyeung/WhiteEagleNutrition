@@ -189,17 +189,19 @@
     const products = qsa('[data-product-card]');
     if (!buttons.length || !products.length) return;
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const selected = button.getAttribute('data-filter');
-        buttons.forEach((btn) => btn.classList.toggle('is-active', btn === button));
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const selected = button.getAttribute('data-filter');
+          buttons.forEach((btn) => btn.classList.toggle('is-active', btn === button));
 
-        products.forEach((product) => {
-          const category = product.getAttribute('data-category') || 'all';
-          product.style.display = selected === 'all' || category === selected ? '' : 'none';
+          products.forEach((product) => {
+            const categoryAttr = product.getAttribute('data-category') || 'all';
+            const categories = categoryAttr.split(' ').filter(Boolean);
+            const matches = selected === 'all' || categories.includes(selected);
+            product.style.display = matches ? '' : 'none';
+          });
         });
       });
-    });
   };
 
   const setupAccordions = () => {
