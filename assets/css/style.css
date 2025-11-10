@@ -1145,6 +1145,30 @@ img {
   padding: 4rem 0 2rem;
 }
 
+.footer__brand {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 420px;
+}
+
+.footer__brand p {
+  margin: 0;
+}
+
+.footer__brand p + p {
+  margin-top: 0.75rem;
+}
+
+.footer__brand .logo {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.footer-tagline {
+  margin: 0;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .site-footer a {
   color: rgba(255, 255, 255, 0.9);
 }
