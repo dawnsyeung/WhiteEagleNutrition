@@ -425,6 +425,10 @@ img {
   background: #2f6690;
 }
 
+.product-card__badge--gold {
+  background: #b15f14;
+}
+
 .product-card__subtitle {
   color: var(--color-muted);
   margin: -0.4rem 0 1rem;
