@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360" role="img" aria-labelledby="title desc">
+  <title id="title">Gift basket with brown paper packages and a bow</title>
+  <desc id="desc">Illustrated wicker basket filled with brown paper wrapped packages accented by a ribbon bow on top.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f7f3eb" />
+      <stop offset="100%" stop-color="#ebe2d5" />
+    </linearGradient>
+    <linearGradient id="basketGradient" x1="0" x2="1" y1="0.2" y2="0.9">
+      <stop offset="0%" stop-color="#b9783f" />
+      <stop offset="40%" stop-color="#a3622c" />
+      <stop offset="100%" stop-color="#834b1f" />
+    </linearGradient>
+    <linearGradient id="handleGradient" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#c28246" />
+      <stop offset="100%" stop-color="#8c531d" />
+    </linearGradient>
+    <linearGradient id="packageLight" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f4e5cf" />
+      <stop offset="100%" stop-color="#d5b994" />
+    </linearGradient>
+    <linearGradient id="packageMedium" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#e2c9a5" />
+      <stop offset="100%" stop-color="#c4a074" />
+    </linearGradient>
+    <linearGradient id="packageDark" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#cfb083" />
+      <stop offset="100%" stop-color="#ac8653" />
+    </linearGradient>
+    <linearGradient id="bow" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#d96a5c" />
+      <stop offset="100%" stop-color="#b5453d" />
+    </linearGradient>
+  </defs>
+  <rect width="360" height="360" fill="url(#bg)" />
+  <ellipse cx="180" cy="292" rx="124" ry="26" fill="#d0c2ae" opacity="0.45" />
+  <path
+    d="M110 146c0-38 32-70 70-70s70 32 70 70v10h-16v-10c0-30-24-54-54-54s-54 24-54 54v10h-16v-10z"
+    fill="url(#handleGradient)"
+  />
+  <g opacity="0.4">
+    <path
+      d="M128 146c3-26 25-46 52-46s49 20 52 46h6c-3-30-28-54-58-54s-55 24-58 54h6z"
+      fill="#f3d8b5"
+    />
+  </g>
+  <g>
+    <rect x="102" y="150" width="74" height="70" rx="12" fill="url(#packageLight)" />
+    <rect x="182" y="154" width="68" height="66" rx="12" fill="url(#packageMedium)" />
+    <rect x="150" y="180" width="92" height="74" rx="12" fill="url(#packageDark)" />
+    <rect x="120" y="176" width="42" height="48" rx="10" fill="url(#packageMedium)" />
+    <rect x="218" y="182" width="50" height="54" rx="10" fill="url(#packageLight)" />
+    <path
+      d="M168 184h52c6.6 0 12 5.4 12 12v56c0 6.6-5.4 12-12 12h-52c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12z"
+      fill="url(#packageLight)"
+    />
+  </g>
+  <g fill="#b28b5a" opacity="0.5">
+    <rect x="102" y="180" width="74" height="6" rx="3" />
+    <rect x="182" y="210" width="68" height="6" rx="3" />
+    <rect x="150" y="222" width="92" height="6" rx="3" />
+  </g>
+  <g>
+    <path
+      d="M72 222h216l-16 68c-4 18-20 30-38 30H126c-18 0-34-12-38-30l-16-68z"
+      fill="url(#basketGradient)"
+    />
+    <path
+      d="M90 262c14 10 46 18 90 18s76-8 90-18l6-24H84l6 24z"
+      fill="rgba(255,255,255,0.18)"
+    />
+    <path
+      d="M84 246h192"
+      stroke="rgba(0,0,0,0.15)"
+      stroke-width="6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M100 276c22 12 46 18 80 18s58-6 80-18"
+      stroke="rgba(0,0,0,0.18)"
+      stroke-width="6"
+      stroke-linecap="round"
+    />
+  </g>
+  <g transform="translate(172 112)">
+    <path
+      d="M8 28c-6-6-8-12-6-16 2-6 10-6 18-2 8-4 16-4 18 2 2 4 0 10-6 16 8-2 14-2 18 2 4 4 2 12-4 16-6 2-12 0-18-6-6 6-12 8-18 6-6-4-8-12-4-16 4-4 10-4 18-2z"
+      fill="url(#bow)"
+    />
+    <path
+      d="M20 20c2-8 4-16 2-22"
+      stroke="#7f2e2b"
+      stroke-width="4"
+      stroke-linecap="round"
+    />
+    <path
+      d="M24 20c-2-8-4-16-2-22"
+      stroke="#7f2e2b"
+      stroke-width="4"
+      stroke-linecap="round"
+    />
+  </g>
+</svg>
