@@ -15,6 +15,7 @@
   --radius-md: 16px;
   --radius-lg: 28px;
   --radius-sm: 10px;
+  --input-padding-y: 0.75rem;
   --transition: all 0.25s ease;
 }
 
@@ -610,7 +611,6 @@ img {
 .page-faq .faq-search {
   margin-top: 1.5rem;
 }
-
 .product-filter input,
 .faq-search input,
 .newsletter-form input,
@@ -621,7 +621,7 @@ img {
   width: 100%;
   border-radius: 999px;
   border: 1px solid rgba(43, 95, 76, 0.2);
-  padding: 0.75rem 1.2rem;
+  padding: var(--input-padding-y) 1.2rem;
   font-size: 1rem;
   font-family: inherit;
   background: #fff;
@@ -1374,6 +1374,10 @@ img {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --input-padding-y: 0.6rem;
+  }
+
   .hero__stat-card {
     position: static;
     margin-top: 1rem;
