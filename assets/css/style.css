@@ -244,6 +244,7 @@ img {
 
 .hero__visual {
   position: relative;
+  padding-bottom: 3.5rem;
 }
 
 .hero__image {
@@ -257,10 +258,11 @@ img {
   position: absolute;
   bottom: 1.5rem;
   left: 1.5rem;
+  right: auto;
   background: rgba(255, 255, 255, 0.92);
   border-radius: var(--radius-md);
   padding: 1rem 1.2rem;
-  width: min(260px, 80%);
+  width: min(260px, calc(100% - 3rem));
   box-shadow: var(--shadow-sm);
 }
 
@@ -1378,10 +1380,21 @@ img {
     --input-padding-y: 0.6rem;
   }
 
+  .hero {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .hero__visual {
+    padding-bottom: 0;
+    display: grid;
+    gap: 1.2rem;
+  }
+
   .hero__stat-card {
     position: static;
-    margin-top: 1rem;
+    margin-top: 0;
     width: 100%;
+    box-shadow: var(--shadow-sm);
   }
 
   .cart-toggle {
