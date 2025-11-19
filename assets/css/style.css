@@ -699,6 +699,66 @@ img {
   color: var(--color-muted);
 }
 
+.page-hero__layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.page-hero__content {
+  flex: 1 1 320px;
+  min-width: 280px;
+}
+
+.page-hero__visual {
+  flex: 1 1 280px;
+  min-width: 260px;
+}
+
+.page-hero__visual img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
+}
+
+.page-hero__stats {
+  margin-top: 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(43, 95, 76, 0.08);
+}
+
+.stat-card__number {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.stat-card__label {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 720px) {
+  .page-hero__visual {
+    order: -1;
+  }
+}
+
 .page-products .product-filter,
 .page-faq .faq-search {
   margin-top: 1.5rem;
