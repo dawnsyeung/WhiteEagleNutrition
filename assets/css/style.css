@@ -288,6 +288,13 @@ img {
   font-size: 0.95rem;
 }
 
+.btn[disabled],
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .btn-primary {
   background: var(--color-primary);
   color: #fff;
@@ -1259,6 +1266,32 @@ img {
 
 .form-group--full {
   grid-column: 1 / -1;
+}
+
+.form-status {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-weight: 500;
+  background: var(--color-cream);
+  color: var(--color-primary);
+}
+
+.form-status--success {
+  background: rgba(28, 124, 84, 0.12);
+  border-color: rgba(28, 124, 84, 0.35);
+  color: #1c7c54;
+}
+
+.form-status--error {
+  background: rgba(185, 28, 28, 0.1);
+  border-color: rgba(185, 28, 28, 0.3);
+  color: #9b1c1c;
+}
+
+.form-status[hidden] {
+  display: none;
 }
 
 .checkbox {

@@ -113,6 +113,24 @@
     document.body.style.overflow = '';
   };
 
+  const toggleButtonLoading = (button, isLoading) => {
+    if (!button) return;
+    if (isLoading) {
+      if (!button.dataset.originalLabel) {
+        button.dataset.originalLabel = button.textContent;
+      }
+      const loadingLabel = button.getAttribute('data-loading-text') || 'Sending...';
+      button.textContent = loadingLabel;
+      button.disabled = true;
+    } else {
+      const originalLabel = button.dataset.originalLabel;
+      if (originalLabel) {
+        button.textContent = originalLabel;
+      }
+      button.disabled = false;
+    }
+  };
+
   const setupNavigation = () => {
     if (!navToggle || !nav) return;
     navToggle.addEventListener('click', () => {
@@ -251,6 +269,90 @@
     });
   };
 
+  const setupContactForm = () => {
+    const form = qs('[data-contact-form]');
+    if (!form) return;
+
+    const status = qs('[data-form-status]', form);
+    const submitButton = form.querySelector('button[type="submit"]');
+    const honeypot = qs('[data-honeypot]', form);
+
+    const resolvedEndpoint = (form.getAttribute('data-endpoint') || '').trim();
+
+    const setStatus = (type, message) => {
+      if (!status) return;
+      status.classList.remove('form-status--success', 'form-status--error');
+
+      if (!message) {
+        status.hidden = true;
+        status.textContent = '';
+        return;
+      }
+
+      if (type === 'success') {
+        status.classList.add('form-status--success');
+      } else if (type === 'error') {
+        status.classList.add('form-status--error');
+      }
+
+      status.hidden = false;
+      status.textContent = message;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (honeypot && honeypot.value.trim()) {
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (!resolvedEndpoint) {
+        setStatus(
+          'error',
+          'Online submissions are temporarily unavailable. Email hello@whiteeaglenutrition.com.'
+        );
+        return;
+      }
+
+      setStatus('', '');
+      toggleButtonLoading(submitButton, true);
+
+      const formData = new FormData(form);
+      formData.delete('company');
+      formData.append('submittedAt', new Date().toISOString());
+
+      try {
+        const response = await fetch(resolvedEndpoint, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json'
+          },
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        setStatus('success', 'Thank you! Our nutrition team will reply within one business day.');
+        form.reset();
+      } catch (error) {
+        console.error('Contact form submission failed', error);
+        setStatus(
+          'error',
+          'We could not send your message. Try again shortly or email hello@whiteeaglenutrition.com.'
+        );
+      } finally {
+        toggleButtonLoading(submitButton, false);
+      }
+    });
+  };
+
   const updateYear = () => {
     const yearSpan = qs('[data-current-year]');
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
@@ -266,6 +368,7 @@
     setupProductFiltering();
     setupAccordions();
     setupBundleButton();
+    setupContactForm();
     updateYear();
   };
 
