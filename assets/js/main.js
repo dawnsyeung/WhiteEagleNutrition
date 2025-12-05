@@ -277,7 +277,13 @@
     const submitButton = form.querySelector('button[type="submit"]');
     const honeypot = qs('[data-honeypot]', form);
 
-    const resolvedEndpoint = (form.getAttribute('data-endpoint') || '').trim();
+    const getEndpoint = () => {
+      const dataEndpoint = (form.getAttribute('data-endpoint') || '').trim();
+      if (dataEndpoint) return dataEndpoint;
+      const actionEndpoint = (form.getAttribute('action') || '').trim();
+      if (actionEndpoint && actionEndpoint !== '#') return actionEndpoint;
+      return '';
+    };
 
     const setStatus = (type, message) => {
       if (!status) return;
@@ -311,10 +317,13 @@
         return;
       }
 
-      if (!resolvedEndpoint) {
+      const endpoint = getEndpoint();
+      const isPlaceholderEndpoint = endpoint.includes('YOUR_FORM_ID');
+
+      if (!endpoint || isPlaceholderEndpoint) {
         setStatus(
           'error',
-          'Online submissions are temporarily unavailable. Email dawn@whiteeaglenutrition.com.'
+          'Online submissions are not configured yet. Email dawn@whiteeaglenutrition.com.'
         );
         return;
       }
@@ -327,7 +336,7 @@
       formData.append('submittedAt', new Date().toISOString());
 
       try {
-        const response = await fetch(resolvedEndpoint, {
+        const response = await fetch(endpoint, {
           method: 'POST',
           headers: {
             Accept: 'application/json'
