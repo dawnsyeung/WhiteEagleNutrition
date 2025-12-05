@@ -1,0 +1,23 @@
+{
+  "name": "white-eagle-nutrition",
+  "version": "1.0.0",
+  "description": "Marketing site with Resend-backed contact form",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No automated tests configured\""
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "keywords": [
+    "marketing",
+    "contact-form",
+    "resend"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "resend": "^6.5.2"
+  }
+}

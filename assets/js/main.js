@@ -325,21 +325,43 @@
       const formData = new FormData(form);
       formData.delete('company');
       formData.append('submittedAt', new Date().toISOString());
+      if (!formData.get('source')) {
+        formData.append('source', window.location.href);
+      }
+
+      const payload = {};
+      formData.forEach((value, key) => {
+        payload[key] = value;
+      });
 
       try {
         const response = await fetch(resolvedEndpoint, {
           method: 'POST',
           headers: {
-            Accept: 'application/json'
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
           },
-          body: formData
+          body: JSON.stringify(payload)
         });
 
-        if (!response.ok) {
-          throw new Error(`Request failed with status ${response.status}`);
+        let responseBody = {};
+        try {
+          responseBody = await response.json();
+        } catch (error) {
+          responseBody = {};
         }
 
-        setStatus('success', 'Thank you! Our nutrition team will reply within one business day.');
+        if (!response.ok) {
+          const errorMessage =
+            responseBody?.error ||
+            responseBody?.message ||
+            `Request failed with status ${response.status}`;
+          throw new Error(errorMessage);
+        }
+
+        const successMessage =
+          responseBody?.message || 'Thank you! Our nutrition team will reply within one business day.';
+        setStatus('success', successMessage);
         form.reset();
       } catch (error) {
         console.error('Contact form submission failed', error);
