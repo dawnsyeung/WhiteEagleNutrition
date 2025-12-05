@@ -120,13 +120,14 @@
         <div class="container">
           <h2 id="form-heading">Send us a message</h2>
           <form
-            action="#"
+            action="https://formspree.io/f/YOUR_FORM_ID"
             method="post"
             class="form-grid"
             data-contact-form
-            data-endpoint="https://jsonplaceholder.typicode.com/posts"
+            data-endpoint="https://formspree.io/f/YOUR_FORM_ID"
           >
             <input type="hidden" name="formName" value="contact-form" />
+            <input type="hidden" name="_subject" value="White Eagle Nutrition contact form" />
             <div class="form-group">
               <label for="name">Full name</label>
               <input type="text" id="name" name="name" required />
