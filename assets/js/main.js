@@ -314,7 +314,7 @@
       if (!resolvedEndpoint) {
         setStatus(
           'error',
-          'Online submissions are temporarily unavailable. Email hello@whiteeaglenutrition.com.'
+          'Online submissions are temporarily unavailable. Email dawn@whiteeaglenutrition.com.'
         );
         return;
       }
@@ -345,7 +345,7 @@
         console.error('Contact form submission failed', error);
         setStatus(
           'error',
-          'We could not send your message. Try again shortly or email hello@whiteeaglenutrition.com.'
+          'We could not send your message. Try again shortly or email dawn@whiteeaglenutrition.com.'
         );
       } finally {
         toggleButtonLoading(submitButton, false);
