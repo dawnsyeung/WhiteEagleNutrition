@@ -1661,3 +1661,132 @@ img {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* --- Happy Pet Photos app --- */
+.pet-app {
+  padding: 3.5rem 0 5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f3ed 100%);
+}
+
+.pet-app__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .pet-app__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  }
+}
+
+.pet-app__panel {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(209, 213, 219, 0.6);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+}
+
+.pet-preview {
+  display: grid;
+  gap: 0.9rem;
+  background: rgba(43, 95, 76, 0.06);
+  border: 1px solid rgba(43, 95, 76, 0.12);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.pet-preview img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.pet-preview__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pet-feed__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+}
+
+.pet-feed__filters {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  width: min(520px, 100%);
+}
+
+@media (min-width: 640px) {
+  .pet-feed__filters {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.pet-feed {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.pet-post {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(209, 213, 219, 0.6);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-surface);
+}
+
+.pet-post__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.pet-post__body {
+  padding: 1.25rem 1.25rem 1.4rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.pet-post__title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pet-post__title h3 {
+  margin: 0;
+}
+
+.pet-post__pills {
+  display: inline-flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.pet-post__caption {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.pet-post__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}

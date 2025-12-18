@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Happy Pet Photos — an installable app to post and revisit photos of your animal companion."
+    />
+    <meta name="robots" content="index, follow" />
+    <title>Happy Pet Photos | Installable Pet Photo App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#2b5f4c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Happy Pet Photos" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Happy Pet Photos" />
+    <meta
+      property="og:description"
+      content="An installable app to post and revisit photos of your happy pet / animal companion."
+    />
+    <meta property="og:image" content="/assets/images/white_eagle.png" />
+  </head>
+  <body class="page-pet-photos-app">
+    <header class="site-header" id="top">
+      <div class="container">
+        <a href="index.html" class="logo" aria-label="White Eagle Nutrition home">
+          <span class="logo-mark" aria-hidden="true">🪶</span>
+          <span class="logo-text">White Eagle Nutrition</span>
+        </a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <nav id="primary-navigation" class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="research.html">BSFL Science</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="ethics.html">Ethics & Sustainability</a></li>
+            <li><a href="blog.html">Insights</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="cart-toggle" aria-label="Open cart">
+          <span class="cart-icon" aria-hidden="true">🛒</span>
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="cart-panel" data-cart-panel aria-hidden="true">
+      <div class="cart-panel__header">
+        <h2>Shopping Cart</h2>
+        <button class="cart-close" aria-label="Close cart">×</button>
+      </div>
+      <div class="cart-panel__body" data-cart-items>
+        <p class="cart-empty">Your cart is currently empty. Explore our formulations tailored to every companion animal.</p>
+      </div>
+      <div class="cart-panel__footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <strong data-cart-total>$0.00</strong>
+        </div>
+        <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+        <button class="btn btn-accent" data-checkout>Secure Checkout</button>
+      </div>
+    </div>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <p class="eyebrow">Installable app</p>
+          <div class="page-hero__layout">
+            <div class="page-hero__content">
+              <h1>Happy Pet Photos</h1>
+              <p>
+                Post photos of your happy pet / animal companion and build a personal, scrollable gallery. You can install this as an app on
+                mobile or desktop.
+              </p>
+              <div class="section-actions">
+                <button class="btn btn-primary" type="button" data-install-app hidden>Install app</button>
+                <a class="btn btn-outline" href="#new-post">Post a photo</a>
+                <button class="btn btn-outline" type="button" data-clear-posts>Clear my posts</button>
+              </div>
+              <p class="small-print" data-install-help>
+                Tip: On iPhone/iPad use Safari → Share → “Add to Home Screen” to install.
+              </p>
+            </div>
+            <div class="page-hero__visual">
+              <img src="assets/images/abstract-headshot-1.svg" alt="Abstract illustration" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pet-app" id="new-post" aria-labelledby="new-post-heading">
+        <div class="container">
+          <div class="pet-app__grid">
+            <div class="pet-app__panel">
+              <h2 id="new-post-heading">New photo post</h2>
+              <p class="section-intro">
+                Your posts are saved on this device (no server required). You can share a post using your phone’s share sheet.
+              </p>
+
+              <form class="pet-form" data-pet-form>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="pet-name">Pet name</label>
+                    <input id="pet-name" name="petName" type="text" placeholder="e.g., Luna" maxlength="40" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pet-type">Type</label>
+                    <select id="pet-type" name="petType">
+                      <option value="Dog">Dog</option>
+                      <option value="Cat">Cat</option>
+                      <option value="Bird">Bird</option>
+                      <option value="Rabbit">Rabbit</option>
+                      <option value="Horse">Horse</option>
+                      <option value="Reptile">Reptile</option>
+                      <option value="Fish">Fish</option>
+                      <option value="Other" selected>Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group form-group--full">
+                    <label for="pet-caption">Caption</label>
+                    <textarea
+                      id="pet-caption"
+                      name="caption"
+                      rows="3"
+                      placeholder="What’s making them happy today?"
+                      maxlength="240"
+                    ></textarea>
+                  </div>
+
+                  <div class="form-group form-group--full">
+                    <label for="pet-photo">Photo</label>
+                    <input
+                      id="pet-photo"
+                      name="photo"
+                      type="file"
+                      accept="image/*"
+                      capture="environment"
+                      required
+                    />
+                    <p class="small-print">Tip: you can use your camera on mobile.</p>
+                  </div>
+
+                  <div class="form-group form-group--full">
+                    <div class="pet-preview" data-preview hidden>
+                      <img data-preview-img alt="Selected photo preview" />
+                      <div class="pet-preview__meta">
+                        <span class="label">Preview</span>
+                        <div class="pet-preview__actions">
+                          <button class="btn btn-outline" type="button" data-remove-photo>Remove</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="section-actions">
+                  <button class="btn btn-accent" type="submit" data-submit-post data-loading-text="Saving...">Post</button>
+                  <button class="btn btn-outline" type="button" data-demo-post>Add demo post</button>
+                </div>
+
+                <p class="form-status" data-pet-status hidden></p>
+              </form>
+            </div>
+
+            <div class="pet-app__panel">
+              <div class="pet-feed__header">
+                <h2>Your gallery</h2>
+                <div class="pet-feed__filters">
+                  <label class="sr-only" for="pet-search">Search posts</label>
+                  <input id="pet-search" type="search" placeholder="Search name, type, caption…" data-search />
+                  <select aria-label="Sort posts" data-sort>
+                    <option value="newest" selected>Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="name">Pet name</option>
+                  </select>
+                </div>
+              </div>
+              <div class="pet-feed" data-feed>
+                <p class="section-intro" data-empty-state>
+                  No posts yet. Add a photo above — or tap “Add demo post” to see how it looks.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer__brand">
+          <a href="index.html" class="logo">
+            <span class="logo-mark" aria-hidden="true">🪶</span>
+            <span class="logo-text">White Eagle Nutrition</span>
+          </a>
+          <p class="footer-tagline"><em>Rise.&nbsp;&nbsp; Renew.&nbsp;&nbsp; Thrive.</em></p>
+          <p>
+            Ethical, science-forward BSFL nutrition with USA-sourced ingredients for dogs, cats, horses, ruminants, turtles, fish, reptiles,
+            backyard chickens, and wild birds. We put animal health, our natural resources, and your peace of mind first.
+          </p>
+        </div>
+        <div class="footer__links">
+          <div>
+            <h3>Explore</h3>
+            <ul>
+              <li><a href="products.html">Shop</a></li>
+              <li><a href="research.html">Research</a></li>
+              <li><a href="blog.html">Insights</a></li>
+              <li><a href="ethics.html">Ethics</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Support</h3>
+            <ul>
+              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="contact.html#wholesale">Wholesale</a></li>
+              <li><a href="contact.html#subscribe">Subscribe &amp; Save</a></li>
+              <li><a href="contact.html#contact-form">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Policies</h3>
+            <ul>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Sale</a></li>
+              <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container footer__legal">
+        <p>© <span data-current-year></span> White Eagle Nutrition. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/whiteeaglenutrition" aria-label="Follow on Instagram">Instagram</a>
+          <a href="https://www.facebook.com/whiteeaglenutrition" aria-label="Follow on Facebook">Facebook</a>
+          <a href="https://www.linkedin.com/company/whiteeaglenutrition" aria-label="Follow on LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <a href="#top" class="scroll-top" aria-label="Back to top">↑</a>
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/pet-photos-app.js" defer></script>
+  </body>
+</html>

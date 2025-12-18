@@ -5,6 +5,11 @@
   const qs = (selector, scope = document) => scope.querySelector(selector);
   const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
+  const petApp = {
+    href: 'pet-photos-app.html',
+    label: 'Pet Photos App'
+  };
+
   const navToggle = qs('.nav-toggle');
   const nav = qs('.site-nav');
   const cartToggle = qs('.cart-toggle');
@@ -144,6 +149,77 @@
         navToggle.setAttribute('aria-expanded', 'false');
       })
     );
+  };
+
+  const injectPetAppNavLink = () => {
+    const navList = qs('.site-nav ul');
+    if (!navList) return;
+
+    const already = qsa('a', navList).some((a) => (a.getAttribute('href') || '').includes(petApp.href));
+    if (already) return;
+
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = petApp.href;
+    a.textContent = petApp.label;
+
+    const currentPath = (window.location.pathname || '').split('/').pop() || 'index.html';
+    if (currentPath === petApp.href) {
+      a.classList.add('is-active');
+    }
+
+    li.appendChild(a);
+    navList.appendChild(li);
+  };
+
+  const setupPwa = () => {
+    if (!('serviceWorker' in navigator)) return;
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js').catch((error) => {
+        console.warn('Service worker registration failed', error);
+      });
+    });
+  };
+
+  const setupInstallPrompt = () => {
+    let deferredPrompt = null;
+    const installButtons = qsa('[data-install-app]');
+    const installHelp = qs('[data-install-help]');
+
+    const setInstallVisible = (isVisible) => {
+      installButtons.forEach((btn) => (btn.hidden = !isVisible));
+      // iOS doesn't fire beforeinstallprompt; keep the help text visible there.
+      if (installHelp) {
+        const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent || '');
+        installHelp.hidden = isVisible || !isIos ? true : false;
+      }
+    };
+
+    setInstallVisible(false);
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      deferredPrompt = event;
+      setInstallVisible(true);
+    });
+
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt = null;
+      setInstallVisible(false);
+    });
+
+    installButtons.forEach((button) => {
+      button.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        try {
+          await deferredPrompt.userChoice;
+        } finally {
+          deferredPrompt = null;
+          setInstallVisible(false);
+        }
+      });
+    });
   };
 
   const setupCart = () => {
@@ -371,6 +447,7 @@
     loadCart();
     renderCart();
     updateCartSummary();
+    injectPetAppNavLink();
     setupNavigation();
     setupCart();
     setupProductButtons();
@@ -378,6 +455,8 @@
     setupAccordions();
     setupBundleButton();
     setupContactForm();
+    setupPwa();
+    setupInstallPrompt();
     updateYear();
   };
 
