@@ -1,9 +1,15 @@
 (() => {
+  const apiMeta = document.querySelector('meta[name="happy-pet-photos-api-base"]');
+  const apiFromMeta = (apiMeta?.getAttribute('content') || '').trim();
+  const API_BASE = (window.HAPPY_PET_PHOTOS_API_BASE || apiFromMeta || '').replace(/\/+$/, '');
+  const apiUrl = (path) => `${API_BASE}${path}`;
+
   const DB_NAME = 'happyPetPhotos';
   const DB_VERSION = 1;
   const STORE = 'posts';
 
   const qs = (selector, scope = document) => scope.querySelector(selector);
+  const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
   const els = {
     form: qs('[data-pet-form]'),
@@ -12,13 +18,24 @@
     petName: qs('#pet-name'),
     petType: qs('#pet-type'),
     caption: qs('#pet-caption'),
+    sharePublic: qs('[data-share-public]'),
     preview: qs('[data-preview]'),
     previewImg: qs('[data-preview-img]'),
     removePhoto: qs('[data-remove-photo]'),
-    feed: qs('[data-feed]'),
+    tabs: qsa('[data-tab]'),
+    localControls: qs('[data-local-controls]'),
+    publicControls: qs('[data-public-controls]'),
+    localFeed: qs('[data-feed]'),
+    publicFeed: qs('[data-public-feed]'),
     emptyState: qs('[data-empty-state]'),
     search: qs('[data-search]'),
     sort: qs('[data-sort]'),
+    publicEmpty: qs('[data-public-empty-state]'),
+    publicSearch: qs('[data-public-search]'),
+    publicSort: qs('[data-public-sort]'),
+    publicLoadMore: qs('[data-public-load-more]'),
+    publicFooter: qs('[data-public-footer]'),
+    publicStatus: qs('[data-public-status]'),
     demoPost: qs('[data-demo-post]'),
     clearPosts: qs('[data-clear-posts]')
   };
@@ -28,7 +45,14 @@
     selectedPreviewUrl: '',
     posts: [],
     filter: '',
-    sort: 'newest'
+    sort: 'newest',
+    activeTab: 'local',
+    publicPosts: [],
+    publicCursor: null,
+    publicHasMore: true,
+    publicFilter: '',
+    publicSort: 'newest',
+    publicIsLoading: false
   };
 
   const setStatus = (type, message) => {
@@ -217,23 +241,38 @@
   };
 
   const revokeAllRenderedImageUrls = () => {
-    if (!els.feed) return;
-    els.feed.querySelectorAll('[data-object-url]').forEach((img) => {
+    if (!els.localFeed) return;
+    els.localFeed.querySelectorAll('[data-object-url]').forEach((img) => {
       const url = img.getAttribute('data-object-url');
       if (url) URL.revokeObjectURL(url);
     });
   };
 
-  const render = () => {
-    if (!els.feed) return;
+  const setActiveTab = (tab) => {
+    state.activeTab = tab === 'public' ? 'public' : 'local';
+    if (els.localControls) els.localControls.hidden = state.activeTab !== 'local';
+    if (els.publicControls) els.publicControls.hidden = state.activeTab !== 'public';
+    if (els.localFeed) els.localFeed.hidden = state.activeTab !== 'local';
+    if (els.publicFeed) els.publicFeed.hidden = state.activeTab !== 'public';
+    if (els.publicFooter) els.publicFooter.hidden = state.activeTab !== 'public';
+
+    els.tabs.forEach((btn) => {
+      const isActive = btn.getAttribute('data-tab') === state.activeTab;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+    });
+  };
+
+  const renderLocal = () => {
+    if (!els.localFeed) return;
 
     revokeAllRenderedImageUrls();
-    els.feed.innerHTML = '';
+    els.localFeed.innerHTML = '';
 
     const visible = getVisiblePosts();
     if (els.emptyState) {
       els.emptyState.hidden = visible.length > 0;
-      if (!els.emptyState.hidden) els.feed.appendChild(els.emptyState);
+      if (!els.emptyState.hidden) els.localFeed.appendChild(els.emptyState);
     }
 
     visible.forEach((post) => {
@@ -329,13 +368,173 @@
 
       body.append(title, caption, actions);
       card.append(img, body);
-      els.feed.appendChild(card);
+      els.localFeed.appendChild(card);
     });
+  };
+
+  const renderPublic = () => {
+    if (!els.publicFeed) return;
+    els.publicFeed.innerHTML = '';
+
+    if (els.publicEmpty) {
+      els.publicEmpty.hidden = state.publicPosts.length > 0;
+      if (!els.publicEmpty.hidden) els.publicFeed.appendChild(els.publicEmpty);
+    }
+
+    state.publicPosts.forEach((post) => {
+      const card = document.createElement('article');
+      card.className = 'pet-post';
+      card.setAttribute('data-public-post-id', post.id);
+
+      const img = document.createElement('img');
+      img.className = 'pet-post__image';
+      img.alt = safeText(post.caption) || `${safeText(post.petName) || 'Pet'} photo`;
+      img.loading = 'lazy';
+      img.src = post.imageUrl;
+
+      const body = document.createElement('div');
+      body.className = 'pet-post__body';
+
+      const title = document.createElement('div');
+      title.className = 'pet-post__title';
+
+      const name = document.createElement('h3');
+      name.textContent = safeText(post.petName) || 'Happy companion';
+
+      const pills = document.createElement('div');
+      pills.className = 'pet-post__pills';
+
+      const typePill = document.createElement('span');
+      typePill.className = 'label';
+      typePill.textContent = safeText(post.petType) || 'Pet';
+
+      const datePill = document.createElement('span');
+      datePill.className = 'label';
+      datePill.textContent = humanDate(post.createdAt);
+
+      pills.append(typePill, datePill);
+      title.append(name, pills);
+
+      const caption = document.createElement('p');
+      caption.className = 'pet-post__caption';
+      caption.textContent = safeText(post.caption) || '—';
+
+      const actions = document.createElement('div');
+      actions.className = 'pet-post__actions';
+
+      const shareBtn = document.createElement('button');
+      shareBtn.type = 'button';
+      shareBtn.className = 'btn btn-outline';
+      shareBtn.textContent = 'Share';
+      shareBtn.addEventListener('click', async () => {
+        const shareTextParts = [];
+        if (safeText(post.petName)) shareTextParts.push(post.petName);
+        if (safeText(post.petType)) shareTextParts.push(`(${post.petType})`);
+        const text = shareTextParts.join(' ') || 'Happy pet photo';
+
+        try {
+          if (navigator.share) {
+            await navigator.share({
+              title: 'Happy Pet Photo',
+              text: safeText(post.caption) ? `${text} — ${post.caption}` : text,
+              url: post.imageUrl
+            });
+            return;
+          }
+        } catch (error) {
+          console.warn('Share failed', error);
+        }
+
+        try {
+          await navigator.clipboard.writeText(post.imageUrl);
+          setStatus('success', 'Link copied to clipboard.');
+        } catch {
+          window.prompt('Copy link:', post.imageUrl);
+        }
+      });
+
+      actions.append(shareBtn);
+      body.append(title, caption, actions);
+      card.append(img, body);
+      els.publicFeed.appendChild(card);
+    });
+
+    if (els.publicLoadMore) {
+      els.publicLoadMore.disabled = state.publicIsLoading || !state.publicHasMore;
+      els.publicLoadMore.textContent = state.publicHasMore ? 'Load more' : 'No more posts';
+    }
+  };
+
+  const render = () => {
+    renderLocal();
+    renderPublic();
   };
 
   const refresh = async () => {
     state.posts = await listPosts();
-    render();
+    renderLocal();
+  };
+
+  const setPublicStatus = (message) => {
+    if (!els.publicStatus) return;
+    els.publicStatus.textContent = message || '';
+  };
+
+  const fetchPublicPage = async ({ reset } = { reset: false }) => {
+    if (state.publicIsLoading) return;
+    state.publicIsLoading = true;
+    setPublicStatus(reset ? 'Loading…' : 'Loading more…');
+    renderPublic();
+
+    try {
+      if (reset) {
+        state.publicCursor = null;
+        state.publicHasMore = true;
+        state.publicPosts = [];
+      }
+      const params = new URLSearchParams();
+      params.set('limit', '20');
+      params.set('sort', state.publicSort);
+      if (state.publicFilter) params.set('q', state.publicFilter);
+      if (state.publicCursor) params.set('cursor', state.publicCursor);
+
+      const res = await fetch(apiUrl(`/api/posts?${params.toString()}`), { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Public feed request failed (${res.status}).`);
+      const data = await res.json();
+      const posts = Array.isArray(data.posts) ? data.posts : [];
+      state.publicPosts = state.publicPosts.concat(posts);
+      state.publicCursor = data.nextCursor || null;
+      state.publicHasMore = Boolean(data.nextCursor);
+      setPublicStatus('');
+    } catch (error) {
+      console.error(error);
+      setPublicStatus(error?.message || 'Could not load public feed.');
+    } finally {
+      state.publicIsLoading = false;
+      renderPublic();
+    }
+  };
+
+  const sharePublic = async ({ petName, petType, caption, imageBlob }) => {
+    const form = new FormData();
+    form.set('petName', petName || '');
+    form.set('petType', petType || 'Other');
+    form.set('caption', caption || '');
+    const file = new File([imageBlob], 'photo.jpg', { type: 'image/jpeg' });
+    form.set('photo', file);
+
+    const res = await fetch(apiUrl('/api/posts'), { method: 'POST', body: form });
+    if (!res.ok) {
+      let msg = `Public share failed (${res.status}).`;
+      try {
+        const data = await res.json();
+        if (data?.error) msg = data.error;
+      } catch {
+        // ignore
+      }
+      throw new Error(msg);
+    }
+    return res.json();
   };
 
   const fetchDemoImageBlob = async () => {
@@ -399,9 +598,32 @@
       await putPost(post);
       await refresh();
 
+      const shouldSharePublic = Boolean(els.sharePublic?.checked);
+      if (shouldSharePublic) {
+        try {
+          await sharePublic({
+            petName: post.petName,
+            petType: post.petType,
+            caption: post.caption,
+            imageBlob: post.imageBlob
+          });
+          // If user is looking at the public feed, refresh it.
+          if (state.activeTab === 'public') {
+            await fetchPublicPage({ reset: true });
+          }
+          setStatus('success', 'Posted locally and shared to the public feed.');
+        } catch (error) {
+          setStatus(
+            'error',
+            `Saved on your device, but could not share publicly: ${error?.message || 'Unknown error.'}`
+          );
+        }
+      } else {
+        setStatus('success', 'Posted! Your photo is saved on this device.');
+      }
+
       els.form.reset();
       setPreview(null);
-      setStatus('success', 'Posted! Your photo is saved on this device.');
     } catch (error) {
       console.error(error);
       setStatus('error', error?.message || 'Could not save your post.');
@@ -417,14 +639,39 @@
     els.removePhoto?.addEventListener('click', () => setPreview(null));
     els.form.addEventListener('submit', onSubmit);
 
+    els.tabs.forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const tab = btn.getAttribute('data-tab') || 'local';
+        setActiveTab(tab);
+        if (state.activeTab === 'public' && state.publicPosts.length === 0) {
+          await fetchPublicPage({ reset: true });
+        }
+      });
+    });
+
     els.search?.addEventListener('input', () => {
       state.filter = els.search.value;
-      render();
+      renderLocal();
     });
 
     els.sort?.addEventListener('change', () => {
       state.sort = els.sort.value;
-      render();
+      renderLocal();
+    });
+
+    els.publicSearch?.addEventListener('input', async () => {
+      state.publicFilter = els.publicSearch.value.trim();
+      await fetchPublicPage({ reset: true });
+    });
+
+    els.publicSort?.addEventListener('change', async () => {
+      state.publicSort = els.publicSort.value;
+      await fetchPublicPage({ reset: true });
+    });
+
+    els.publicLoadMore?.addEventListener('click', async () => {
+      if (!state.publicHasMore) return;
+      await fetchPublicPage({ reset: false });
     });
 
     els.demoPost?.addEventListener('click', async () => {
@@ -443,7 +690,7 @@
         };
         await putPost(post);
         await refresh();
-        setStatus('success', 'Demo post added.');
+        setStatus('success', 'Demo post added locally.');
       } catch (error) {
         console.error(error);
         setStatus('error', error?.message || 'Could not add demo post.');
@@ -461,6 +708,8 @@
     });
 
     state.sort = els.sort?.value || 'newest';
+    state.publicSort = els.publicSort?.value || 'newest';
+    setActiveTab('local');
     await refresh();
   };
 

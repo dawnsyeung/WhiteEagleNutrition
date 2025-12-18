@@ -45,6 +45,12 @@
     const url = new URL(request.url);
     const isSameOrigin = url.origin === self.location.origin;
 
+    // Don't cache API responses or uploaded images (can be large / dynamic).
+    if (isSameOrigin && (url.pathname.startsWith('/api/') || url.pathname.startsWith('/uploads/'))) {
+      event.respondWith(fetch(request));
+      return;
+    }
+
     if (isSameOrigin && !isNavigationalRequest(request)) {
       event.respondWith(
         caches.match(request).then((cached) => {

@@ -1,0 +1,28 @@
+{
+  "name": "happy-pet-photos-backend",
+  "version": "1.0.0",
+  "description": "Backend API for the Happy Pet Photos public feed.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dawnsyeung/WhiteEagleNutrition.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dawnsyeung/WhiteEagleNutrition/issues"
+  },
+  "homepage": "https://github.com/dawnsyeung/WhiteEagleNutrition#readme",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2"
+  }
+}

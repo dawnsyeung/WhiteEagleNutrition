@@ -24,6 +24,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Happy Pet Photos" />
+    <meta name="happy-pet-photos-api-base" content="" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Happy Pet Photos" />
@@ -91,12 +92,13 @@
             <div class="page-hero__content">
               <h1>Happy Pet Photos</h1>
               <p>
-                Post photos of your happy pet / animal companion and build a personal, scrollable gallery. You can install this as an app on
-                mobile or desktop.
+                Post photos of your happy pet / animal companion and build a personal gallery on your device — or share to the public feed.
+                You can install this as an app on mobile or desktop.
               </p>
               <div class="section-actions">
                 <button class="btn btn-primary" type="button" data-install-app hidden>Install app</button>
                 <a class="btn btn-outline" href="#new-post">Post a photo</a>
+                <a class="btn btn-outline" href="#feed">View public feed</a>
                 <button class="btn btn-outline" type="button" data-clear-posts>Clear my posts</button>
               </div>
               <p class="small-print" data-install-help>
@@ -116,7 +118,8 @@
             <div class="pet-app__panel">
               <h2 id="new-post-heading">New photo post</h2>
               <p class="section-intro">
-                Your posts are saved on this device (no server required). You can share a post using your phone’s share sheet.
+                Save to your device and (optionally) share to the public feed. Your device gallery works offline; the public feed requires an
+                internet connection.
               </p>
 
               <form class="pet-form" data-pet-form>
@@ -149,6 +152,14 @@
                       placeholder="What’s making them happy today?"
                       maxlength="240"
                     ></textarea>
+                  </div>
+
+                  <div class="form-group form-group--full">
+                    <label class="checkbox">
+                      <input type="checkbox" name="sharePublic" data-share-public />
+                      Share to public feed
+                    </label>
+                    <p class="small-print">Public posts are visible to everyone.</p>
                   </div>
 
                   <div class="form-group form-group--full">
@@ -186,23 +197,51 @@
               </form>
             </div>
 
-            <div class="pet-app__panel">
+            <div class="pet-app__panel" id="feed">
               <div class="pet-feed__header">
-                <h2>Your gallery</h2>
-                <div class="pet-feed__filters">
-                  <label class="sr-only" for="pet-search">Search posts</label>
-                  <input id="pet-search" type="search" placeholder="Search name, type, caption…" data-search />
-                  <select aria-label="Sort posts" data-sort>
-                    <option value="newest" selected>Newest</option>
-                    <option value="oldest">Oldest</option>
-                    <option value="name">Pet name</option>
-                  </select>
+                <h2>Feed</h2>
+                <div class="pet-tabs" role="tablist" aria-label="Choose feed">
+                  <button class="chip is-active" type="button" role="tab" aria-selected="true" data-tab="local">
+                    My gallery
+                  </button>
+                  <button class="chip" type="button" role="tab" aria-selected="false" data-tab="public">
+                    Public feed
+                  </button>
                 </div>
               </div>
+
+              <div class="pet-feed__filters" data-local-controls>
+                <label class="sr-only" for="pet-search">Search my posts</label>
+                <input id="pet-search" type="search" placeholder="Search name, type, caption…" data-search />
+                <select aria-label="Sort my posts" data-sort>
+                  <option value="newest" selected>Newest</option>
+                  <option value="oldest">Oldest</option>
+                  <option value="name">Pet name</option>
+                </select>
+              </div>
+
+              <div class="pet-feed__filters" data-public-controls hidden>
+                <label class="sr-only" for="public-search">Search public feed</label>
+                <input id="public-search" type="search" placeholder="Search public feed…" data-public-search />
+                <select aria-label="Sort public feed" data-public-sort>
+                  <option value="newest" selected>Newest</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+              </div>
+
               <div class="pet-feed" data-feed>
                 <p class="section-intro" data-empty-state>
                   No posts yet. Add a photo above — or tap “Add demo post” to see how it looks.
                 </p>
+              </div>
+
+              <div class="pet-feed" data-public-feed hidden>
+                <p class="section-intro" data-public-empty-state hidden>No public posts yet.</p>
+              </div>
+
+              <div class="pet-feed__footer" data-public-footer hidden>
+                <button class="btn btn-outline" type="button" data-public-load-more>Load more</button>
+                <p class="small-print" data-public-status></p>
               </div>
             </div>
           </div>
