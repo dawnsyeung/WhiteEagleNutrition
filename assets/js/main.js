@@ -151,6 +151,21 @@
     );
   };
 
+  const syncHeaderHeightVar = () => {
+    const header = qs('.site-header');
+    if (!header) return;
+
+    const update = () => {
+      const height = header.offsetHeight || 0;
+      if (height) {
+        document.documentElement.style.setProperty('--site-header-height', `${height}px`);
+      }
+    };
+
+    update();
+    window.addEventListener('resize', () => window.requestAnimationFrame(update));
+  };
+
   const injectPetAppNavLink = () => {
     const navList = qs('.site-nav ul');
     if (!navList) return;
@@ -447,6 +462,7 @@
     loadCart();
     renderCart();
     updateCartSummary();
+    syncHeaderHeightVar();
     injectPetAppNavLink();
     setupNavigation();
     setupCart();
