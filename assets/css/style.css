@@ -85,18 +85,23 @@ img {
   box-shadow: 0 6px 20px rgba(17, 24, 39, 0.06);
 }
 
+.site-header .container {
+  width: min(1400px, 96vw);
+}
+
 .site-header > .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.9rem 0;
-  gap: 1.5rem;
+  justify-content: flex-start;
+  padding: 0.85rem 0;
+  gap: 1rem;
 }
 
 .logo {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
+  flex: 0 0 auto;
   font-weight: 600;
   color: var(--color-text);
   text-decoration: none;
@@ -107,18 +112,24 @@ img {
 }
 
 .logo-text {
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   letter-spacing: 0.03em;
+  line-height: 1.15;
 }
 
 .site-nav {
   display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
 }
 
 .site-nav ul {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
+  row-gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -127,7 +138,10 @@ img {
 .site-nav a {
   font-weight: 500;
   color: var(--color-text);
-  padding: 0.35rem 0.2rem;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  white-space: nowrap;
+  padding: 0.45rem 0.25rem;
   position: relative;
 }
 
@@ -135,7 +149,7 @@ img {
   content: '';
   position: absolute;
   inset-inline: 0;
-  bottom: -0.4rem;
+  bottom: -0.35rem;
   height: 3px;
   background: transparent;
   border-radius: 999px;
@@ -155,6 +169,7 @@ img {
   background: transparent;
   border: none;
   cursor: pointer;
+  flex: 0 0 auto;
 }
 
 .nav-toggle-bar {
@@ -177,6 +192,7 @@ img {
   gap: 0.4rem;
   cursor: pointer;
   font-weight: 600;
+  flex: 0 0 auto;
 }
 
 .cart-count {
@@ -1558,6 +1574,10 @@ img {
 }
 
 @media (max-width: 1024px) {
+  .site-header .container {
+    width: min(var(--max-width), 92vw);
+  }
+
   .site-nav {
     position: fixed;
     inset: 0;
@@ -1565,6 +1585,7 @@ img {
     transform: translateY(-100%);
     transition: var(--transition);
     padding-top: 5rem;
+    justify-content: flex-start;
   }
 
   .site-nav.is-open {
@@ -1578,6 +1599,11 @@ img {
 
   .nav-toggle {
     display: flex;
+    margin-left: auto;
+  }
+
+  .cart-toggle {
+    margin-left: 0.65rem;
   }
 
   .site-header > .container {
