@@ -126,6 +126,45 @@ img {
   line-height: 1.15;
 }
 
+.logo-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.logo-tagline {
+  margin-top: 0.1rem;
+  font-style: italic;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+/* Header logo emphasis (bigger + horizontally stretched wordmark). */
+.site-header .logo-mark {
+  font-size: 1.75rem;
+}
+
+.site-header .logo-text {
+  display: inline-block;
+  font-size: 1.28rem;
+  letter-spacing: 0.09em;
+  transform: scaleX(1.07);
+  transform-origin: left center;
+}
+
+@media (max-width: 640px) {
+  .site-header .logo-text {
+    font-size: 1.12rem;
+    letter-spacing: 0.075em;
+    transform: scaleX(1.05);
+  }
+
+  .site-header .logo-tagline {
+    font-size: 0.76rem;
+  }
+}
+
 .site-nav {
   display: flex;
   flex: 1 1 auto;
