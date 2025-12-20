@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Request availability and pricing for White Eagle Nutrition BSFL formulations. Submit your order request and our team will confirm next steps."
+    />
+    <meta name="robots" content="index, follow" />
+    <title>Order Request | White Eagle Nutrition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <link rel="canonical" href="https://www.whiteeaglenutrition.com/orders" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Order Request | White Eagle Nutrition" />
+    <meta
+      property="og:description"
+      content="Request availability and pricing for our USA-sourced BSFL formulations and bundles."
+    />
+    <meta property="og:image" content="/assets/images/white_eagle.png" />
+  </head>
+  <body class="page-orders">
+    <header class="site-header" id="top">
+      <div class="container">
+        <a href="index.html" class="logo" aria-label="White Eagle Nutrition home">
+          <span class="logo-mark" aria-hidden="true">🪶</span>
+          <span class="logo-text">White Eagle Nutrition</span>
+        </a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <nav id="primary-navigation" class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="research.html">BSFL Science</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="ethics.html">Ethics & Sustainability</a></li>
+            <li><a href="blog.html">Insights</a></li>
+            <li><a href="faq.html">FAQs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="cart-toggle" aria-label="Open cart">
+          <span class="cart-icon" aria-hidden="true">🛒</span>
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+      </div>
+    </header>
+    <div class="cart-panel" data-cart-panel aria-hidden="true">
+      <div class="cart-panel__header">
+        <h2>Shopping Cart</h2>
+        <button class="cart-close" aria-label="Close cart">×</button>
+      </div>
+      <div class="cart-panel__body" data-cart-items>
+        <p class="cart-empty">Your cart is currently empty. Explore our formulations tailored to every companion animal.</p>
+      </div>
+      <div class="cart-panel__footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <strong data-cart-total>$0.00</strong>
+        </div>
+        <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+        <button class="btn btn-accent" data-checkout>Secure Checkout</button>
+      </div>
+    </div>
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <p class="eyebrow">Offer board</p>
+          <h1>Submit an order request</h1>
+          <p>
+            Use this form to request availability and pricing. We’ll respond within one business day with confirmation, lead time, and next
+            steps.
+          </p>
+          <a class="btn btn-primary" href="#order-form">Skip to request form</a>
+        </div>
+      </section>
+
+      <section class="contact-form" id="order-form" aria-labelledby="order-heading">
+        <div class="container">
+          <h2 id="order-heading">Request details</h2>
+          <form
+            action="https://formspree.io/f/xqarlbqr"
+            method="post"
+            class="form-grid"
+            data-async-form
+            data-endpoint="https://formspree.io/f/xqarlbqr"
+            data-success-message="Thanks! Your request has been received. We’ll follow up within one business day."
+            data-error-message="We could not submit your request. Please try again shortly or email info@whiteeaglenutrition.com."
+            data-unconfigured-message="Online submissions are not configured yet. Please email info@whiteeaglenutrition.com."
+          >
+            <input type="hidden" name="formName" value="order-request" />
+            <input type="hidden" name="_subject" value="White Eagle Nutrition order request" />
+            <div class="form-group">
+              <label for="order-name">Full name</label>
+              <input type="text" id="order-name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="order-email">Email</label>
+              <input type="email" id="order-email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="order-phone">Phone</label>
+              <input type="tel" id="order-phone" name="phone" placeholder="Optional" />
+            </div>
+            <div class="form-group">
+              <label for="order-type">Request type</label>
+              <select id="order-type" name="requestType" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="retail">Retail availability</option>
+                <option value="wholesale">Wholesale pricing</option>
+                <option value="subscription">Subscription setup</option>
+                <option value="custom">Custom bundle</option>
+              </select>
+            </div>
+            <div class="form-group form-group--full">
+              <label for="order-products">Products of interest</label>
+              <textarea
+                id="order-products"
+                name="products"
+                rows="3"
+                placeholder="Example: Canine Longevity Blend (2 bags), Backyard Layer Vitality Crumble (1 bag)"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group form-group--full">
+              <label for="order-notes">Notes</label>
+              <textarea id="order-notes" name="notes" rows="6" placeholder="Additional notes (optional)"></textarea>
+            </div>
+            <div class="form-group form-group--full">
+              <label class="checkbox">
+                <input type="checkbox" name="contactConsent" value="yes" />
+                <span>You may contact me about this and future availability.</span>
+              </label>
+            </div>
+            <div class="sr-only" aria-hidden="true">
+              <label for="order-company">Company (leave blank)</label>
+              <input type="text" id="order-company" name="company" tabindex="-1" autocomplete="off" data-honeypot />
+            </div>
+            <div class="form-group form-group--full">
+              <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
+            </div>
+            <button type="submit" class="btn btn-primary" data-loading-text="Submitting...">Submit request</button>
+          </form>
+          <p class="small-print">Spam protection is enabled. Your pricing is private.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer__brand">
+          <a href="index.html" class="logo">
+            <span class="logo-mark" aria-hidden="true">🪶</span>
+            <span class="logo-text">White Eagle Nutrition</span>
+          </a>
+          <p class="footer-tagline"><em>Rise.&nbsp;&nbsp; Renew.&nbsp;&nbsp; Thrive.</em></p>
+          <p>
+            Ethical, science-forward BSFL nutrition with USA-sourced ingredients for dogs, cats, horses, ruminants, turtles, fish, reptiles,
+            backyard chickens, and wild birds. We put animal health, our natural resources, and your peace of mind first.
+          </p>
+        </div>
+        <div class="footer__links">
+          <div>
+            <h3>Explore</h3>
+            <ul>
+              <li><a href="products.html">Shop</a></li>
+              <li><a href="research.html">Research</a></li>
+              <li><a href="blog.html">Insights</a></li>
+              <li><a href="ethics.html">Ethics</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Support</h3>
+            <ul>
+              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="contact.html#wholesale">Wholesale</a></li>
+              <li><a href="contact.html#contact-form">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Policies</h3>
+            <ul>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="terms.html">Terms of Sale</a></li>
+              <li><a href="shipping.html">Shipping &amp; Returns</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__newsletter" id="subscribe-footer">
+          <h3>Stay in the wellness loop</h3>
+          <p>Receive vet-authored insights and early access to limited harvest BSFL batches.</p>
+          <form class="newsletter-form" action="#" method="post">
+            <label for="newsletter-email" class="sr-only">Email address</label>
+            <input type="email" id="newsletter-email" name="email" placeholder="Email address" required />
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <p class="small-print">We respect your inbox and never sell data. Opt out anytime.</p>
+        </div>
+      </div>
+      <div class="container footer__legal">
+        <p>© <span data-current-year></span> White Eagle Nutrition. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/whiteeaglenutrition" aria-label="Follow on Instagram">Instagram</a>
+          <a href="https://www.facebook.com/whiteeaglenutrition" aria-label="Follow on Facebook">Facebook</a>
+          <a href="https://www.linkedin.com/company/whiteeaglenutrition" aria-label="Follow on LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+    <a href="#top" class="scroll-top" aria-label="Back to top">↑</a>
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>
+

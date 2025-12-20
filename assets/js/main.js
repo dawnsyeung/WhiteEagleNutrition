@@ -345,96 +345,115 @@
     });
   };
 
-  const setupContactForm = () => {
-    const form = qs('[data-contact-form]');
-    if (!form) return;
+  const setupAsyncForms = () => {
+    const forms = qsa('[data-contact-form], [data-async-form]');
+    if (!forms.length) return;
 
-    const status = qs('[data-form-status]', form);
-    const submitButton = form.querySelector('button[type="submit"]');
-    const honeypot = qs('[data-honeypot]', form);
+    forms.forEach((form) => {
+      if (form.dataset.asyncBound === 'true') return;
+      form.dataset.asyncBound = 'true';
 
-    const getEndpoint = () => {
-      const dataEndpoint = (form.getAttribute('data-endpoint') || '').trim();
-      if (dataEndpoint) return dataEndpoint;
-      const actionEndpoint = (form.getAttribute('action') || '').trim();
-      if (actionEndpoint && actionEndpoint !== '#') return actionEndpoint;
-      return '';
-    };
+      const status = qs('[data-form-status]', form);
+      const submitButton = form.querySelector('button[type="submit"]');
+      const honeypot = qs('[data-honeypot]', form);
 
-    const setStatus = (type, message) => {
-      if (!status) return;
-      status.classList.remove('form-status--success', 'form-status--error');
+      const getEndpoint = () => {
+        const dataEndpoint = (form.getAttribute('data-endpoint') || '').trim();
+        if (dataEndpoint) return dataEndpoint;
+        const actionEndpoint = (form.getAttribute('action') || '').trim();
+        if (actionEndpoint && actionEndpoint !== '#') return actionEndpoint;
+        return '';
+      };
 
-      if (!message) {
-        status.hidden = true;
-        status.textContent = '';
-        return;
-      }
+      const isContactForm = form.hasAttribute('data-contact-form');
 
-      if (type === 'success') {
-        status.classList.add('form-status--success');
-      } else if (type === 'error') {
-        status.classList.add('form-status--error');
-      }
+      const messages = {
+        unconfigured:
+          (form.getAttribute('data-unconfigured-message') || '').trim() ||
+          (isContactForm
+            ? 'Online submissions are not configured yet. Email dawn@whiteeaglenutrition.com.'
+            : 'Online submissions are not configured yet. Please email info@whiteeaglenutrition.com.'),
+        success:
+          (form.getAttribute('data-success-message') || '').trim() ||
+          (isContactForm
+            ? 'Thank you! Our nutrition team will reply within one business day.'
+            : 'Thank you! We received your submission.'),
+        error:
+          (form.getAttribute('data-error-message') || '').trim() ||
+          (isContactForm
+            ? 'We could not send your message. Try again shortly or email dawn@whiteeaglenutrition.com.'
+            : 'We could not submit your request. Please try again shortly.')
+      };
 
-      status.hidden = false;
-      status.textContent = message;
-    };
+      const setStatus = (type, message) => {
+        if (!status) return;
+        status.classList.remove('form-status--success', 'form-status--error');
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      if (honeypot && honeypot.value.trim()) {
-        return;
-      }
-
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      const endpoint = getEndpoint();
-      const isPlaceholderEndpoint = endpoint.includes('YOUR_FORM_ID');
-
-      if (!endpoint || isPlaceholderEndpoint) {
-        setStatus(
-          'error',
-          'Online submissions are not configured yet. Email dawn@whiteeaglenutrition.com.'
-        );
-        return;
-      }
-
-      setStatus('', '');
-      toggleButtonLoading(submitButton, true);
-
-      const formData = new FormData(form);
-      formData.delete('company');
-      formData.append('submittedAt', new Date().toISOString());
-
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json'
-          },
-          body: formData
-        });
-
-        if (!response.ok) {
-          throw new Error(`Request failed with status ${response.status}`);
+        if (!message) {
+          status.hidden = true;
+          status.textContent = '';
+          return;
         }
 
-        setStatus('success', 'Thank you! Our nutrition team will reply within one business day.');
-        form.reset();
-      } catch (error) {
-        console.error('Contact form submission failed', error);
-        setStatus(
-          'error',
-          'We could not send your message. Try again shortly or email dawn@whiteeaglenutrition.com.'
-        );
-      } finally {
-        toggleButtonLoading(submitButton, false);
-      }
+        if (type === 'success') {
+          status.classList.add('form-status--success');
+        } else if (type === 'error') {
+          status.classList.add('form-status--error');
+        }
+
+        status.hidden = false;
+        status.textContent = message;
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (honeypot && honeypot.value.trim()) {
+          return;
+        }
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const endpoint = getEndpoint();
+        const isPlaceholderEndpoint = endpoint.includes('YOUR_FORM_ID');
+
+        if (!endpoint || isPlaceholderEndpoint) {
+          setStatus('error', messages.unconfigured);
+          return;
+        }
+
+        setStatus('', '');
+        toggleButtonLoading(submitButton, true);
+
+        const formData = new FormData(form);
+        formData.delete('company');
+        formData.append('submittedAt', new Date().toISOString());
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json'
+            },
+            body: formData
+          });
+
+          if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+          }
+
+          setStatus('success', messages.success);
+          form.reset();
+        } catch (error) {
+          console.error('Form submission failed', error);
+          setStatus('error', messages.error);
+        } finally {
+          toggleButtonLoading(submitButton, false);
+        }
+      });
     });
   };
 
@@ -454,7 +473,7 @@
     setupProductFiltering();
     setupAccordions();
     setupBundleButton();
-    setupContactForm();
+    setupAsyncForms();
     setupPwa();
     setupInstallPrompt();
     updateYear();
