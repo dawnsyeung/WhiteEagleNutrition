@@ -136,6 +136,109 @@
     }
   };
 
+  const defaultFormspreeEndpoint = 'https://formspree.io/f/xqarlbqr';
+
+  const createThankYouModal = () => {
+    const existing = qs('[data-thank-you-modal]');
+    if (existing) return existing;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'wen-modal-overlay';
+    overlay.setAttribute('data-thank-you-modal', '');
+    overlay.setAttribute('aria-hidden', 'true');
+
+    const modal = document.createElement('div');
+    modal.className = 'wen-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'wen-modal-title');
+    modal.setAttribute('aria-describedby', 'wen-modal-message');
+
+    const header = document.createElement('div');
+    header.className = 'wen-modal__header';
+
+    const title = document.createElement('h2');
+    title.className = 'wen-modal__title';
+    title.id = 'wen-modal-title';
+    title.textContent = 'Thank you!';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'wen-modal__close';
+    closeBtn.setAttribute('aria-label', 'Close');
+    closeBtn.innerHTML = '×';
+
+    header.append(title, closeBtn);
+
+    const body = document.createElement('div');
+    body.className = 'wen-modal__body';
+
+    const message = document.createElement('p');
+    message.className = 'wen-modal__message';
+    message.id = 'wen-modal-message';
+    message.textContent = 'You’re all set.';
+
+    body.appendChild(message);
+
+    modal.append(header, body);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    const close = () => closeThankYouModal();
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) close();
+    });
+
+    return overlay;
+  };
+
+  let thankYouModalLastFocus = null;
+
+  const openThankYouModal = ({ title, message } = {}) => {
+    const overlay = createThankYouModal();
+    const modalTitle = qs('#wen-modal-title', overlay);
+    const modalMessage = qs('#wen-modal-message', overlay);
+    const closeBtn = qs('.wen-modal__close', overlay);
+
+    if (modalTitle && title) modalTitle.textContent = title;
+    if (modalMessage && message) modalMessage.textContent = message;
+
+    thankYouModalLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    window.requestAnimationFrame(() => {
+      closeBtn?.focus();
+    });
+  };
+
+  const closeThankYouModal = () => {
+    const overlay = qs('[data-thank-you-modal]');
+    if (!overlay) return;
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    if (thankYouModalLastFocus) {
+      thankYouModalLastFocus.focus();
+      thankYouModalLastFocus = null;
+    }
+  };
+
+  const setupThankYouModalGlobalEvents = () => {
+    document.addEventListener('keydown', (event) => {
+      const overlay = qs('[data-thank-you-modal]');
+      const isOpen = overlay?.classList.contains('is-open');
+      if (!isOpen) return;
+
+      if (event.key === 'Escape') {
+        closeThankYouModal();
+      }
+    });
+  };
+
   const setupNavigation = () => {
     if (!navToggle || !nav) return;
     navToggle.addEventListener('click', () => {
@@ -453,6 +556,78 @@
     });
   };
 
+  const setupNewsletterForms = () => {
+    const forms = qsa('form.newsletter-form, form.subscription-form');
+    if (!forms.length) return;
+
+    const getEndpoint = (form) => {
+      const dataEndpoint = (form.getAttribute('data-endpoint') || '').trim();
+      if (dataEndpoint) return dataEndpoint;
+      const actionEndpoint = (form.getAttribute('action') || '').trim();
+      if (actionEndpoint && actionEndpoint !== '#') return actionEndpoint;
+      return defaultFormspreeEndpoint;
+    };
+
+    forms.forEach((form) => {
+      const submitButton = form.querySelector('button[type="submit"]');
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const endpoint = getEndpoint(form);
+        const isPlaceholderEndpoint = endpoint.includes('YOUR_FORM_ID');
+
+        if (!endpoint || isPlaceholderEndpoint) {
+          openThankYouModal({
+            title: 'Unable to subscribe',
+            message: 'Online signups are not configured yet. Please email info@whiteeaglenutrition.com.'
+          });
+          return;
+        }
+
+        toggleButtonLoading(submitButton, true);
+
+        const formData = new FormData(form);
+        formData.append('formName', form.classList.contains('subscription-form') ? 'subscription-form' : 'newsletter-form');
+        formData.append('_subject', 'White Eagle Nutrition newsletter signup');
+        formData.append('source', window.location.href);
+        formData.append('submittedAt', new Date().toISOString());
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json'
+            },
+            body: formData
+          });
+
+          if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+          }
+
+          openThankYouModal({
+            title: 'Thank you!',
+            message: 'You’re subscribed. Watch your inbox for next month’s science brief.'
+          });
+          form.reset();
+        } catch (error) {
+          console.error('Newsletter form submission failed', error);
+          openThankYouModal({
+            title: 'Could not subscribe',
+            message: 'Please try again in a moment. If this keeps happening, email info@whiteeaglenutrition.com.'
+          });
+        } finally {
+          toggleButtonLoading(submitButton, false);
+        }
+      });
+    });
+  };
+
   const updateYear = () => {
     const yearSpan = qs('[data-current-year]');
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
@@ -471,9 +646,11 @@
     setupAccordions();
     setupBundleButton();
     setupContactForm();
+    setupNewsletterForms();
     setupPwa();
     setupInstallPrompt();
     updateYear();
+    setupThankYouModalGlobalEvents();
   };
 
   document.addEventListener('DOMContentLoaded', init);

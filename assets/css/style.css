@@ -1375,6 +1375,75 @@ img {
   display: none;
 }
 
+.wen-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(17, 24, 39, 0.55);
+  z-index: 2000;
+}
+
+.wen-modal-overlay.is-open {
+  display: grid;
+}
+
+.wen-modal {
+  width: min(560px, 92vw);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(209, 213, 219, 0.7);
+  overflow: hidden;
+}
+
+.wen-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1.4rem 0.8rem;
+  border-bottom: 1px solid rgba(209, 213, 219, 0.6);
+  background: linear-gradient(180deg, rgba(43, 95, 76, 0.06), rgba(255, 255, 255, 0));
+}
+
+.wen-modal__title {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.wen-modal__close {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(43, 95, 76, 0.22);
+  background: rgba(43, 95, 76, 0.08);
+  color: var(--color-primary);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.wen-modal__close:hover,
+.wen-modal__close:focus {
+  background: rgba(43, 95, 76, 0.14);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(43, 95, 76, 0.12);
+}
+
+.wen-modal__body {
+  padding: 1.1rem 1.4rem 1.4rem;
+}
+
+.wen-modal__message {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1rem;
+}
+
 .checkbox {
   display: inline-flex;
   align-items: center;
