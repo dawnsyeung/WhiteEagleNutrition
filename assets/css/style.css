@@ -145,12 +145,17 @@ img {
   font-size: 1.75rem;
 }
 
+.site-header .logo-wordmark {
+  line-height: 1;
+}
+
 .site-header .logo-text {
   display: inline-block;
   font-size: 1.28rem;
   letter-spacing: 0.09em;
   transform: scaleX(1.07);
   transform-origin: left center;
+  line-height: 1.05;
 }
 
 @media (max-width: 640px) {
@@ -163,6 +168,11 @@ img {
   .site-header .logo-tagline {
     font-size: 0.76rem;
   }
+}
+
+.site-header .logo-tagline {
+  margin-top: 0.04rem;
+  line-height: 1.05;
 }
 
 .site-nav {
