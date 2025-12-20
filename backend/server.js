@@ -11,6 +11,7 @@ const multer = require('multer');
 const rateLimit = require('express-rate-limit');
 
 const PORT = Number(process.env.PORT || 8787);
+const WEB_ROOT = process.env.WEB_ROOT || path.join(__dirname, '..');
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
 const UPLOADS_DIR = process.env.UPLOADS_DIR || path.join(__dirname, 'uploads');
 const POSTS_FILE = process.env.POSTS_FILE || path.join(DATA_DIR, 'posts.json');
@@ -161,6 +162,23 @@ const createApp = async () => {
     express.static(UPLOADS_DIR, {
       fallthrough: true,
       maxAge: '30d',
+      etag: true
+    })
+  );
+
+  // Serve the static website from the same origin (same domain deployment).
+  // Block accidental exposure of backend source/data via the static server.
+  app.use((req, res, next) => {
+    if (req.path === '/backend' || req.path.startsWith('/backend/')) {
+      res.status(404).end();
+      return;
+    }
+    next();
+  });
+  app.use(
+    express.static(WEB_ROOT, {
+      extensions: ['html'],
+      maxAge: '1h',
       etag: true
     })
   );
