@@ -7,7 +7,7 @@
 
   const petApp = {
     href: 'pet-photos-app.html',
-    label: 'Pet Photos App'
+    label: 'HAPPY PETS'
   };
 
   const navToggle = qs('.nav-toggle');
@@ -542,14 +542,19 @@
           throw new Error(`Request failed with status ${response.status}`);
         }
 
-        setStatus('success', 'Thank you! Our nutrition team will reply within one business day.');
+        openThankYouModal({
+          title: 'Thank you!',
+          message: 'We’ve received your message. Our nutrition team will reply within one business day.'
+        });
+        setStatus('success', 'Thank you! We’ve received your message.');
         form.reset();
       } catch (error) {
         console.error('Contact form submission failed', error);
-        setStatus(
-          'error',
-          'We could not send your message. Try again shortly or email dawn@whiteeaglenutrition.com.'
-        );
+        openThankYouModal({
+          title: 'Could not send message',
+          message: 'Please try again in a moment. If this keeps happening, email dawn@whiteeaglenutrition.com.'
+        });
+        setStatus('error', 'We could not send your message.');
       } finally {
         toggleButtonLoading(submitButton, false);
       }
@@ -628,6 +633,16 @@
     });
   };
 
+  const setupNonSubmittingSearchForms = () => {
+    const forms = qsa('form[role="search"]');
+    if (!forms.length) return;
+    forms.forEach((form) => {
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+      });
+    });
+  };
+
   const updateYear = () => {
     const yearSpan = qs('[data-current-year]');
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
@@ -647,6 +662,7 @@
     setupBundleButton();
     setupContactForm();
     setupNewsletterForms();
+    setupNonSubmittingSearchForms();
     setupPwa();
     setupInstallPrompt();
     updateYear();
