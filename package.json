@@ -1,0 +1,14 @@
+{
+  "name": "white-eagle-nutrition",
+  "private": true,
+  "description": "Static site + Vercel serverless API for Happy Pet Photos.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.0.0",
+    "@vercel/postgres": "^0.10.0",
+    "formidable": "^3.5.4"
+  }
+}
