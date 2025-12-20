@@ -135,6 +135,7 @@ img {
 .logo-tagline {
   margin-top: 0.1rem;
   font-style: italic;
+  font-weight: 400;
   font-size: 0.82rem;
   letter-spacing: 0.05em;
   color: var(--color-muted);
@@ -173,6 +174,7 @@ img {
 .site-header .logo-tagline {
   margin-top: 0.04rem;
   line-height: 1.05;
+  font-weight: 400;
 }
 
 .site-nav {
