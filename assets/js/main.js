@@ -7,7 +7,7 @@
 
   const petApp = {
     href: 'pet-photos-app.html',
-    label: 'HAPPY PETS'
+    label: 'Happy Pets'
   };
 
   const navToggle = qs('.nav-toggle');
@@ -287,6 +287,15 @@
     }
 
     li.appendChild(a);
+
+    // Insert just before "About" so About stays the rightmost tab.
+    const aboutLink = qsa('a', navList).find((link) => (link.getAttribute('href') || '') === 'about.html');
+    const aboutLi = aboutLink?.closest('li') || null;
+    if (aboutLi && aboutLi.parentElement === navList) {
+      navList.insertBefore(li, aboutLi);
+      return;
+    }
+
     navList.appendChild(li);
   };
 
