@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 (() => {
-  const VERSION = 'pet-photos-v1';
+  // Bump this to force clients to refresh cached assets (CSS/JS/etc.).
+  const VERSION = 'pet-photos-v2';
   const CORE_ASSETS = [
     '/',
     '/index.html',
