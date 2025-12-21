@@ -117,7 +117,14 @@ img {
 }
 
 .logo-mark {
-  font-size: 1.4rem;
+  /* Render actual brand mark instead of emoji/text. */
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: url('../images/logo.svg') center / contain no-repeat;
+  overflow: hidden;
+  text-indent: -9999px;
+  white-space: nowrap;
 }
 
 .logo-text {
@@ -143,7 +150,8 @@ img {
 
 /* Header logo emphasis (bigger + horizontally stretched wordmark). */
 .site-header .logo-mark {
-  font-size: 1.75rem;
+  width: 44px;
+  height: 44px;
 }
 
 .site-header .logo-wordmark {
@@ -1731,14 +1739,14 @@ img {
 
   .site-nav {
     position: fixed;
-    top: var(--site-header-height);
+    top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     background: rgba(255, 255, 255, 0.98);
     transform: translateY(-100%);
     transition: var(--transition);
-    padding-top: 2.5rem;
+    padding-top: calc(var(--site-header-height) + 2.5rem);
     padding-bottom: 2rem;
     justify-content: flex-start;
     overflow-y: auto;
@@ -1808,55 +1816,18 @@ img {
   }
 }
 
-/* Phones: keep logo at top + show navigation (no hidden overlay). */
+/* Phones: keep hamburger + slide-down menu (consistent behavior). */
 @media (max-width: 768px) {
   .site-header > .container {
-    flex-wrap: wrap;
     align-items: center;
-    row-gap: 0.4rem;
   }
 
   .logo {
     flex: 1 1 auto;
   }
 
-  /* Show links directly on mobile instead of an off-canvas overlay. */
   .nav-toggle {
-    display: none;
-  }
-
-  .site-nav {
-    position: static;
-    inset: auto;
-    background: transparent;
-    transform: none;
-    transition: none;
-    padding: 0;
-    flex: 0 0 100%;
-    width: 100%;
-    justify-content: flex-start;
-    overflow: visible;
-  }
-
-  .site-nav.is-open {
-    transform: none;
-  }
-
-  .site-nav ul {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    width: 100%;
-    padding: 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .site-nav a {
-    width: auto;
-    font-size: 0.95rem;
-    padding: 0.55rem 0.25rem;
+    display: flex;
   }
 }
 
