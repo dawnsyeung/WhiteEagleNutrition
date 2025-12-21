@@ -10,7 +10,7 @@
     '/assets/js/pet-photos-app.js',
     '/manifest.webmanifest',
     '/assets/images/favicon.svg',
-    '/assets/images/logo.svg'
+    '/assets/images/logo.png'
   ];
 
   self.addEventListener('install', (event) => {

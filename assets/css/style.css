@@ -121,7 +121,7 @@ img {
   display: inline-block;
   width: 40px;
   height: 40px;
-  background: url('../images/logo.svg') center / contain no-repeat;
+  background: url('../images/logo.png') center / contain no-repeat;
   overflow: hidden;
   text-indent: -9999px;
   white-space: nowrap;
