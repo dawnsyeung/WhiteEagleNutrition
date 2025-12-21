@@ -1712,6 +1712,23 @@ img {
     width: min(var(--max-width), 92vw);
   }
 
+  /* Mobile header: keep logo visible and buttons reachable. */
+  .logo {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .logo-wordmark {
+    min-width: 0;
+  }
+
+  .site-header .logo-text {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .site-nav {
     position: fixed;
     top: var(--site-header-height);
@@ -1722,7 +1739,11 @@ img {
     transform: translateY(-100%);
     transition: var(--transition);
     padding-top: 2.5rem;
+    padding-bottom: 2rem;
     justify-content: flex-start;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 950;
   }
 
   .site-nav.is-open {
@@ -1733,11 +1754,25 @@ img {
     flex-direction: column;
     gap: 1.5rem;
     overflow: visible;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 1.5rem;
+  }
+
+  .site-nav a {
+    display: block;
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 0.85rem 0;
   }
 
   .nav-toggle {
     display: flex;
     margin-left: auto;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
   }
 
   .cart-toggle {
