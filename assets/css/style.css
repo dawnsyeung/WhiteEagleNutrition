@@ -1808,6 +1808,58 @@ img {
   }
 }
 
+/* Phones: keep logo at top + show navigation (no hidden overlay). */
+@media (max-width: 768px) {
+  .site-header > .container {
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 0.4rem;
+  }
+
+  .logo {
+    flex: 1 1 auto;
+  }
+
+  /* Show links directly on mobile instead of an off-canvas overlay. */
+  .nav-toggle {
+    display: none;
+  }
+
+  .site-nav {
+    position: static;
+    inset: auto;
+    background: transparent;
+    transform: none;
+    transition: none;
+    padding: 0;
+    flex: 0 0 100%;
+    width: 100%;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+
+  .site-nav.is-open {
+    transform: none;
+  }
+
+  .site-nav ul {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-nav a {
+    width: auto;
+    font-size: 0.95rem;
+    padding: 0.55rem 0.25rem;
+  }
+}
+
 @media (max-width: 640px) {
   .hero__stat-card {
     position: static;
