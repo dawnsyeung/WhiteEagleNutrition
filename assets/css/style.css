@@ -1818,16 +1818,63 @@ img {
 
 /* Phones: keep hamburger + slide-down menu (consistent behavior). */
 @media (max-width: 768px) {
+  /* Fallback for first paint before JS measures header height. */
+  :root {
+    --site-header-height: 112px;
+  }
+
+  /*
+    Mobile requirement: logo + nav menu must be visible at the top.
+    Show the nav links as a horizontal bar directly under the header row.
+    Keep logo + cart on the first row (DOM order is logo, toggle, nav, cart).
+  */
   .site-header > .container {
     align-items: center;
+    flex-wrap: wrap;
   }
 
-  .logo {
+  .site-header .logo {
+    order: 1;
     flex: 1 1 auto;
+    min-width: 0;
   }
 
-  .nav-toggle {
-    display: flex;
+  .site-header .cart-toggle {
+    order: 2;
+    margin-left: auto;
+  }
+
+  /* Hide hamburger; nav is always visible on phones. */
+  .site-header .nav-toggle {
+    display: none;
+    order: 3;
+  }
+
+  .site-header .site-nav {
+    order: 4;
+    position: static;
+    transform: none;
+    inset: auto;
+    width: 100%;
+    flex: 0 0 100%;
+    background: transparent;
+    padding: 0.25rem 0 0;
+    overflow: visible;
+    justify-content: flex-start;
+    z-index: auto;
+  }
+
+  .site-header .site-nav ul {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.9rem;
+    padding: 0 0 0.25rem;
+  }
+
+  .site-header .site-nav a {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.2rem;
   }
 }
 
