@@ -254,6 +254,24 @@
     );
   };
 
+  const setupPurchaseNavCta = () => {
+    const links = qsa('.site-nav a');
+    if (!links.length) return;
+
+    const normalizeHref = (href) => (href || '').trim().replace(/^\.?\//, '').replace(/\/+$/, '');
+
+    const purchaseLink = links.find((link) => {
+      const href = normalizeHref(link.getAttribute('href'));
+      const label = (link.textContent || '').trim();
+      return href === 'products.html' || /offer\s*board/i.test(label) || /^products$/i.test(label);
+    });
+
+    if (!purchaseLink) return;
+
+    purchaseLink.textContent = 'Purchase';
+    purchaseLink.classList.add('nav-purchase');
+  };
+
   const syncHeaderHeightVar = () => {
     const header = qs('.site-header');
     if (!header) return;
@@ -663,6 +681,7 @@
     updateCartSummary();
     syncHeaderHeightVar();
     injectPetAppNavLink();
+    setupPurchaseNavCta();
     setupNavigation();
     setupCart();
     setupProductButtons();
