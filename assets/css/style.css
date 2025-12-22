@@ -227,6 +227,35 @@ img {
   position: relative;
 }
 
+.site-nav a.nav-purchase {
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  background: rgba(242, 163, 101, 0.28);
+  border: 1px solid rgba(242, 163, 101, 0.55);
+  padding: 0.52rem 0.95rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 22px rgba(242, 163, 101, 0.18);
+  text-decoration: none;
+}
+
+.site-nav a.nav-purchase::after {
+  display: none;
+}
+
+.site-nav a.nav-purchase:hover,
+.site-nav a.nav-purchase:focus {
+  background: var(--color-accent);
+  border-color: var(--color-accent-dark);
+  color: #1f2933;
+  text-decoration: none;
+}
+
+.site-nav a.nav-purchase.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary-dark);
+  color: #fff;
+}
+
 .site-nav a::after {
   content: '';
   position: absolute;
