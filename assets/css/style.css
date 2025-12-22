@@ -383,11 +383,15 @@ img {
   position: absolute;
   bottom: 1.5rem;
   left: 1.5rem;
-  background: rgba(255, 255, 255, 0.92);
+  /* Semi-transparent "glass" so photo shows through, while remaining readable. */
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: var(--radius-md);
   padding: 1rem 1.2rem;
   width: min(260px, 80%);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 14px 34px rgba(17, 24, 39, 0.18);
 }
 
 .hero__stat-card h3 {
@@ -398,7 +402,8 @@ img {
 .hero__stat-card p {
   margin: 0;
   font-size: 0.9rem;
-  color: var(--color-muted);
+  /* Darker than global muted for contrast on translucent surface. */
+  color: #334155;
 }
 
 .btn {
