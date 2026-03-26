@@ -1763,7 +1763,6 @@ img {
     width: min(var(--max-width), 92vw);
   }
 
-  /* Mobile header: keep logo visible and buttons reachable. */
   .logo {
     flex: 1 1 auto;
     min-width: 0;
@@ -1780,17 +1779,22 @@ img {
     white-space: nowrap;
   }
 
+  .site-header > .container {
+    padding: 0.7rem 0;
+  }
+
   .site-nav {
     position: fixed;
-    top: 0;
+    top: var(--site-header-height);
     right: 0;
     bottom: 0;
     left: 0;
     background: rgba(255, 255, 255, 0.98);
-    transform: translateY(-100%);
-    transition: var(--transition);
-    padding-top: calc(var(--site-header-height) + 2.5rem);
-    padding-bottom: 2rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    padding: 1.1rem 0 2rem;
     justify-content: flex-start;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -1799,11 +1803,13 @@ img {
 
   .site-nav.is-open {
     transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .site-nav ul {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.75rem;
     overflow: visible;
     align-items: flex-start;
     width: 100%;
@@ -1814,7 +1820,7 @@ img {
     display: block;
     width: 100%;
     font-size: 1.05rem;
-    padding: 0.85rem 0;
+    padding: 0.8rem 0.2rem;
   }
 
   .nav-toggle {
@@ -1828,10 +1834,6 @@ img {
 
   .cart-toggle {
     margin-left: 0.65rem;
-  }
-
-  .site-header > .container {
-    padding: 0.7rem 0;
   }
 
   .bsfl-benefits .container,
@@ -1852,72 +1854,14 @@ img {
     padding-top: 4.5rem;
   }
 
-  /* In-page nav stays aligned to measured header height. */
-
   .footer__links {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 }
 
-/* Phones: keep hamburger + slide-down menu (consistent behavior). */
 @media (max-width: 768px) {
-  /* Fallback for first paint before JS measures header height. */
   :root {
-    --site-header-height: 112px;
-  }
-
-  /*
-    Mobile requirement: logo + nav menu must be visible at the top.
-    Show the nav links as a horizontal bar directly under the header row.
-    Keep logo + cart on the first row (DOM order is logo, toggle, nav, cart).
-  */
-  .site-header > .container {
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .site-header .logo {
-    order: 1;
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  .site-header .cart-toggle {
-    order: 2;
-    margin-left: auto;
-  }
-
-  /* Hide hamburger; nav is always visible on phones. */
-  .site-header .nav-toggle {
-    display: none;
-    order: 3;
-  }
-
-  .site-header .site-nav {
-    order: 4;
-    position: static;
-    transform: none;
-    inset: auto;
-    width: 100%;
-    flex: 0 0 100%;
-    background: transparent;
-    padding: 0.25rem 0 0;
-    overflow: visible;
-    justify-content: flex-start;
-    z-index: auto;
-  }
-
-  .site-header .site-nav ul {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.9rem;
-    padding: 0 0 0.25rem;
-  }
-
-  .site-header .site-nav a {
-    font-size: 0.95rem;
-    padding: 0.4rem 0.2rem;
+    --site-header-height: 84px;
   }
 }
 
