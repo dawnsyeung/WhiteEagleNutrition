@@ -41,6 +41,10 @@ main {
   padding-top: var(--site-header-height);
 }
 
+main [id] {
+  scroll-margin-top: calc(var(--site-header-height) + 0.9rem);
+}
+
 h1,
 h2,
 h3,
@@ -410,6 +414,7 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 44px;
   padding: 0.75rem 1.6rem;
   border-radius: 999px;
   border: none;
@@ -1601,8 +1606,8 @@ img {
 
 .scroll-top {
   position: fixed;
-  bottom: 1.8rem;
-  right: 1.8rem;
+  bottom: calc(1.2rem + env(safe-area-inset-bottom));
+  right: max(1.2rem, env(safe-area-inset-right));
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -1625,7 +1630,7 @@ img {
   top: 0;
   right: 0;
   width: min(420px, 90vw);
-  height: 100vh;
+  height: 100dvh;
   background: #fff;
   transform: translateX(100%);
   transition: var(--transition);
@@ -1651,6 +1656,7 @@ img {
   margin-top: auto;
   display: grid;
   gap: 0.8rem;
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
 }
 
 .cart-panel__body {
@@ -1763,7 +1769,6 @@ img {
     width: min(var(--max-width), 92vw);
   }
 
-  /* Mobile header: keep logo visible and buttons reachable. */
   .logo {
     flex: 1 1 auto;
     min-width: 0;
@@ -1780,17 +1785,22 @@ img {
     white-space: nowrap;
   }
 
+  .site-header > .container {
+    padding: 0.7rem 0;
+  }
+
   .site-nav {
     position: fixed;
-    top: 0;
+    top: var(--site-header-height);
     right: 0;
     bottom: 0;
     left: 0;
     background: rgba(255, 255, 255, 0.98);
-    transform: translateY(-100%);
-    transition: var(--transition);
-    padding-top: calc(var(--site-header-height) + 2.5rem);
-    padding-bottom: 2rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    padding: 1.1rem 0 calc(2rem + env(safe-area-inset-bottom));
     justify-content: flex-start;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -1799,11 +1809,13 @@ img {
 
   .site-nav.is-open {
     transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .site-nav ul {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.75rem;
     overflow: visible;
     align-items: flex-start;
     width: 100%;
@@ -1814,7 +1826,7 @@ img {
     display: block;
     width: 100%;
     font-size: 1.05rem;
-    padding: 0.85rem 0;
+    padding: 0.8rem 0.2rem;
   }
 
   .nav-toggle {
@@ -1828,10 +1840,6 @@ img {
 
   .cart-toggle {
     margin-left: 0.65rem;
-  }
-
-  .site-header > .container {
-    padding: 0.7rem 0;
   }
 
   .bsfl-benefits .container,
@@ -1852,76 +1860,39 @@ img {
     padding-top: 4.5rem;
   }
 
-  /* In-page nav stays aligned to measured header height. */
-
   .footer__links {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 }
 
-/* Phones: keep hamburger + slide-down menu (consistent behavior). */
 @media (max-width: 768px) {
-  /* Fallback for first paint before JS measures header height. */
   :root {
-    --site-header-height: 112px;
-  }
-
-  /*
-    Mobile requirement: logo + nav menu must be visible at the top.
-    Show the nav links as a horizontal bar directly under the header row.
-    Keep logo + cart on the first row (DOM order is logo, toggle, nav, cart).
-  */
-  .site-header > .container {
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .site-header .logo {
-    order: 1;
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  .site-header .cart-toggle {
-    order: 2;
-    margin-left: auto;
-  }
-
-  /* Hide hamburger; nav is always visible on phones. */
-  .site-header .nav-toggle {
-    display: none;
-    order: 3;
-  }
-
-  .site-header .site-nav {
-    order: 4;
-    position: static;
-    transform: none;
-    inset: auto;
-    width: 100%;
-    flex: 0 0 100%;
-    background: transparent;
-    padding: 0.25rem 0 0;
-    overflow: visible;
-    justify-content: flex-start;
-    z-index: auto;
-  }
-
-  .site-header .site-nav ul {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.9rem;
-    padding: 0 0 0.25rem;
-  }
-
-  .site-header .site-nav a {
-    font-size: 0.95rem;
-    padding: 0.4rem 0.2rem;
+    --site-header-height: 84px;
   }
 }
 
 @media (max-width: 640px) {
+  body {
+    line-height: 1.58;
+  }
+
+  .hero {
+    padding: 3.6rem 0 2.8rem;
+  }
+
+  .hero__copy h1 {
+    font-size: clamp(1.85rem, 8.2vw, 2.45rem);
+    margin-bottom: 1rem;
+  }
+
+  .page-hero {
+    padding: 3.1rem 0 2rem;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.7rem, 7.2vw, 2.15rem);
+  }
+
   .hero__stat-card {
     position: static;
     margin-top: 1rem;
@@ -1962,6 +1933,88 @@ img {
   .bundle__visual img {
     width: 80%;
     max-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: min(var(--max-width), 94vw);
+  }
+
+  .site-header .container {
+    width: min(1400px, 94vw);
+  }
+
+  .site-nav ul {
+    padding: 0 1rem;
+  }
+
+  .site-nav a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .hero__cta .btn,
+  .section-actions .btn,
+  .cta__buttons .btn {
+    width: 100%;
+  }
+
+  .product-card__bottom,
+  .product-tile__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .product-card__bottom .btn,
+  .product-tile__footer .btn {
+    width: 100%;
+  }
+
+  .in-page-nav ul {
+    gap: 0.75rem;
+  }
+
+  .in-page-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  .accordion__trigger {
+    padding: 1rem 1.1rem;
+    font-size: 0.96rem;
+  }
+
+  .accordion__content {
+    padding: 0 1.1rem 1.1rem;
+  }
+}
+
+@media (max-width: 390px) {
+  :root {
+    --site-header-height: 78px;
+  }
+
+  .site-header > .container {
+    gap: 0.6rem;
+  }
+
+  .site-header .logo-mark {
+    width: 168px;
+    height: 34px;
+    max-width: 56vw;
+  }
+
+  .btn {
+    font-size: 0.92rem;
+    padding: 0.72rem 1.2rem;
+  }
+
+  .hero__copy h1 {
+    font-size: clamp(1.72rem, 8vw, 2.05rem);
   }
 }
 

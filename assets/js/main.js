@@ -19,6 +19,39 @@
   const cartCount = qs('[data-cart-count]');
   const cartTotal = qs('[data-cart-total]');
   const checkoutBtn = qs('[data-checkout]');
+  const uiState = {
+    navOpen: false,
+    cartOpen: false,
+    modalOpen: false
+  };
+
+  const syncPageScrollLock = () => {
+    const shouldLock = uiState.navOpen || uiState.cartOpen || uiState.modalOpen;
+    document.body.style.overflow = shouldLock ? 'hidden' : '';
+  };
+
+  const setNavOpen = (isOpen) => {
+    uiState.navOpen = Boolean(isOpen);
+    if (nav && navToggle) {
+      nav.classList.toggle('is-open', uiState.navOpen);
+      navToggle.setAttribute('aria-expanded', String(uiState.navOpen));
+    }
+    syncPageScrollLock();
+  };
+
+  const setCartOpen = (isOpen) => {
+    uiState.cartOpen = Boolean(isOpen);
+    if (cartPanel) {
+      cartPanel.classList.toggle('is-open', uiState.cartOpen);
+      cartPanel.setAttribute('aria-hidden', String(!uiState.cartOpen));
+    }
+    syncPageScrollLock();
+  };
+
+  const setModalOpen = (isOpen) => {
+    uiState.modalOpen = Boolean(isOpen);
+    syncPageScrollLock();
+  };
 
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('en-US', {
@@ -106,16 +139,12 @@
 
   const openCart = () => {
     if (!cartPanel) return;
-    cartPanel.classList.add('is-open');
-    cartPanel.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    setNavOpen(false);
+    setCartOpen(true);
   };
 
   const closeCart = () => {
-    if (!cartPanel) return;
-    cartPanel.classList.remove('is-open');
-    cartPanel.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    setCartOpen(false);
   };
 
   const toggleButtonLoading = (button, isLoading) => {
@@ -207,7 +236,7 @@
     thankYouModalLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    setModalOpen(true);
 
     window.requestAnimationFrame(() => {
       closeBtn?.focus();
@@ -216,10 +245,11 @@
 
   const closeThankYouModal = () => {
     const overlay = qs('[data-thank-you-modal]');
-    if (!overlay) return;
-    overlay.classList.remove('is-open');
-    overlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    if (overlay) {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    setModalOpen(false);
 
     if (thankYouModalLastFocus) {
       thankYouModalLastFocus.focus();
@@ -241,17 +271,50 @@
 
   const setupNavigation = () => {
     if (!navToggle || !nav) return;
+
+    const isMobileNavViewport = () => window.matchMedia('(max-width: 1024px)').matches;
+
+    setNavOpen(false);
+
     navToggle.addEventListener('click', () => {
-      const isOpen = nav.classList.toggle('is-open');
-      navToggle.setAttribute('aria-expanded', String(isOpen));
+      const isOpen = !uiState.navOpen;
+      if (isOpen) {
+        closeCart();
+      }
+      setNavOpen(isOpen);
     });
 
     qsa('.site-nav a').forEach((link) =>
       link.addEventListener('click', () => {
-        nav.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
+        setNavOpen(false);
       })
     );
+
+    nav.addEventListener('click', (event) => {
+      if (event.target === nav) {
+        setNavOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setNavOpen(false);
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!isMobileNavViewport() || !uiState.navOpen) return;
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (nav.contains(target) || navToggle.contains(target)) return;
+      setNavOpen(false);
+    });
+
+    window.addEventListener('resize', () => {
+      if (!isMobileNavViewport()) {
+        setNavOpen(false);
+      }
+    });
   };
 
   const setupPurchaseNavCta = () => {
