@@ -491,6 +491,24 @@ img {
   color: var(--color-muted);
 }
 
+.nellies-promo {
+  margin-bottom: 1.5rem;
+  max-width: 760px;
+}
+
+.nellies-promo__note {
+  margin: 0.35rem 0 0;
+  font-weight: 600;
+}
+
+.nellies-promo img {
+  margin-top: 1rem;
+  width: min(100%, 420px);
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
 .species-grid__items {
   display: grid;
   grid-template-columns: 1fr;
