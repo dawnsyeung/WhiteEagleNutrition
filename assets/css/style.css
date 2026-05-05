@@ -260,6 +260,27 @@ img {
   color: #fff;
 }
 
+.site-nav a.nav-highlight {
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: rgba(43, 95, 76, 0.1);
+  border: 1.5px solid rgba(43, 95, 76, 0.35);
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.site-nav a.nav-highlight::after {
+  display: none;
+}
+
+.site-nav a.nav-highlight:hover,
+.site-nav a.nav-highlight:focus {
+  background: var(--color-primary);
+  border-color: var(--color-primary-dark);
+  color: #fff;
+}
+
 .site-nav a::after {
   content: '';
   position: absolute;
@@ -1847,6 +1868,12 @@ img {
     padding: 0.8rem 0.2rem;
   }
 
+  .site-nav a.nav-highlight {
+    width: auto;
+    font-size: 1.1rem;
+    padding: 0.7rem 1.1rem;
+  }
+
   .nav-toggle {
     display: flex;
     margin-left: auto;
@@ -1886,6 +1913,11 @@ img {
 @media (max-width: 768px) {
   :root {
     --site-header-height: 84px;
+  }
+
+  .site-header .site-nav a.nav-highlight {
+    font-size: 0.95rem;
+    padding: 0.35rem 0.7rem;
   }
 }
 
