@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 (() => {
-  const VERSION = 'pet-photos-v3';
+  const VERSION = 'pet-photos-v4';
   const CORE_ASSETS = [
     '/',
     '/index.html',
