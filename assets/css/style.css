@@ -503,7 +503,7 @@ img {
 
 .nellies-promo img {
   margin-top: 1rem;
-  width: min(100%, 420px);
+  width: min(100%, 168px);
   height: auto;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
