@@ -377,25 +377,26 @@ img {
 }
 
 .hero__image {
-  position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
 }
 
+.hero__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .hero__stat-card {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  /* Semi-transparent "glass" so photo shows through, while remaining readable. */
-  background: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
-  backdrop-filter: blur(10px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  position: static;
+  margin-top: 1rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(43, 95, 76, 0.14);
   border-radius: var(--radius-md);
   padding: 1rem 1.2rem;
-  width: min(260px, 80%);
-  box-shadow: 0 14px 34px rgba(17, 24, 39, 0.18);
+  width: 100%;
+  box-shadow: var(--shadow-sm);
 }
 
 .hero__stat-card h3 {
@@ -406,8 +407,7 @@ img {
 .hero__stat-card p {
   margin: 0;
   font-size: 0.9rem;
-  /* Darker than global muted for contrast on translucent surface. */
-  color: #334155;
+  color: var(--color-muted);
 }
 
 .btn {
@@ -962,6 +962,18 @@ img {
 
 .product-groups {
   padding: 3rem 0;
+}
+
+.shopify-buy-components {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.shopify-buy-components > div {
+  flex: 1 1 320px;
 }
 
 .product-groups__buttons {
@@ -1909,12 +1921,6 @@ img {
 
   .page-hero h1 {
     font-size: clamp(1.7rem, 7.2vw, 2.15rem);
-  }
-
-  .hero__stat-card {
-    position: static;
-    margin-top: 1rem;
-    width: 100%;
   }
 
   .cart-toggle {
