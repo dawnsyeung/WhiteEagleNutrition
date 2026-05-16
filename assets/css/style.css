@@ -488,7 +488,7 @@ img {
 }
 
 .species-grid {
-  padding: 4.5rem 0;
+  padding: 2.75rem 0 4.5rem;
 }
 
 .section-intro {
@@ -499,19 +499,42 @@ img {
 .nellies-promo {
   margin-bottom: 1.5rem;
   max-width: 760px;
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 1rem 1.25rem;
+  align-items: center;
+}
+
+.nellies-promo__caption {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.nellies-promo__caption p {
+  margin: 0;
 }
 
 .nellies-promo__note {
-  margin: 0.35rem 0 0;
+  margin: 0;
   font-weight: 600;
 }
 
 .nellies-promo img {
-  margin-top: 1rem;
-  width: min(100%, 168px);
+  width: 100%;
   height: auto;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 639px) {
+  .nellies-promo {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .nellies-promo img {
+    width: min(100%, 168px);
+  }
 }
 
 .species-grid__items {
