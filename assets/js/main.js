@@ -19,6 +19,7 @@
   const cartCount = qs('[data-cart-count]');
   const cartTotal = qs('[data-cart-total]');
   const checkoutBtn = qs('[data-checkout]');
+  const hasShopifyBuyButton = Boolean(qs('[data-shopify-buy-button]'));
   const uiState = {
     navOpen: false,
     cartOpen: false,
@@ -456,6 +457,30 @@
     }
   };
 
+  const disableNativeCartUi = () => {
+    if (!hasShopifyBuyButton) return;
+
+    if (cartToggle) {
+      cartToggle.hidden = true;
+      cartToggle.setAttribute('aria-hidden', 'true');
+    }
+
+    if (cartPanel) {
+      cartPanel.remove();
+      uiState.cartOpen = false;
+    }
+  };
+
+  const disableComingSoonProductButtons = () => {
+    if (!hasShopifyBuyButton) return;
+
+    qsa('.product-grid [data-add-to-cart]').forEach((button) => {
+      button.disabled = true;
+      button.setAttribute('aria-disabled', 'true');
+      button.textContent = 'Coming Soon';
+    });
+  };
+
   const setupProductButtons = () => {
     qsa('[data-add-to-cart]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -739,15 +764,22 @@
   };
 
   const init = () => {
-    loadCart();
-    renderCart();
-    updateCartSummary();
+    if (hasShopifyBuyButton) {
+      disableNativeCartUi();
+      disableComingSoonProductButtons();
+    } else {
+      loadCart();
+      renderCart();
+      updateCartSummary();
+    }
     syncHeaderHeightVar();
     injectPetAppNavLink();
     setupPurchaseNavCta();
     setupNavigation();
-    setupCart();
-    setupProductButtons();
+    if (!hasShopifyBuyButton) {
+      setupCart();
+      setupProductButtons();
+    }
     setupProductFiltering();
     setupAccordions();
     setupBundleButton();
