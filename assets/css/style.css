@@ -966,32 +966,14 @@ img {
 
 .shopify-buy-components {
   margin-top: 2rem;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
   align-items: flex-start;
 }
 
 .shopify-buy-components > div {
-  display: flex;
-  justify-content: center;
-}
-
-.shopify-buy-components .shopify-buy__collection-products {
-  margin-left: 0 !important;
-}
-
-.shopify-buy-components .shopify-buy__product {
-  width: 100% !important;
-  max-width: 340px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-@media (max-width: 900px) {
-  .shopify-buy-components {
-    grid-template-columns: 1fr;
-  }
+  flex: 1 1 320px;
 }
 
 .product-groups__buttons {
