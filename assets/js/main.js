@@ -472,9 +472,16 @@
   };
 
   const disableComingSoonProductButtons = () => {
-    if (!hasShopifyBuyButton) return;
+    qsa('[data-add-to-cart]').forEach((button) => {
+      const productContainer =
+        button.closest('[data-product-card]') ||
+        button.closest('.product-card') ||
+        button.closest('.product-tile') ||
+        button.closest('article');
+      const productTitle = productContainer?.querySelector('h3');
+      const isComingSoon = /\(coming soon\)/i.test(productTitle?.textContent || '');
+      if (!isComingSoon) return;
 
-    qsa('.product-grid [data-add-to-cart]').forEach((button) => {
       button.disabled = true;
       button.setAttribute('aria-disabled', 'true');
       button.textContent = 'Coming Soon';
@@ -766,12 +773,12 @@
   const init = () => {
     if (hasShopifyBuyButton) {
       disableNativeCartUi();
-      disableComingSoonProductButtons();
     } else {
       loadCart();
       renderCart();
       updateCartSummary();
     }
+    disableComingSoonProductButtons();
     syncHeaderHeightVar();
     injectPetAppNavLink();
     setupPurchaseNavCta();
