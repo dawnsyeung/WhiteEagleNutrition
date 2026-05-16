@@ -964,6 +964,18 @@ img {
   padding: 3rem 0;
 }
 
+.shopify-buy-components {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.shopify-buy-components > div {
+  flex: 1 1 320px;
+}
+
 .product-groups__buttons {
   display: flex;
   flex-wrap: wrap;
