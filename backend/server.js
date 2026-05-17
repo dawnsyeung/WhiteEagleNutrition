@@ -17,7 +17,7 @@ const UPLOADS_DIR = process.env.UPLOADS_DIR || path.join(__dirname, 'uploads');
 const POSTS_FILE = process.env.POSTS_FILE || path.join(DATA_DIR, 'posts.json');
 const PUBLIC_BASE_URL = (process.env.PUBLIC_BASE_URL || '').replace(/\/+$/, ''); // optional
 const CORS_ORIGIN = (process.env.CORS_ORIGIN || '').trim(); // optional
-const ADMIN_TOKEN = (process.env.ADMIN_TOKEN || '').trim(); // optional
+const MODERATOR_PASSWORD = (process.env.MODERATOR_PASSWORD || 'Remove').trim();
 const MAX_UPLOAD_BYTES = Number(process.env.MAX_UPLOAD_BYTES || 6 * 1024 * 1024); // 6MB
 
 const ensureDirs = async () => {
@@ -300,13 +300,11 @@ const createApp = async () => {
   });
 
   app.delete('/api/posts/:id', async (req, res) => {
-    if (!ADMIN_TOKEN) {
-      res.status(403).json({ error: 'Delete is disabled (ADMIN_TOKEN not set).' });
-      return;
-    }
+    const fromHeader = String(req.headers['x-moderator-password'] || '').trim();
     const auth = String(req.headers.authorization || '');
-    const token = auth.startsWith('Bearer ') ? auth.slice('Bearer '.length) : '';
-    if (token !== ADMIN_TOKEN) {
+    const bearer = auth.startsWith('Bearer ') ? auth.slice('Bearer '.length).trim() : '';
+    const password = fromHeader || bearer;
+    if (!password || password !== MODERATOR_PASSWORD) {
       res.status(401).json({ error: 'Unauthorized.' });
       return;
     }

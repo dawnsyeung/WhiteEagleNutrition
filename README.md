@@ -32,13 +32,16 @@ Deploy as usual. The public feed API routes will be available at:
 And the app UI is at:
 - `/pet-photos-app.html`
 
-## Admin delete (optional)
+## Moderator delete
 
-To enable deleting public posts:
-- Add an env var in Vercel: `ADMIN_TOKEN = <some long random string>`
-- Then call: `DELETE /api/posts/:id` with header `Authorization: Bearer <ADMIN_TOKEN>`
+Public posts are permanent by default and can be removed only by moderators using a shared password.
 
-If `ADMIN_TOKEN` is not set, delete is disabled.
+- Default moderator password: `Remove`
+- Optional override in Vercel env vars: `MODERATOR_PASSWORD = <your password>`
+- Delete endpoint: `DELETE /api/posts/:id`
+- Send moderator password in header:
+  - `x-moderator-password: <password>`
+  - (or `Authorization: Bearer <password>`)
 
 ## Notes
 

@@ -13,6 +13,12 @@ const getBearerToken = (req) => {
   return auth.slice('Bearer '.length).trim();
 };
 
+const getModeratorPassword = (req) => {
+  const fromHeader = String(req.headers?.['x-moderator-password'] || '').trim();
+  if (fromHeader) return fromHeader;
+  return getBearerToken(req);
+};
+
 module.exports = async function handler(req, res) {
   try {
     if (req.method !== 'DELETE') {
@@ -20,19 +26,16 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    const adminToken = String(process.env.ADMIN_TOKEN || '').trim();
-    if (!adminToken) {
-      json(res, 403, { error: 'Delete is disabled (ADMIN_TOKEN not set).' });
-      return;
-    }
-
-    const token = getBearerToken(req);
-    if (token !== adminToken) {
+    // Keep moderation intentionally simple: shared password, no usernames.
+    const moderatorPassword = String(process.env.MODERATOR_PASSWORD || 'Remove').trim();
+    const password = getModeratorPassword(req);
+    if (!password || password !== moderatorPassword) {
       json(res, 401, { error: 'Unauthorized.' });
       return;
     }
 
-    const id = String(req.query?.id || '').trim();
+    const rawId = req.query?.id;
+    const id = String(Array.isArray(rawId) ? rawId[0] : rawId || '').trim();
     if (!id) {
       json(res, 400, { error: 'Missing id.' });
       return;

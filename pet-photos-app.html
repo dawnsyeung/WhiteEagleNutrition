@@ -117,7 +117,7 @@
             <div class="pet-app__panel">
               <h2 id="new-post-heading">New photo post</h2>
               <p class="section-intro">
-                Save to your device and (optionally) share to the public feed. Your device gallery works offline; the public feed requires an
+                Save to your device and share to the public feed. Your device gallery works offline; the public feed requires an
                 internet connection.
               </p>
 
@@ -156,7 +156,7 @@
 
                   <div class="form-group form-group--full">
                     <label class="checkbox">
-                      <input type="checkbox" name="sharePublic" data-share-public />
+                      <input type="checkbox" name="sharePublic" data-share-public checked />
                       Share to public feed
                     </label>
                     <p class="small-print" data-share-hint>Public posts are visible to everyone.</p>
@@ -228,6 +228,9 @@
                   <option value="oldest">Oldest</option>
                 </select>
               </div>
+              <p class="small-print" data-moderation-help hidden>
+                Moderators can remove a public post by clicking Remove and entering password: Remove.
+              </p>
 
               <div class="pet-feed" data-feed>
                 <p class="section-intro" data-empty-state>

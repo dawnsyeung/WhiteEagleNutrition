@@ -38,6 +38,7 @@
     publicLoadMore: qs('[data-public-load-more]'),
     publicFooter: qs('[data-public-footer]'),
     publicStatus: qs('[data-public-status]'),
+    moderationHelp: qs('[data-moderation-help]'),
     demoPost: qs('[data-demo-post]'),
     clearPosts: qs('[data-clear-posts]')
   };
@@ -415,6 +416,7 @@
     if (els.localFeed) els.localFeed.hidden = state.activeTab !== 'local';
     if (els.publicFeed) els.publicFeed.hidden = state.activeTab !== 'public';
     if (els.publicFooter) els.publicFooter.hidden = state.activeTab !== 'public';
+    if (els.moderationHelp) els.moderationHelp.hidden = state.activeTab !== 'public';
 
     els.tabs.forEach((btn) => {
       const isActive = btn.getAttribute('data-tab') === state.activeTab;
@@ -620,7 +622,23 @@
         }
       });
 
-      actions.append(shareBtn);
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'btn btn-outline';
+      removeBtn.textContent = 'Remove';
+      removeBtn.addEventListener('click', async () => {
+        const password = window.prompt('Moderator password to remove this photo:');
+        if (password === null) return;
+        try {
+          await deletePublicPost(post.id, password);
+          setPublicStatus('Post removed.');
+          await fetchPublicPage({ reset: true });
+        } catch (error) {
+          setPublicStatus(error?.message || 'Could not remove post.');
+        }
+      });
+
+      actions.append(shareBtn, removeBtn);
       body.append(title, caption, actions);
       card.append(img, body);
       els.publicFeed.appendChild(card);
@@ -684,16 +702,10 @@
 
   const setPublicShareAvailability = (available) => {
     const isAvailable = Boolean(available);
-    if (els.sharePublic) {
-      els.sharePublic.disabled = !isAvailable;
-      if (!isAvailable) {
-        els.sharePublic.checked = false;
-      }
-    }
     if (els.shareHint) {
       els.shareHint.textContent = isAvailable
         ? 'Public posts are visible to everyone.'
-        : 'Public feed is unavailable right now. Posts will still save to this device.';
+        : 'Public feed may be temporarily unavailable. Posts still save locally and can be shared once the feed responds.';
     }
   };
 
@@ -732,6 +744,31 @@
       throw new Error(msg);
     }
     return res.json();
+  };
+
+  const deletePublicPost = async (postId, moderatorPassword) => {
+    const id = safeText(postId);
+    const password = safeText(moderatorPassword);
+    if (!id) throw new Error('Missing post id.');
+    if (!password) throw new Error('Moderator password is required.');
+
+    const res = await fetch(apiUrl(`/api/posts/${encodeURIComponent(id)}`), {
+      method: 'DELETE',
+      headers: {
+        'x-moderator-password': password
+      }
+    });
+
+    if (!res.ok) {
+      let message = `Could not remove post (${res.status}).`;
+      try {
+        const data = await res.json();
+        if (data?.error) message = data.error;
+      } catch {
+        // ignore
+      }
+      throw new Error(message);
+    }
   };
 
   const fetchDemoImageBlob = async () => {
