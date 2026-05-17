@@ -140,21 +140,31 @@
     <section class="we-origin-page">
       <style>
         .we-origin-page {
-          --cream: #f7f0e4;
-          --paper: #fbf7ef;
-          --ink: #1f1a16;
-          --brown: #6f4b2f;
-          --gold: #b88a44;
-          --sage: #69735d;
-          --line: rgba(31, 26, 22, 0.18);
-          font-family: Georgia, 'Times New Roman', serif;
+          --cream: var(--color-bg);
+          --paper: var(--color-surface);
+          --ink: var(--color-text);
+          --brown: var(--color-primary);
+          --gold: var(--color-accent);
+          --sage: var(--color-primary-dark);
+          --line: rgba(43, 95, 76, 0.14);
+          font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           color: var(--ink);
           background: var(--cream);
           line-height: 1.65;
         }
 
+        .we-origin-page h1,
+        .we-origin-page h2,
+        .we-origin-page h3 {
+          font-family: 'Poppins', 'Roboto', sans-serif;
+        }
+
         .we-origin-page * {
           box-sizing: border-box;
+        }
+
+        .we-origin-page > main {
+          padding-top: 0;
         }
 
         .we-wrap {
@@ -166,8 +176,8 @@
           position: relative;
           padding: 92px 0 72px;
           background:
-            linear-gradient(rgba(31, 26, 22, 0.62), rgba(31, 26, 22, 0.55)),
-            url('/images/feast-of-the-harvest-moon-article.jpg') center / cover no-repeat;
+            linear-gradient(rgba(34, 75, 61, 0.8), rgba(31, 42, 55, 0.72)),
+            url('assets/images/feast-of-the-harvest-moon-article.jpg') center / cover no-repeat;
           color: #fffaf1;
           overflow: hidden;
         }
@@ -187,7 +197,7 @@
           letter-spacing: 0.18em;
           font-size: 0.82rem;
           font-weight: 700;
-          color: #f1d49b;
+          color: #ffd6a8;
         }
 
         .we-hero h1 {
@@ -202,7 +212,7 @@
           max-width: 760px;
           margin: 26px 0 0;
           font-size: clamp(1.08rem, 2vw, 1.35rem);
-          color: #fff2dc;
+          color: rgba(255, 255, 255, 0.92);
         }
 
         .we-section {
@@ -217,7 +227,7 @@
           border: 1px solid var(--line);
           border-radius: 24px;
           padding: clamp(28px, 5vw, 52px);
-          box-shadow: 0 18px 45px rgba(31, 26, 22, 0.1);
+          box-shadow: var(--shadow-sm);
         }
 
         .we-intro-card h2,
@@ -255,7 +265,7 @@
           border: 1px solid var(--line);
           border-radius: 18px;
           overflow: hidden;
-          box-shadow: 0 14px 32px rgba(31, 26, 22, 0.08);
+          box-shadow: var(--shadow-sm);
         }
 
         .we-img-card img {
@@ -269,19 +279,19 @@
           padding: 13px 16px 15px;
           font-size: 0.92rem;
           line-height: 1.45;
-          color: rgba(31, 26, 22, 0.72);
-          background: rgba(255, 255, 255, 0.42);
+          color: var(--color-muted);
+          background: rgba(246, 245, 243, 0.9);
         }
 
         .we-pullquote {
           margin: 34px 0;
           padding: 26px 30px;
           border-left: 5px solid var(--gold);
-          background: rgba(184, 138, 68, 0.1);
+          background: rgba(242, 163, 101, 0.14);
           border-radius: 0 18px 18px 0;
           font-size: clamp(1.18rem, 2vw, 1.48rem);
           line-height: 1.45;
-          color: #3a2a1e;
+          color: var(--color-primary-dark);
         }
 
         .we-values {
@@ -309,7 +319,7 @@
         .we-value p {
           margin: 0;
           font-size: 0.98rem;
-          color: rgba(31, 26, 22, 0.78);
+          color: var(--color-muted);
         }
 
         .we-timeline {
@@ -332,11 +342,11 @@
         }
 
         .we-note {
-          background: #efe4d4;
+          background: rgba(43, 95, 76, 0.1);
           border: 1px solid var(--line);
           border-radius: 18px;
           padding: 24px;
-          color: rgba(31, 26, 22, 0.82);
+          color: var(--color-text);
         }
 
         .we-note strong {
@@ -344,7 +354,7 @@
         }
 
         .we-cta {
-          background: var(--ink);
+          background: var(--color-primary-dark);
           color: #fff7e8;
           padding: 58px 0;
           text-align: center;
@@ -361,7 +371,7 @@
         .we-cta p {
           max-width: 760px;
           margin: 0 auto;
-          color: #ead8bd;
+          color: rgba(255, 255, 255, 0.86);
           font-size: 1.12rem;
         }
 
@@ -445,7 +455,7 @@
             <aside class="we-photo-stack" aria-label="Historic clippings from the White Eagle family archive">
               <figure class="we-img-card">
                 <img
-                  src="/images/haynie-comanche-chief-headline-1927.jpg"
+                  src="assets/images/haynie-comanche-chief-headline-1927.jpg"
                   alt="1927 newspaper headline reading Haynie Made Comanche Chief in Quanah Festival"
                 />
                 <figcaption class="we-caption">
@@ -454,7 +464,7 @@
               </figure>
               <figure class="we-img-card">
                 <img
-                  src="/images/feast-of-the-harvest-moon-article.jpg"
+                  src="assets/images/feast-of-the-harvest-moon-article.jpg"
                   alt="Newspaper article about the Feast of the Harvest Moon ceremony in Quanah, Texas"
                 />
                 <figcaption class="we-caption">
@@ -465,12 +475,12 @@
           </div>
         </section>
 
-        <section class="we-section" style="background: rgba(255, 255, 255, 0.32)">
+        <section class="we-section" style="background: rgba(255, 255, 255, 0.65)">
           <div class="we-wrap we-grid reverse">
             <aside class="we-photo-stack">
               <figure class="we-img-card">
                 <img
-                  src="/images/indian-quartet-visit-article.jpg"
+                  src="assets/images/indian-quartet-visit-article.jpg"
                   alt="Historic newspaper clipping titled Indian Quartet Depart After Visit Here"
                 />
                 <figcaption class="we-caption">
@@ -480,7 +490,7 @@
               </figure>
               <figure class="we-img-card">
                 <img
-                  src="/images/quanah-parker-arrive-later-article.jpg"
+                  src="assets/images/quanah-parker-arrive-later-article.jpg"
                   alt="Historic newspaper clipping about Quanah Parker expected to arrive later"
                 />
                 <figcaption class="we-caption">
@@ -537,7 +547,7 @@
             <aside class="we-photo-stack">
               <figure class="we-img-card">
                 <img
-                  src="/images/white-eagle-letter-1927.jpg"
+                  src="assets/images/white-eagle-letter-1927.jpg"
                   alt="December 9, 1927 letter from Robert W. Haynie to his mother on West Texas Chamber of Commerce letterhead"
                 />
                 <figcaption class="we-caption">
@@ -545,7 +555,7 @@
                 </figcaption>
               </figure>
               <figure class="we-img-card">
-                <img src="/images/haynie-embrey-house-marker.jpg" alt="Texas historical marker for Haynie-Embrey House" />
+                <img src="assets/images/haynie-embrey-house-marker.jpg" alt="Texas historical marker for Haynie-Embrey House" />
                 <figcaption class="we-caption">
                   The Haynie-Embrey House marker records Haynie's family roots and later stature as a prominent attorney and West Texas Chamber
                   of Commerce leader.
@@ -555,7 +565,7 @@
           </div>
         </section>
 
-        <section class="we-section" style="background: rgba(105, 115, 93, 0.12)">
+        <section class="we-section" style="background: rgba(43, 95, 76, 0.1)">
           <div class="we-wrap">
             <p class="we-kicker">What the name means to us</p>
             <h2>The values behind White Eagle Nutrition</h2>
