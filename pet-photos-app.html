@@ -42,6 +42,14 @@
 
       gtag('config', 'AW-17813054995');
     </script>
+    <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Mi Ri init Vi Gi Rr Wi Ji Bi capture calculateEventProperties tn register register_once register_for_session unregister unregister_for_session an getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync un identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty nn Xi createPersonProfile setInternalOrTestUser sn Hi cn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Ki debug Lr rn getPageViewId captureTraceFeedback captureTraceMetric Di".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_mWecd5gQP9g3xt2yI4VbfuDQg9rCcTNhBZnNPmr09x6', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-01-30',
+        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+    })
+</script>
 </head>
   <body class="page-pet-photos-app">
     <header class="site-header" id="top">
@@ -164,11 +172,7 @@
                   </div>
 
                   <div class="form-group form-group--full">
-                    <label class="checkbox">
-                      <input type="checkbox" name="sharePublic" data-share-public checked />
-                      Share to public feed
-                    </label>
-                    <p class="small-print" data-share-hint>Public posts are visible to everyone.</p>
+                    <p class="small-print">All posts are shared publicly and remain available unless removed by a moderator.</p>
                   </div>
 
                   <div class="form-group form-group--full">
@@ -210,16 +214,16 @@
               <div class="pet-feed__header">
                 <h2>Feed</h2>
                 <div class="pet-tabs" role="tablist" aria-label="Choose feed">
-                  <button class="chip is-active" type="button" role="tab" aria-selected="true" data-tab="local">
+                  <button class="chip" type="button" role="tab" aria-selected="false" data-tab="local">
                     My gallery
                   </button>
-                  <button class="chip" type="button" role="tab" aria-selected="false" data-tab="public">
+                  <button class="chip is-active" type="button" role="tab" aria-selected="true" data-tab="public">
                     Public feed
                   </button>
                 </div>
               </div>
 
-              <div class="pet-feed__filters" data-local-controls>
+              <div class="pet-feed__filters" data-local-controls hidden>
                 <label class="sr-only" for="pet-search">Search my posts</label>
                 <input id="pet-search" type="search" placeholder="Search name, type, caption…" data-search />
                 <select aria-label="Sort my posts" data-sort>
@@ -229,7 +233,7 @@
                 </select>
               </div>
 
-              <div class="pet-feed__filters" data-public-controls hidden>
+              <div class="pet-feed__filters" data-public-controls>
                 <label class="sr-only" for="public-search">Search public feed</label>
                 <input id="public-search" type="search" placeholder="Search public feed…" data-public-search />
                 <select aria-label="Sort public feed" data-public-sort>
@@ -241,17 +245,17 @@
                 Moderators can remove a public post by clicking Remove and entering password: Remove.
               </p>
 
-              <div class="pet-feed" data-feed>
+              <div class="pet-feed" data-feed hidden>
                 <p class="section-intro" data-empty-state>
                   No posts yet. Add a photo above — or tap “Add demo post” to see how it looks.
                 </p>
               </div>
 
-              <div class="pet-feed" data-public-feed hidden>
+              <div class="pet-feed" data-public-feed>
                 <p class="section-intro" data-public-empty-state hidden>No public posts yet.</p>
               </div>
 
-              <div class="pet-feed__footer" data-public-footer hidden>
+              <div class="pet-feed__footer" data-public-footer>
                 <button class="btn btn-outline" type="button" data-public-load-more>Load more</button>
                 <p class="small-print" data-public-status></p>
               </div>
