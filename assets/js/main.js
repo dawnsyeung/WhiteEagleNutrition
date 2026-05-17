@@ -449,10 +449,16 @@
     if (checkoutBtn) {
       checkoutBtn.addEventListener('click', () => {
         if (!cart.length) {
-          alert('Your cart is empty. Add a formulation to continue.');
+          openThankYouModal({
+            title: 'Cart is empty',
+            message: 'Add a formulation to your cart to continue to checkout.'
+          });
           return;
         }
-        alert('Thank you! Checkout flow would integrate with your e-commerce platform.');
+        openThankYouModal({
+          title: 'Checkout',
+          message: 'Thank you! Checkout flow will be connected to your e-commerce platform.'
+        });
       });
     }
   };
@@ -581,7 +587,10 @@
     const bundleBtn = qs('[data-open-bundle]');
     if (!bundleBtn) return;
     bundleBtn.addEventListener('click', () => {
-      alert('Bundle builder coming soon. Contact us for a custom nutrition bundle today!');
+      openThankYouModal({
+        title: 'Bundle builder coming soon',
+        message: 'Contact us for a custom nutrition bundle today.'
+      });
     });
   };
 

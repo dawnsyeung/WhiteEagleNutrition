@@ -3,6 +3,7 @@
   const apiFromMeta = (apiMeta?.getAttribute('content') || '').trim();
   const API_BASE = (window.HAPPY_PET_PHOTOS_API_BASE || apiFromMeta || '').replace(/\/+$/, '');
   const apiUrl = (path) => `${API_BASE}${path}`;
+  const LOCAL_POSTS_KEY = 'happyPetPosts:v1';
 
   const DB_NAME = 'happyPetPhotos';
   const DB_VERSION = 1;
@@ -19,6 +20,7 @@
     petType: qs('#pet-type'),
     caption: qs('#pet-caption'),
     sharePublic: qs('[data-share-public]'),
+    shareHint: qs('[data-share-hint]'),
     preview: qs('[data-preview]'),
     previewImg: qs('[data-preview-img]'),
     removePhoto: qs('[data-remove-photo]'),
@@ -54,6 +56,7 @@
     publicSort: 'newest',
     publicIsLoading: false
   };
+  let storageBackend = 'indexeddb';
 
   const setStatus = (type, message) => {
     if (!els.status) return;
@@ -109,7 +112,7 @@
     }).finally(() => db.close());
   };
 
-  const listPosts = () =>
+  const listIndexedDbPosts = () =>
     withStore('readonly', (store) => {
       return new Promise((resolve, reject) => {
         const req = store.getAll();
@@ -118,22 +121,179 @@
       });
     });
 
-  const putPost = (post) =>
+  const putIndexedDbPost = (post) =>
     withStore('readwrite', (store) => {
       store.put(post);
     });
 
-  const deletePost = (id) =>
+  const deleteIndexedDbPost = (id) =>
     withStore('readwrite', (store) => {
       store.delete(id);
     });
 
-  const clearAllPosts = () =>
+  const clearAllIndexedDbPosts = () =>
     withStore('readwrite', (store) => {
       store.clear();
     });
 
   const safeText = (value) => (typeof value === 'string' ? value.trim() : '');
+
+  const blobToDataUrl = (blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(reader.error || new Error('Could not read image data.'));
+      reader.readAsDataURL(blob);
+    });
+
+  const dataUrlToBlob = async (dataUrl) => {
+    const res = await fetch(dataUrl);
+    if (!res.ok) throw new Error('Could not decode image data.');
+    return res.blob();
+  };
+
+  const readLocalPostsRaw = () => {
+    try {
+      const raw = localStorage.getItem(LOCAL_POSTS_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.warn('Could not parse local post cache.', error);
+      return [];
+    }
+  };
+
+  const writeLocalPostsRaw = (rows) => {
+    localStorage.setItem(LOCAL_POSTS_KEY, JSON.stringify(rows));
+  };
+
+  const sanitizeLocalPostRow = (row) => {
+    if (!row || typeof row !== 'object') return null;
+    const imageDataUrl = typeof row.imageDataUrl === 'string' ? row.imageDataUrl : '';
+    if (!imageDataUrl) return null;
+    return {
+      id: safeText(row.id) || uid(),
+      petName: safeText(row.petName),
+      petType: safeText(row.petType) || 'Other',
+      caption: safeText(row.caption),
+      createdAt: Number.isFinite(Number(row.createdAt)) ? Number(row.createdAt) : Date.now(),
+      imageDataUrl
+    };
+  };
+
+  const listLocalStoragePosts = async () => {
+    return readLocalPostsRaw().map(sanitizeLocalPostRow).filter(Boolean);
+  };
+
+  const putLocalStoragePost = async (post) => {
+    const rows = readLocalPostsRaw();
+    const imageDataUrl =
+      safeText(post.imageDataUrl) ||
+      (post.imageBlob instanceof Blob ? await blobToDataUrl(post.imageBlob) : '');
+
+    if (!imageDataUrl) {
+      throw new Error('Could not save image.');
+    }
+
+    const stored = {
+      id: safeText(post.id) || uid(),
+      petName: safeText(post.petName),
+      petType: safeText(post.petType) || 'Other',
+      caption: safeText(post.caption),
+      createdAt: Number.isFinite(Number(post.createdAt)) ? Number(post.createdAt) : Date.now(),
+      imageDataUrl
+    };
+    const idx = rows.findIndex((row) => row?.id === stored.id);
+    if (idx >= 0) rows[idx] = stored;
+    else rows.push(stored);
+    writeLocalPostsRaw(rows);
+    return stored;
+  };
+
+  const deleteLocalStoragePost = async (id) => {
+    const rows = readLocalPostsRaw();
+    const next = rows.filter((row) => row?.id !== id);
+    writeLocalPostsRaw(next);
+  };
+
+  const clearAllLocalStoragePosts = async () => {
+    writeLocalPostsRaw([]);
+  };
+
+  const ensureStorageBackend = async () => {
+    if (storageBackend === 'localStorage') return;
+    if (!('indexedDB' in window)) {
+      storageBackend = 'localStorage';
+      return;
+    }
+    try {
+      await withStore('readonly', () => {});
+    } catch (error) {
+      console.warn('IndexedDB unavailable. Falling back to localStorage.', error);
+      storageBackend = 'localStorage';
+    }
+  };
+
+  const listPosts = async () => {
+    await ensureStorageBackend();
+    if (storageBackend === 'indexeddb') {
+      try {
+        return await listIndexedDbPosts();
+      } catch (error) {
+        console.warn('IndexedDB read failed. Falling back to localStorage.', error);
+        storageBackend = 'localStorage';
+      }
+    }
+    return listLocalStoragePosts();
+  };
+
+  const putPost = async (post) => {
+    await ensureStorageBackend();
+    if (storageBackend === 'indexeddb') {
+      try {
+        await putIndexedDbPost(post);
+        return;
+      } catch (error) {
+        console.warn('IndexedDB write failed. Falling back to localStorage.', error);
+        storageBackend = 'localStorage';
+      }
+    }
+    await putLocalStoragePost(post);
+  };
+
+  const deletePost = async (id) => {
+    await ensureStorageBackend();
+    if (storageBackend === 'indexeddb') {
+      try {
+        await deleteIndexedDbPost(id);
+        return;
+      } catch (error) {
+        console.warn('IndexedDB delete failed. Falling back to localStorage.', error);
+        storageBackend = 'localStorage';
+      }
+    }
+    await deleteLocalStoragePost(id);
+  };
+
+  const clearAllPosts = async () => {
+    await ensureStorageBackend();
+    if (storageBackend === 'indexeddb') {
+      try {
+        await clearAllIndexedDbPosts();
+        return;
+      } catch (error) {
+        console.warn('IndexedDB clear failed. Falling back to localStorage.', error);
+        storageBackend = 'localStorage';
+      }
+    }
+    await clearAllLocalStoragePosts();
+  };
+
+  const getPostImageBlob = async (post) => {
+    if (post?.imageBlob instanceof Blob) return post.imageBlob;
+    if (safeText(post?.imageDataUrl)) return dataUrlToBlob(post.imageDataUrl);
+    throw new Error('Image data unavailable for this post.');
+  };
 
   const uid = () => {
     if (crypto?.randomUUID) return crypto.randomUUID();
@@ -280,13 +440,19 @@
       card.className = 'pet-post';
       card.setAttribute('data-post-id', post.id);
 
-      const imageUrl = URL.createObjectURL(post.imageBlob);
+      const hasDataUrl = typeof post.imageDataUrl === 'string' && post.imageDataUrl.startsWith('data:image/');
+      const hasBlob = post.imageBlob instanceof Blob;
+      if (!hasDataUrl && !hasBlob) return;
+
+      const imageUrl = hasDataUrl ? post.imageDataUrl : URL.createObjectURL(post.imageBlob);
       const img = document.createElement('img');
       img.className = 'pet-post__image';
       img.alt = safeText(post.caption) || `${safeText(post.petName) || 'Pet'} photo`;
       img.loading = 'lazy';
       img.src = imageUrl;
-      img.setAttribute('data-object-url', imageUrl);
+      if (!hasDataUrl) {
+        img.setAttribute('data-object-url', imageUrl);
+      }
 
       const body = document.createElement('div');
       body.className = 'pet-post__body';
@@ -325,7 +491,8 @@
       shareBtn.addEventListener('click', async () => {
         const baseName = safeText(post.petName) || 'pet-photo';
         const fileName = `${baseName.replace(/\s+/g, '-').toLowerCase() || 'pet-photo'}.jpg`;
-        const file = new File([post.imageBlob], fileName, { type: 'image/jpeg' });
+        const imageBlob = await getPostImageBlob(post);
+        const file = new File([imageBlob], fileName, { type: imageBlob.type || 'image/jpeg' });
         const shareTextParts = [];
         if (safeText(post.petName)) shareTextParts.push(post.petName);
         if (safeText(post.petType)) shareTextParts.push(`(${post.petType})`);
@@ -515,6 +682,36 @@
     }
   };
 
+  const setPublicShareAvailability = (available) => {
+    const isAvailable = Boolean(available);
+    if (els.sharePublic) {
+      els.sharePublic.disabled = !isAvailable;
+      if (!isAvailable) {
+        els.sharePublic.checked = false;
+      }
+    }
+    if (els.shareHint) {
+      els.shareHint.textContent = isAvailable
+        ? 'Public posts are visible to everyone.'
+        : 'Public feed is unavailable right now. Posts will still save to this device.';
+    }
+  };
+
+  const checkPublicFeedAvailability = async () => {
+    try {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 4000);
+      const res = await fetch(apiUrl('/api/posts?limit=1'), {
+        cache: 'no-store',
+        signal: controller.signal
+      });
+      window.clearTimeout(timeoutId);
+      return res.ok;
+    } catch {
+      return false;
+    }
+  };
+
   const sharePublic = async ({ petName, petType, caption, imageBlob }) => {
     const form = new FormData();
     form.set('petName', petName || '');
@@ -633,7 +830,7 @@
   };
 
   const init = async () => {
-    if (!els.form || !('indexedDB' in window)) return;
+    if (!els.form) return;
 
     els.fileInput?.addEventListener('change', onFileChange);
     els.removePhoto?.addEventListener('click', () => setPreview(null));
@@ -710,6 +907,8 @@
     state.sort = els.sort?.value || 'newest';
     state.publicSort = els.publicSort?.value || 'newest';
     setActiveTab('local');
+    await ensureStorageBackend();
+    setPublicShareAvailability(await checkPublicFeedAvailability());
     await refresh();
   };
 
