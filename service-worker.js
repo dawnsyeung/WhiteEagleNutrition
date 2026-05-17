@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 (() => {
-  const VERSION = 'pet-photos-v6';
+  const VERSION = 'pet-photos-v7';
   const CORE_ASSETS = [
     '/',
     '/index.html',
@@ -37,6 +37,15 @@
     request.mode === 'navigate' ||
     (request.headers.get('accept') || '').includes('text/html');
 
+  const isHotAsset = (url) => url.pathname.endsWith('.css') || url.pathname.endsWith('.js');
+
+  const cacheResponse = (request, response) => {
+    if (!response || !response.ok) return response;
+    const copy = response.clone();
+    caches.open(VERSION).then((cache) => cache.put(request, copy)).catch(() => {});
+    return response;
+  };
+
   self.addEventListener('fetch', (event) => {
     const { request } = event;
     if (request.method !== 'GET') return;
@@ -51,17 +60,22 @@
       return;
     }
 
+    // CSS/JS change frequently and should reflect deploys quickly.
+    // Use network-first with cache fallback to reduce stale UI after releases.
+    if (isSameOrigin && isHotAsset(url)) {
+      event.respondWith(
+        fetch(request)
+          .then((response) => cacheResponse(request, response))
+          .catch(() => caches.match(request))
+      );
+      return;
+    }
+
     if (isSameOrigin && !isNavigationalRequest(request)) {
       event.respondWith(
         caches.match(request).then((cached) => {
           if (cached) return cached;
-          return fetch(request)
-            .then((response) => {
-              const copy = response.clone();
-              caches.open(VERSION).then((cache) => cache.put(request, copy)).catch(() => {});
-              return response;
-            })
-            .catch(() => cached);
+          return fetch(request).then((response) => cacheResponse(request, response)).catch(() => cached);
         })
       );
       return;
@@ -71,11 +85,7 @@
     if (isNavigationalRequest(request)) {
       event.respondWith(
         fetch(request)
-          .then((response) => {
-            const copy = response.clone();
-            caches.open(VERSION).then((cache) => cache.put(request, copy)).catch(() => {});
-            return response;
-          })
+          .then((response) => cacheResponse(request, response))
           .catch(() => caches.match(request).then((cached) => cached || caches.match('/pet-photos-app.html')))
       );
     }
