@@ -36,6 +36,7 @@
     publicLoadMore: qs('[data-public-load-more]'),
     publicFooter: qs('[data-public-footer]'),
     publicStatus: qs('[data-public-status]'),
+    moderationHelp: qs('[data-moderation-help]'),
     demoPost: qs('[data-demo-post]'),
     clearPosts: qs('[data-clear-posts]')
   };
@@ -413,6 +414,7 @@
     if (els.localFeed) els.localFeed.hidden = state.activeTab !== 'local';
     if (els.publicFeed) els.publicFeed.hidden = state.activeTab !== 'public';
     if (els.publicFooter) els.publicFooter.hidden = state.activeTab !== 'public';
+    if (els.moderationHelp) els.moderationHelp.hidden = state.activeTab !== 'public';
 
     els.tabs.forEach((btn) => {
       const isActive = btn.getAttribute('data-tab') === state.activeTab;
