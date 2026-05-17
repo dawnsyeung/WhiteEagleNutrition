@@ -49,12 +49,16 @@ module.exports = async function handler(req, res) {
     }
 
     // Best-effort delete of blob object.
-    if (removed.image_url) {
+    if (removed.image_url && /^https?:\/\//i.test(removed.image_url)) {
       del(removed.image_url).catch(() => {});
     }
 
     json(res, 200, { ok: true });
-  } catch {
+  } catch (error) {
+    if (error?.code === 'PET_FEED_STORAGE_UNAVAILABLE') {
+      json(res, 503, { error: 'Public feed storage is not configured on the server.' });
+      return;
+    }
     json(res, 500, { error: 'Server error.' });
   }
 };

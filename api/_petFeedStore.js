@@ -21,6 +21,14 @@ const hasPostgresConfig = () =>
       process.env.POSTGRES_HOST
   );
 
+const hasBlobConfig = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+
+const createStorageUnavailableError = () => {
+  const error = new Error('Public feed storage is not configured.');
+  error.code = 'PET_FEED_STORAGE_UNAVAILABLE';
+  return error;
+};
+
 const parseCursor = (cursor) => {
   if (!cursor) return null;
   try {
@@ -65,6 +73,7 @@ const rowPassesCursor = (row, parsedCursor, sort) => {
 };
 
 const listStoreBlobs = async () => {
+  if (!hasBlobConfig()) return [];
   const { blobs = [] } = await list({ prefix: BLOB_STORE_PATH });
   return blobs
     .filter((blob) => blob.pathname === BLOB_STORE_PATH)
@@ -97,6 +106,9 @@ const loadBlobRows = async () => {
 };
 
 const saveBlobRows = async (rows) => {
+  if (!hasBlobConfig()) {
+    throw createStorageUnavailableError();
+  }
   const payload = JSON.stringify({ posts: rows }, null, 2);
   await put(BLOB_STORE_PATH, payload, {
     access: 'public',
@@ -114,7 +126,15 @@ const withSqlFallback = async (sqlAction, blobAction) => {
       console.warn('Postgres unavailable for pet feed; falling back to Blob metadata store.', error?.message || error);
     }
   }
-  return blobAction();
+
+  try {
+    return await blobAction();
+  } catch (error) {
+    if (!hasBlobConfig()) {
+      throw createStorageUnavailableError();
+    }
+    throw error;
+  }
 };
 
 const ensureSchema = async () => {

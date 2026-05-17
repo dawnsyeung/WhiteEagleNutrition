@@ -37,6 +37,30 @@ const extForMime = (mime) => {
   }
 };
 
+const hasBlobConfig = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+
+const isBlobTokenError = (error) => String(error?.message || '').includes('Vercel Blob: No token found');
+
+const toDataUrl = (buffer, mime) => `data:${mime};base64,${buffer.toString('base64')}`;
+
+const persistImage = async ({ buffer, mime, ext }) => {
+  const fileName = `pet-photos/${crypto.randomUUID()}.${ext}`;
+  if (hasBlobConfig()) {
+    try {
+      const blob = await put(fileName, buffer, {
+        access: 'public',
+        contentType: mime
+      });
+      return blob.url;
+    } catch (error) {
+      if (!isBlobTokenError(error)) throw error;
+    }
+  }
+
+  // Blob token is unavailable: keep the upload usable by storing the image inline.
+  return toDataUrl(buffer, mime);
+};
+
 const parseMultipart = async (req) => {
   const form = formidable({
     multiples: false,
@@ -103,18 +127,11 @@ module.exports = async function handler(req, res) {
       }
 
       const buf = await fs.readFile(file.filepath);
-      const fileName = `pet-photos/${crypto.randomUUID()}.${ext}`;
-
-      const blob = await put(fileName, buf, {
-        access: 'public',
-        contentType: mime
-      });
-
       const row = await insertPost({
         petName,
         petType,
         caption,
-        imageUrl: blob.url
+        imageUrl: await persistImage({ buffer: buf, mime, ext })
       });
 
       json(res, 201, {
@@ -140,6 +157,10 @@ module.exports = async function handler(req, res) {
     // Formidable v3 uses http errors sometimes
     if (String(error?.message || '').toLowerCase().includes('maxfilesize')) {
       json(res, 413, { error: 'File too large.' });
+      return;
+    }
+    if (error?.code === 'PET_FEED_STORAGE_UNAVAILABLE') {
+      json(res, 503, { error: 'Public feed storage is not configured on the server.' });
       return;
     }
     json(res, 500, { error: 'Server error.' });
