@@ -19,8 +19,6 @@
     petName: qs('#pet-name'),
     petType: qs('#pet-type'),
     caption: qs('#pet-caption'),
-    sharePublic: qs('[data-share-public]'),
-    shareHint: qs('[data-share-hint]'),
     preview: qs('[data-preview]'),
     previewImg: qs('[data-preview-img]'),
     removePhoto: qs('[data-remove-photo]'),
@@ -38,7 +36,6 @@
     publicLoadMore: qs('[data-public-load-more]'),
     publicFooter: qs('[data-public-footer]'),
     publicStatus: qs('[data-public-status]'),
-    moderationHelp: qs('[data-moderation-help]'),
     demoPost: qs('[data-demo-post]'),
     clearPosts: qs('[data-clear-posts]')
   };
@@ -416,7 +413,6 @@
     if (els.localFeed) els.localFeed.hidden = state.activeTab !== 'local';
     if (els.publicFeed) els.publicFeed.hidden = state.activeTab !== 'public';
     if (els.publicFooter) els.publicFooter.hidden = state.activeTab !== 'public';
-    if (els.moderationHelp) els.moderationHelp.hidden = state.activeTab !== 'public';
 
     els.tabs.forEach((btn) => {
       const isActive = btn.getAttribute('data-tab') === state.activeTab;
@@ -700,30 +696,6 @@
     }
   };
 
-  const setPublicShareAvailability = (available) => {
-    const isAvailable = Boolean(available);
-    if (els.shareHint) {
-      els.shareHint.textContent = isAvailable
-        ? 'Public posts are visible to everyone.'
-        : 'Public feed may be temporarily unavailable. Posts still save locally and can be shared once the feed responds.';
-    }
-  };
-
-  const checkPublicFeedAvailability = async () => {
-    try {
-      const controller = new AbortController();
-      const timeoutId = window.setTimeout(() => controller.abort(), 4000);
-      const res = await fetch(apiUrl('/api/posts?limit=1'), {
-        cache: 'no-store',
-        signal: controller.signal
-      });
-      window.clearTimeout(timeoutId);
-      return res.ok;
-    } catch {
-      return false;
-    }
-  };
-
   const sharePublic = async ({ petName, petType, caption, imageBlob }) => {
     const form = new FormData();
     form.set('petName', petName || '');
@@ -832,28 +804,20 @@
       await putPost(post);
       await refresh();
 
-      const shouldSharePublic = Boolean(els.sharePublic?.checked);
-      if (shouldSharePublic) {
-        try {
-          await sharePublic({
-            petName: post.petName,
-            petType: post.petType,
-            caption: post.caption,
-            imageBlob: post.imageBlob
-          });
-          // If user is looking at the public feed, refresh it.
-          if (state.activeTab === 'public') {
-            await fetchPublicPage({ reset: true });
-          }
-          setStatus('success', 'Posted locally and shared to the public feed.');
-        } catch (error) {
-          setStatus(
-            'error',
-            `Saved on your device, but could not share publicly: ${error?.message || 'Unknown error.'}`
-          );
-        }
-      } else {
-        setStatus('success', 'Posted! Your photo is saved on this device.');
+      try {
+        await sharePublic({
+          petName: post.petName,
+          petType: post.petType,
+          caption: post.caption,
+          imageBlob: post.imageBlob
+        });
+        await fetchPublicPage({ reset: true });
+        setStatus('success', 'Posted and shared to the public feed.');
+      } catch (error) {
+        setStatus(
+          'error',
+          `Saved on your device, but could not share publicly: ${error?.message || 'Unknown error.'}`
+        );
       }
 
       els.form.reset();
@@ -924,7 +888,21 @@
         };
         await putPost(post);
         await refresh();
-        setStatus('success', 'Demo post added locally.');
+        try {
+          await sharePublic({
+            petName: post.petName,
+            petType: post.petType,
+            caption: post.caption,
+            imageBlob: post.imageBlob
+          });
+          await fetchPublicPage({ reset: true });
+          setStatus('success', 'Demo post added and shared publicly.');
+        } catch (error) {
+          setStatus(
+            'error',
+            `Demo post saved locally, but could not share publicly: ${error?.message || 'Unknown error.'}`
+          );
+        }
       } catch (error) {
         console.error(error);
         setStatus('error', error?.message || 'Could not add demo post.');
@@ -943,10 +921,10 @@
 
     state.sort = els.sort?.value || 'newest';
     state.publicSort = els.publicSort?.value || 'newest';
-    setActiveTab('local');
+    setActiveTab('public');
     await ensureStorageBackend();
-    setPublicShareAvailability(await checkPublicFeedAvailability());
     await refresh();
+    await fetchPublicPage({ reset: true });
   };
 
   document.addEventListener('DOMContentLoaded', init);
