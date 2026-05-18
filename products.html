@@ -45,6 +45,36 @@
           "hasProduct": [
             {
               "@type": "Product",
+              "name": "Whole Dried Black Soldier Fly Larvae",
+              "sku": "WEN-WHOLE-DRIED-BSFL",
+              "image": "https://images.unsplash.com/photo-1593113598332-cd59a93fb6d5?auto=format&fit=crop&w=900&q=80",
+              "description": "Whole dried BSFL for poultry and wild birds with a natural protein, fat, and mineral profile.",
+              "brand": "White Eagle Nutrition",
+              "category": "Poultry feed supplement",
+              "offers": {
+                "@type": "Offer",
+                "price": "24.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            {
+              "@type": "Product",
+              "name": "Live Black Soldier Fly Larvae",
+              "sku": "WEN-LIVE-BSFL",
+              "image": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=900&q=80",
+              "description": "Fresh live BSFL for poultry and pigs that supports natural foraging behavior and nutrient intake.",
+              "brand": "White Eagle Nutrition",
+              "category": "Poultry and swine feed supplement",
+              "offers": {
+                "@type": "Offer",
+                "price": "26.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/PreOrder"
+              }
+            },
+            {
+              "@type": "Product",
               "name": "Canine Longevity Blend",
               "sku": "WEN-CAN-LONG",
               "image": "https://www.whiteeaglenutrition.com/assets/images/products/canine-longevity-blend.jpg",
@@ -223,18 +253,18 @@
                 fatty acids. Choose the companions and herds you feed—from puppies to dairy cows—and customize a routine that extends their
                 health span with measurable mobility, cognition, and coat vitality gains.
               </p>
-              <div class="page-hero__stats" aria-label="Health span analytics">
+              <div class="page-hero__stats" aria-label="Product evidence highlights">
                 <div class="stat-card">
-                  <span class="stat-card__number">+18 mo</span>
-                  <span class="stat-card__label">Average health span gain for multi-species households on custom stacks (2024 cohort, n=412).</span>
+                  <span class="stat-card__number">Evidence-led</span>
+                  <span class="stat-card__label">Formulation strategy is guided by peer-reviewed findings and ongoing field observations.</span>
                 </div>
                 <div class="stat-card">
-                  <span class="stat-card__number">93%</span>
-                  <span class="stat-card__label">Report improved joint fluidity and activity scores within 90 days.</span>
+                  <span class="stat-card__number">Mobility support</span>
+                  <span class="stat-card__label">Mobility and activity outcomes remain central checkpoints in protocol refinement.</span>
                 </div>
                 <div class="stat-card">
-                  <span class="stat-card__number">5</span>
-                  <span class="stat-card__label">Species pods with dedicated longevity protocols and guardian coaching.</span>
+                  <span class="stat-card__number">Species-specific</span>
+                  <span class="stat-card__label">Dedicated nutrition pathways and coaching are tailored by species and life stage.</span>
                 </div>
               </div>
               <form class="product-filter" role="search">
@@ -436,10 +466,47 @@
                 <button class="chip" data-filter="fish" role="tab">Fish</button>
                 <button class="chip" data-filter="reptiles" role="tab">Reptiles</button>
                 <button class="chip" data-filter="chickens" role="tab">Backyard Chickens</button>
+                <button class="chip" data-filter="pigs" role="tab">Pigs</button>
                 <button class="chip" data-filter="wild-birds" role="tab">Wild Birds</button>
             </div>
           <div class="product-grid" data-product-grid>
-                  <article class="product-tile" data-category="dogs" data-product-card>
+                  <article class="product-tile product-tile--featured" data-category="chickens wild-birds ducks quails turkeys poultry" data-product-card>
+                    <img src="https://images.unsplash.com/photo-1593113598332-cd59a93fb6d5?auto=format&fit=crop&w=900&q=80" alt="Dried black soldier fly larvae feed in a scoop" loading="lazy" />
+              <div class="product-tile__body">
+                <span class="label label--green">Available now</span>
+                <h3>Whole Dried Black Soldier Fly Larvae</h3>
+                <p>Whole dried BSFL for backyard poultry and wild birds, with a natural protein, fat, and mineral profile.</p>
+                <ul>
+                  <li>Ideal supplemental treat for flocks and free-ranging birds</li>
+                  <li>Simple daily feeding option for coops and aviary stations</li>
+                  <li>Pairs with current whole-dried Shopify checkout offering</li>
+                </ul>
+                <div class="product-tile__footer">
+                  <span class="price" data-price>$24.00</span>
+                  <a class="btn btn-primary" href="#shopify-buy-buttons">Purchase</a>
+                </div>
+              </div>
+            </article>
+
+                  <article class="product-tile product-tile--shipping" data-category="pigs chickens ducks turkeys quails poultry" data-product-card>
+                    <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=900&q=80" alt="Live larvae tray prepared for poultry and pigs" loading="lazy" />
+              <div class="product-tile__body">
+                <span class="label label--orange">Shipping in June</span>
+                <h3>Live Black Soldier Fly Larvae</h3>
+                <p>Fresh live BSFL for poultry and pigs to support natural foraging behavior and nutrient intake.</p>
+                <ul>
+                  <li>Moisture-rich live feed that encourages active pecking and rooting</li>
+                  <li>High-protein option for flock conditioning and swine growth phases</li>
+                  <li>Packed for short transit windows to preserve viability</li>
+                </ul>
+                <div class="product-tile__footer">
+                  <span class="price" data-price>$26.00</span>
+                  <button class="btn btn-outline" type="button" disabled aria-disabled="true">Shipping in June</button>
+                </div>
+              </div>
+            </article>
+
+                  <article class="product-tile product-tile--coming-soon" data-category="dogs" data-product-card>
                     <img src="assets/images/products/canine-longevity-blend.jpg" alt="Two playful puppies wrestling at sunset" loading="lazy" />
               <div class="product-tile__body">
                 <span class="label">Top-rated</span>
@@ -457,7 +524,7 @@
               </div>
             </article>
 
-                <article class="product-tile" data-category="cats" data-product-card>
+                <article class="product-tile product-tile--coming-soon" data-category="cats" data-product-card>
                   <img src="assets/images/products/feline-metabolic-support.jpg" alt="Grey cat relaxing by a bright window" loading="lazy" />
               <div class="product-tile__body">
                 <span class="label label--green">New formula</span>
@@ -475,7 +542,7 @@
               </div>
             </article>
 
-                    <article class="product-tile" data-category="horses" data-product-card>
+                    <article class="product-tile product-tile--coming-soon" data-category="horses" data-product-card>
                       <img
                         src="https://images.unsplash.com/photo-1682896934076-03d7f9c0eaab?auto=format&fit=crop&w=900&q=80"
                         alt="Bay thoroughbred horse trotting across a green pasture"
@@ -505,7 +572,7 @@
                 </div>
               </article>
 
-                    <article class="product-tile" data-category="ruminants goats" data-product-card>
+                    <article class="product-tile product-tile--coming-soon" data-category="ruminants goats" data-product-card>
                       <img
                         src="https://images.unsplash.com/photo-1730617418818-eef2122de875?auto=format&fit=crop&w=900&q=80"
                         alt="White dairy goat standing along a rural lane"
@@ -535,7 +602,7 @@
                 </div>
               </article>
 
-                    <article class="product-tile" data-category="ruminants sheep" data-product-card>
+                    <article class="product-tile product-tile--coming-soon" data-category="ruminants sheep" data-product-card>
                       <img
                         src="https://images.unsplash.com/photo-1548177709-a2e5c89f3063?auto=format&fit=crop&w=900&q=80"
                         alt="Young lamb resting in a sunlit meadow"
@@ -565,7 +632,7 @@
                 </div>
               </article>
 
-                    <article class="product-tile" data-category="ruminants cattle" data-product-card>
+                    <article class="product-tile product-tile--coming-soon" data-category="ruminants cattle" data-product-card>
                       <img
                         src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=900&q=80"
                         alt="Dairy cow standing in a green pasture at sunrise"
@@ -595,7 +662,7 @@
                 </div>
               </article>
 
-                  <article class="product-tile" data-category="fish" data-product-card>
+                  <article class="product-tile product-tile--coming-soon" data-category="fish" data-product-card>
                     <img src="assets/images/products/aquatic-precision-pellets.jpg" alt="Koi fish gliding through a garden pond" loading="lazy" />
               <div class="product-tile__body">
                 <span class="label label--blue">Aquaculture-grade</span>
@@ -613,7 +680,7 @@
               </div>
             </article>
 
-                  <article class="product-tile" data-category="reptiles" data-product-card>
+                  <article class="product-tile product-tile--coming-soon" data-category="reptiles" data-product-card>
                     <img src="assets/images/products/reptile-metabolic-guard.jpg" alt="Bearded dragon basking on a branch" loading="lazy" />
                 <div class="product-tile__body">
                   <span class="label label--purple">Calcium enriched</span>
@@ -631,7 +698,7 @@
                 </div>
               </article>
 
-                    <article class="product-tile" data-category="turtles" data-product-card>
+                    <article class="product-tile product-tile--coming-soon" data-category="turtles" data-product-card>
                       <img
                         src="https://images.unsplash.com/photo-1684105556265-0b53170afc79?auto=format&fit=crop&w=900&q=80"
                         alt="Red-eared slider basking on a sun-warmed log above the water"
@@ -661,7 +728,7 @@
                   </div>
                 </article>
 
-                        <article class="product-tile" data-category="chickens" data-product-card>
+                        <article class="product-tile product-tile--coming-soon" data-category="chickens" data-product-card>
                             <img src="assets/images/products/backyard-layer-vitality-crumble.jpg" alt="Barred Rock hen exploring a backyard garden" loading="lazy" />
                 <div class="product-tile__body">
                   <span class="label">Flock favorite</span>
@@ -679,7 +746,7 @@
                 </div>
               </article>
 
-                      <article class="product-tile" data-category="wild-birds" data-product-card>
+                      <article class="product-tile product-tile--coming-soon" data-category="wild-birds" data-product-card>
                           <img src="assets/images/products/wild-flight-suet-alternative.jpg" alt="Eastern bluebird perched on a lichen-covered branch" loading="lazy" />
                 <div class="product-tile__body">
                   <span class="label label--gold">Seasonal limited</span>

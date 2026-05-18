@@ -604,15 +604,25 @@ img {
 }
 
 .product-card {
-  background: var(--color-surface);
+  background: #f3f4f6;
   border-radius: var(--radius-lg);
   padding: 2.75rem 2rem 2rem;
   position: relative;
-  border: 1px solid rgba(209, 213, 219, 0.5);
+  border: 1px solid rgba(209, 213, 219, 0.75);
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+}
+
+.product-card--featured {
+  background: #fff5cf;
+  border-color: rgba(184, 138, 68, 0.5);
+}
+
+.product-card--shipping {
+  background: #fffdf1;
+  border-color: rgba(184, 138, 68, 0.35);
 }
 
 .product-card__badge {
@@ -638,6 +648,10 @@ img {
 
 .product-card__badge--gold {
   background: #b15f14;
+}
+
+.product-card__badge--orange {
+  background: #d47d2d;
 }
 
 .product-card__subtitle {
@@ -1058,13 +1072,23 @@ img {
 }
 
 .product-tile {
-  background: var(--color-surface);
+  background: #f3f4f6;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(209, 213, 219, 0.5);
+  border: 1px solid rgba(209, 213, 219, 0.75);
+}
+
+.product-tile--featured {
+  background: #fff5cf;
+  border-color: rgba(184, 138, 68, 0.5);
+}
+
+.product-tile--shipping {
+  background: #fffdf1;
+  border-color: rgba(184, 138, 68, 0.35);
 }
 
 .product-tile > img {
@@ -1130,6 +1154,11 @@ img {
 
 .label--gold {
   background: rgba(242, 163, 101, 0.2);
+  color: #b15f14;
+}
+
+.label--orange {
+  background: rgba(242, 163, 101, 0.22);
   color: #b15f14;
 }
 
@@ -1238,6 +1267,34 @@ img {
   gap: 2rem;
 }
 
+.page-ethics .pillars__grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.page-ethics .metrics__grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .page-ethics .pillars__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-ethics .metrics__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .page-ethics .pillars__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-ethics .metrics__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .impact__stats {
   text-align: center;
 }
@@ -1247,6 +1304,22 @@ img {
   display: block;
   color: var(--color-primary);
   margin-bottom: 0.4rem;
+}
+
+.impact__citations {
+  margin-top: 1.35rem;
+}
+
+.impact__citations .small-print {
+  margin-bottom: 0.45rem;
+}
+
+.impact__citations ol {
+  margin: 0 0 0 1.2rem;
+}
+
+.impact__citations li {
+  margin-bottom: 0.5rem;
 }
 
 .timeline__list {
@@ -1580,6 +1653,37 @@ img {
   margin: 0;
   color: var(--color-muted);
   font-size: 1rem;
+}
+
+.wen-notify-form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.wen-notify-form__row {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.wen-notify-form__row label {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.wen-notify-form__row input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(43, 95, 76, 0.25);
+  padding: 0.7rem 0.9rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.wen-notify-form__row input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(43, 95, 76, 0.12);
 }
 
 .checkbox {

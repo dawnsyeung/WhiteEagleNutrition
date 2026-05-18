@@ -54,6 +54,19 @@
     syncPageScrollLock();
   };
 
+  const getProductContainerFromButton = (button) =>
+    button.closest('[data-product-card]') ||
+    button.closest('.product-card') ||
+    button.closest('.product-tile') ||
+    button.closest('article');
+
+  const getProductTitleFromContainer = (productContainer) => {
+    const productTitle = productContainer?.querySelector('h3');
+    return (productTitle?.textContent || '').trim();
+  };
+
+  const isComingSoonProduct = (productContainer) => /\(coming soon\)/i.test(getProductTitleFromContainer(productContainer));
+
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -258,14 +271,243 @@
     }
   };
 
+  let notifyModalLastFocus = null;
+
+  const createNotifyModal = () => {
+    const existing = qs('[data-notify-modal]');
+    if (existing) return existing;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'wen-modal-overlay';
+    overlay.setAttribute('data-notify-modal', '');
+    overlay.setAttribute('aria-hidden', 'true');
+
+    const modal = document.createElement('div');
+    modal.className = 'wen-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'wen-notify-title');
+
+    const header = document.createElement('div');
+    header.className = 'wen-modal__header';
+
+    const title = document.createElement('h2');
+    title.className = 'wen-modal__title';
+    title.id = 'wen-notify-title';
+    title.textContent = 'Get notified when available';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'wen-modal__close';
+    closeBtn.setAttribute('aria-label', 'Close');
+    closeBtn.innerHTML = '×';
+
+    header.append(title, closeBtn);
+
+    const body = document.createElement('div');
+    body.className = 'wen-modal__body';
+
+    const message = document.createElement('p');
+    message.className = 'wen-modal__message';
+    message.innerHTML = 'Tell us where to reach you for <strong data-notify-product-name>this product</strong>.';
+
+    const form = document.createElement('form');
+    form.className = 'wen-notify-form';
+    form.setAttribute('data-notify-form', '');
+    form.setAttribute('data-endpoint', defaultFormspreeEndpoint);
+
+    const nameRow = document.createElement('div');
+    nameRow.className = 'wen-notify-form__row';
+    const nameLabel = document.createElement('label');
+    nameLabel.setAttribute('for', 'notify-name');
+    nameLabel.textContent = 'Name';
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.name = 'name';
+    nameInput.id = 'notify-name';
+    nameInput.required = true;
+    nameInput.autocomplete = 'name';
+    nameInput.placeholder = 'Your name';
+    nameRow.append(nameLabel, nameInput);
+
+    const phoneRow = document.createElement('div');
+    phoneRow.className = 'wen-notify-form__row';
+    const phoneLabel = document.createElement('label');
+    phoneLabel.setAttribute('for', 'notify-phone');
+    phoneLabel.textContent = 'Phone number';
+    const phoneInput = document.createElement('input');
+    phoneInput.type = 'tel';
+    phoneInput.name = 'phone';
+    phoneInput.id = 'notify-phone';
+    phoneInput.required = true;
+    phoneInput.autocomplete = 'tel';
+    phoneInput.placeholder = 'Best phone number';
+    phoneRow.append(phoneLabel, phoneInput);
+
+    const productInput = document.createElement('input');
+    productInput.type = 'hidden';
+    productInput.name = 'productName';
+    productInput.setAttribute('data-notify-product-input', '');
+
+    const status = document.createElement('p');
+    status.className = 'form-status';
+    status.setAttribute('data-notify-status', '');
+    status.hidden = true;
+
+    const submitBtn = document.createElement('button');
+    submitBtn.type = 'submit';
+    submitBtn.className = 'btn btn-primary';
+    submitBtn.setAttribute('data-loading-text', 'Sending...');
+    submitBtn.textContent = 'Notify Me';
+
+    form.append(nameRow, phoneRow, productInput, status, submitBtn);
+    body.append(message, form);
+    modal.append(header, body);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    const close = () => closeNotifyModal();
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) close();
+    });
+
+    const setStatus = (type, text) => {
+      status.classList.remove('form-status--success', 'form-status--error');
+      if (!text) {
+        status.hidden = true;
+        status.textContent = '';
+        return;
+      }
+
+      status.hidden = false;
+      status.textContent = text;
+      if (type === 'success') status.classList.add('form-status--success');
+      if (type === 'error') status.classList.add('form-status--error');
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const endpoint = (form.getAttribute('data-endpoint') || '').trim() || defaultFormspreeEndpoint;
+      if (!endpoint || endpoint.includes('YOUR_FORM_ID')) {
+        setStatus('error', 'Notify submissions are not configured yet. Please email info@whiteeaglenutrition.com.');
+        return;
+      }
+
+      setStatus('', '');
+      toggleButtonLoading(submitBtn, true);
+
+      const selectedProduct = productInput.value || 'a coming soon product';
+      const formData = new FormData(form);
+      formData.append('formName', 'notify-me');
+      formData.append('_subject', `Notify me request: ${selectedProduct}`);
+      formData.append('source', window.location.href);
+      formData.append('submittedAt', new Date().toISOString());
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json'
+          },
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        form.reset();
+        closeNotifyModal();
+        openThankYouModal({
+          title: 'You’re on the list',
+          message: `Thanks! We’ll text you when ${selectedProduct} is available.`
+        });
+      } catch (error) {
+        console.error('Notify-me submission failed', error);
+        setStatus('error', 'Could not submit right now. Please try again in a moment.');
+      } finally {
+        toggleButtonLoading(submitBtn, false);
+      }
+    });
+
+    return overlay;
+  };
+
+  const openNotifyModal = (productName) => {
+    const overlay = createNotifyModal();
+    const productField = qs('[data-notify-product-input]', overlay);
+    const productLabel = qs('[data-notify-product-name]', overlay);
+    const firstInput = qs('#notify-name', overlay);
+    const status = qs('[data-notify-status]', overlay);
+
+    if (status) {
+      status.hidden = true;
+      status.textContent = '';
+      status.classList.remove('form-status--success', 'form-status--error');
+    }
+
+    if (productField) {
+      productField.value = productName || 'this product';
+    }
+    if (productLabel) {
+      productLabel.textContent = productName || 'this product';
+    }
+
+    notifyModalLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    setModalOpen(true);
+
+    window.requestAnimationFrame(() => {
+      firstInput?.focus();
+    });
+  };
+
+  const closeNotifyModal = () => {
+    const overlay = qs('[data-notify-modal]');
+    if (overlay) {
+      overlay.classList.remove('is-open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+    setModalOpen(false);
+
+    if (notifyModalLastFocus) {
+      notifyModalLastFocus.focus();
+      notifyModalLastFocus = null;
+    }
+  };
+
+  const setupNotifyMeButtons = () => {
+    const buttons = qsa('[data-notify-me="true"]');
+    if (!buttons.length) return;
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const productContainer = getProductContainerFromButton(button);
+        const productName = getProductTitleFromContainer(productContainer).replace(/\s*\(coming soon\)\s*$/i, '');
+        openNotifyModal(productName || 'this product');
+      });
+    });
+  };
+
   const setupThankYouModalGlobalEvents = () => {
     document.addEventListener('keydown', (event) => {
-      const overlay = qs('[data-thank-you-modal]');
-      const isOpen = overlay?.classList.contains('is-open');
-      if (!isOpen) return;
-
       if (event.key === 'Escape') {
-        closeThankYouModal();
+        const thankYouOverlay = qs('[data-thank-you-modal]');
+        const notifyOverlay = qs('[data-notify-modal]');
+        if (thankYouOverlay?.classList.contains('is-open')) {
+          closeThankYouModal();
+          return;
+        }
+        if (notifyOverlay?.classList.contains('is-open')) {
+          closeNotifyModal();
+        }
       }
     });
   };
@@ -479,23 +721,23 @@
 
   const disableComingSoonProductButtons = () => {
     qsa('[data-add-to-cart]').forEach((button) => {
-      const productContainer =
-        button.closest('[data-product-card]') ||
-        button.closest('.product-card') ||
-        button.closest('.product-tile') ||
-        button.closest('article');
-      const productTitle = productContainer?.querySelector('h3');
-      const isComingSoon = /\(coming soon\)/i.test(productTitle?.textContent || '');
+      const productContainer = getProductContainerFromButton(button);
+      const isComingSoon = isComingSoonProduct(productContainer);
       if (!isComingSoon) return;
 
-      button.disabled = true;
-      button.setAttribute('aria-disabled', 'true');
-      button.textContent = 'Coming Soon';
+      button.type = 'button';
+      button.disabled = false;
+      button.setAttribute('aria-disabled', 'false');
+      button.dataset.notifyMe = 'true';
+      button.textContent = 'Notify Me';
+      button.classList.remove('btn-primary');
+      button.classList.add('btn-outline');
     });
   };
 
   const setupProductButtons = () => {
     qsa('[data-add-to-cart]').forEach((button) => {
+      if (button.dataset.notifyMe === 'true') return;
       button.addEventListener('click', () => {
         const id = button.getAttribute('data-product-id');
         const name = button.getAttribute('data-product-name');
@@ -788,6 +1030,7 @@
       updateCartSummary();
     }
     disableComingSoonProductButtons();
+    setupNotifyMeButtons();
     syncHeaderHeightVar();
     injectPetAppNavLink();
     setupPurchaseNavCta();
