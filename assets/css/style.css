@@ -1611,6 +1611,37 @@ img {
   font-size: 1rem;
 }
 
+.wen-notify-form {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.wen-notify-form__row {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.wen-notify-form__row label {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.wen-notify-form__row input {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(43, 95, 76, 0.25);
+  padding: 0.7rem 0.9rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.wen-notify-form__row input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(43, 95, 76, 0.12);
+}
+
 .checkbox {
   display: inline-flex;
   align-items: center;
