@@ -1306,6 +1306,22 @@ img {
   margin-bottom: 0.4rem;
 }
 
+.impact__citations {
+  margin-top: 1.35rem;
+}
+
+.impact__citations .small-print {
+  margin-bottom: 0.45rem;
+}
+
+.impact__citations ol {
+  margin: 0 0 0 1.2rem;
+}
+
+.impact__citations li {
+  margin-bottom: 0.5rem;
+}
+
 .timeline__list {
   list-style: none;
   padding: 0;
