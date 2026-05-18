@@ -1271,14 +1271,26 @@ img {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.page-ethics .metrics__grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 @media (max-width: 1024px) {
   .page-ethics .pillars__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-ethics .metrics__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
   .page-ethics .pillars__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-ethics .metrics__grid {
     grid-template-columns: 1fr;
   }
 }
