@@ -3367,3 +3367,321 @@ img {
     justify-content: center;
   }
 }
+
+/* --- Ecommerce conversion refresh: home + products + coming-soon --- */
+.ehome-hero {
+  padding: 3.5rem 0 2rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f4ed 100%);
+}
+
+.ehome-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: start;
+}
+
+.ehome-hero__copy h1 {
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.ehome-hero__copy p {
+  color: var(--color-muted);
+  max-width: 62ch;
+}
+
+.ehome-trust-strip {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.ehome-trust-strip li {
+  margin: 0;
+  padding: 0.8rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  border: 1px solid rgba(43, 95, 76, 0.12);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.ehome-hero__visual {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.ehome-hero__visual img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.ehome-categories {
+  padding: 2.2rem 0;
+}
+
+.ehome-categories__grid {
+  margin-top: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ehome-category-card {
+  background: #fff;
+  border: 1px solid rgba(209, 213, 219, 0.7);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.ehome-category-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.ehome-category-card p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.ehome-featured {
+  padding: 2.6rem 0;
+  background: #f7f7f5;
+}
+
+.ecom-shopify-grid {
+  margin-top: 1.3rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.ecom-shopify-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ecom-shopify-grid > div {
+  min-width: 0;
+}
+
+.shopify-buy__product {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0.95rem !important;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid rgba(209, 213, 219, 0.75) !important;
+  background: #fff !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.shopify-buy__btn,
+.shopify-buy__btn:hover,
+.shopify-buy__btn:focus {
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+
+.ehome-why,
+.ehome-education,
+.ehome-final-cta {
+  padding: 2.4rem 0;
+}
+
+.ehome-education p {
+  max-width: 70ch;
+  color: var(--color-muted);
+}
+
+.ehome-final-cta {
+  background: linear-gradient(135deg, rgba(43, 95, 76, 0.94), rgba(43, 95, 76, 0.8));
+  color: #fff;
+}
+
+.ehome-final-cta h2 {
+  color: #fff;
+}
+
+.eproducts-hero {
+  padding: 3rem 0 1.9rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f2ec 100%);
+}
+
+.eproducts-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.eproducts-hero__grid img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+}
+
+.eproducts-nav {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.eproducts-sections {
+  padding: 1.1rem 0 2.7rem;
+}
+
+.eproducts-group {
+  padding: 1.2rem 0 2rem;
+  border-top: 1px solid rgba(209, 213, 219, 0.8);
+}
+
+.eproducts-group p {
+  color: var(--color-muted);
+}
+
+.eproducts-coming-soon-link {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  border: 1px solid rgba(43, 95, 76, 0.2);
+  border-radius: var(--radius-md);
+  background: rgba(43, 95, 76, 0.05);
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.eproducts-coming-soon-link p {
+  margin: 0;
+}
+
+.ecoming-hero {
+  padding: 3rem 0 1.8rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f2ec 100%);
+}
+
+.ecoming-hero p {
+  max-width: 68ch;
+  color: var(--color-muted);
+}
+
+.ecoming-grid {
+  padding: 1.2rem 0 2.1rem;
+}
+
+.ecoming-grid__cards {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ecoming-card {
+  padding: 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(209, 213, 219, 0.75);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 0.7rem;
+}
+
+.ecoming-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.ecoming-card p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.ecoming-notify {
+  padding: 1rem 0 3rem;
+}
+
+.mobile-shop-cta {
+  display: none;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(0.85rem + env(safe-area-inset-bottom));
+  z-index: 1300;
+  min-height: 46px;
+  min-width: min(92vw, 360px);
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.22);
+  text-decoration: none;
+}
+
+.mobile-shop-cta:hover,
+.mobile-shop-cta:focus {
+  text-decoration: none;
+  background: var(--color-primary-dark);
+}
+
+@media (max-width: 1024px) {
+  .ehome-hero__grid,
+  .eproducts-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ehome-trust-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .ehome-categories__grid,
+  .ecoming-grid__cards,
+  .ecom-shopify-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .ehome-categories__grid,
+  .ecoming-grid__cards,
+  .ecom-shopify-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-shop-cta {
+    display: block;
+  }
+
+  .scroll-top {
+    bottom: calc(4.8rem + env(safe-area-inset-bottom));
+  }
+
+  .eproducts-coming-soon-link {
+    align-items: stretch;
+  }
+
+  .eproducts-coming-soon-link .btn {
+    width: 100%;
+  }
+}
