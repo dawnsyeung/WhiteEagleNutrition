@@ -3549,12 +3549,26 @@ img {
   padding: 1.1rem 0 2.7rem;
 }
 
+.eproducts-products-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
 .eproducts-group {
-  padding: 1.2rem 0 2rem;
-  border-top: 1px solid rgba(209, 213, 219, 0.8);
+  padding: 1rem;
+  border: 1px solid rgba(209, 213, 219, 0.8);
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.eproducts-group h2 {
+  margin-top: 0;
 }
 
 .eproducts-group p {
+  margin-bottom: 0.75rem;
   color: var(--color-muted);
 }
 
@@ -3573,6 +3587,14 @@ img {
 
 .eproducts-coming-soon-link p {
   margin: 0;
+}
+
+@media (min-width: 1025px) {
+  .eproducts-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+    align-items: start;
+  }
 }
 
 .ecoming-hero {
