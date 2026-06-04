@@ -470,6 +470,18 @@ img {
   color: #fff;
 }
 
+.btn-free-sample {
+  background: #ffe600;
+  color: #1f2933;
+  border: 1.5px solid #e6c800;
+}
+
+.btn-free-sample:hover,
+.btn-free-sample:focus {
+  background: #ffd400;
+  color: #111827;
+}
+
 .btn-text {
   background: transparent;
   color: var(--color-primary);
@@ -3561,6 +3573,7 @@ img {
   border-radius: var(--radius-md);
   background: #fff;
   box-shadow: var(--shadow-sm);
+  scroll-margin-top: 5.5rem;
 }
 
 .eproducts-group h2 {
