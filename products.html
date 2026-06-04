@@ -45,7 +45,7 @@
         person_profiles: 'identified_only'
       });
     </script>
-      <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -101,6 +101,7 @@
               <a class="btn btn-outline" href="#dried-larvae">Dried Larvae</a>
               <a class="btn btn-outline" href="#live-larvae">Live Larvae</a>
               <a class="btn btn-outline" href="#frass">Frass</a>
+              <a class="btn btn-outline" href="#more-products">More Products</a>
             </nav>
           </div>
           <img src="assets/images/products/basket.png" alt="Clean kraft packages and natural feed products" loading="eager" decoding="async" />
@@ -109,29 +110,39 @@
 
       <section class="eproducts-sections" data-shopify-buy-button aria-label="Shopify products">
         <div class="container">
-          <article class="eproducts-group" id="dried-larvae">
-            <h2>Dried Larvae</h2>
-            <p>For chickens, reptiles, wild birds, and feeders.</p>
-            <div class="ecom-shopify-grid ecom-shopify-grid--single">
-              <div id="products-dried-component"></div>
-            </div>
-          </article>
+          <div class="eproducts-products-grid">
+            <article class="eproducts-group" id="dried-larvae">
+              <h2>Dried Larvae</h2>
+              <p>For chickens, reptiles, wild birds, and feeders.</p>
+              <div class="ecom-shopify-grid ecom-shopify-grid--single">
+                <div id="products-dried-component"></div>
+              </div>
+            </article>
 
-          <article class="eproducts-group" id="live-larvae">
-            <h2>Live Larvae</h2>
-            <p>Fresh live larvae for enrichment feeding.</p>
-            <div class="ecom-shopify-grid ecom-shopify-grid--single">
-              <div id="products-live-component"></div>
-            </div>
-          </article>
+            <article class="eproducts-group" id="live-larvae">
+              <h2>Live Larvae</h2>
+              <p>Fresh live larvae for enrichment feeding.</p>
+              <div class="ecom-shopify-grid ecom-shopify-grid--single">
+                <div id="products-live-component"></div>
+              </div>
+            </article>
 
-          <article class="eproducts-group" id="frass">
-            <h2>Frass</h2>
-            <p>Biologically active natural soil amendment.</p>
-            <div class="ecom-shopify-grid ecom-shopify-grid--single">
-              <div id="products-frass-component"></div>
-            </div>
-          </article>
+            <article class="eproducts-group" id="frass">
+              <h2>Frass</h2>
+              <p>Biologically active natural soil amendment.</p>
+              <div class="ecom-shopify-grid ecom-shopify-grid--single">
+                <div id="products-frass-component"></div>
+              </div>
+            </article>
+
+            <article class="eproducts-group" id="more-products">
+              <h2>More Products</h2>
+              <p>Additional catalog items available with secure Shopify checkout.</p>
+              <div class="ecom-shopify-grid ecom-shopify-grid--single">
+                <div id="product-component-1780596602393"></div>
+              </div>
+            </article>
+          </div>
 
           <div class="eproducts-coming-soon-link">
             <p>Looking for future lines?</p>
@@ -187,6 +198,63 @@
                 }
               }
             };
+            var quantityOptions = {
+              "product": {
+                "styles": {
+                  "product": {
+                    "@media (min-width: 601px)": {
+                      "max-width": "calc(25% - 20px)",
+                      "margin-left": "20px",
+                      "margin-bottom": "50px"
+                    }
+                  }
+                },
+                "contents": {
+                  "button": false,
+                  "buttonWithQuantity": true
+                },
+                "text": {
+                  "button": "Add to cart"
+                }
+              },
+              "productSet": {
+                "styles": {
+                  "products": {
+                    "@media (min-width: 601px)": {
+                      "margin-left": "-20px"
+                    }
+                  }
+                }
+              },
+              "modalProduct": {
+                "contents": {
+                  "img": false,
+                  "imgWithCarousel": true,
+                  "button": false,
+                  "buttonWithQuantity": true
+                },
+                "styles": {
+                  "product": {
+                    "@media (min-width: 601px)": {
+                      "max-width": "100%",
+                      "margin-left": "0px",
+                      "margin-bottom": "0px"
+                    }
+                  }
+                },
+                "text": {
+                  "button": "Add to cart"
+                }
+              },
+              "option": {},
+              "cart": {
+                "text": {
+                  "total": "Subtotal",
+                  "button": "Checkout"
+                }
+              },
+              "toggle": {}
+            };
             ui.createComponent('product', {
               id: '8975496478860',
               node: document.getElementById('products-dried-component'),
@@ -204,6 +272,12 @@
               node: document.getElementById('products-frass-component'),
               moneyFormat: '%24%7B%7Bamount%7D%7D',
               options: options
+            });
+            ui.createComponent('product', {
+              id: '9462552461452',
+              node: document.getElementById('product-component-1780596602393'),
+              moneyFormat: '%24%7B%7Bamount%7D%7D',
+              options: quantityOptions
             });
           });
         }
@@ -228,6 +302,7 @@
               <li><a href="#dried-larvae">Dried Larvae</a></li>
               <li><a href="#live-larvae">Live Larvae</a></li>
               <li><a href="#frass">Frass</a></li>
+              <li><a href="#more-products">More Products</a></li>
               <li><a href="coming-soon.html">Coming Soon</a></li>
             </ul>
           </div>
