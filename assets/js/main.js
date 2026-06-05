@@ -25,6 +25,55 @@
     cartOpen: false,
     modalOpen: false
   };
+  const metaCapiEndpoint = '/api/meta-capi';
+
+  const createMetaEventId = () => `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+
+  const ensureMetaEventId = (eventName) => {
+    if (!eventName) return '';
+    window.__wenMetaEventIds = window.__wenMetaEventIds || {};
+    if (!window.__wenMetaEventIds[eventName]) {
+      window.__wenMetaEventIds[eventName] = createMetaEventId();
+    }
+    return window.__wenMetaEventIds[eventName];
+  };
+
+  const readCookie = (name) => {
+    if (!name || !document.cookie) return '';
+    const encodedName = `${encodeURIComponent(name)}=`;
+    const parts = document.cookie.split(';');
+    for (const part of parts) {
+      const cookie = part.trim();
+      if (!cookie.startsWith(encodedName)) continue;
+      return decodeURIComponent(cookie.slice(encodedName.length));
+    }
+    return '';
+  };
+
+  const sendPageViewToMetaCapi = () => {
+    if (window.__wenMetaCapiPageViewSent) return;
+    window.__wenMetaCapiPageViewSent = true;
+
+    const eventId = ensureMetaEventId('PageView');
+    if (!eventId) return;
+
+    const payload = {
+      event_name: 'PageView',
+      event_id: eventId,
+      event_source_url: window.location.href,
+      fbp: readCookie('_fbp'),
+      fbc: readCookie('_fbc')
+    };
+
+    fetch(metaCapiEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(() => {});
+  };
 
   const syncPageScrollLock = () => {
     const shouldLock = uiState.navOpen || uiState.cartOpen || uiState.modalOpen;
@@ -1049,6 +1098,7 @@
     setupInstallPrompt();
     updateYear();
     setupThankYouModalGlobalEvents();
+    sendPageViewToMetaCapi();
   };
 
   document.addEventListener('DOMContentLoaded', init);

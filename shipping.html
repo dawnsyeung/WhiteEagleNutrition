@@ -41,7 +41,10 @@
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '1022347530218534');
-      fbq('track', 'PageView');
+      window.__wenMetaEventIds = window.__wenMetaEventIds || {};
+      window.__wenMetaEventIds.PageView =
+        window.__wenMetaEventIds.PageView || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+      fbq('track', 'PageView', {}, { eventID: window.__wenMetaEventIds.PageView });
     </script>
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=1022347530218534&ev=PageView&noscript=1"
