@@ -3440,6 +3440,93 @@ img {
   box-shadow: var(--shadow-sm);
 }
 
+.ehome-origin,
+.ehome-proof,
+.ehome-review-standards,
+.ehome-circular-loop {
+  padding: 2.8rem 0;
+}
+
+.ehome-origin {
+  background: #fff;
+}
+
+.ehome-origin__grid,
+.ehome-review-standards__grid,
+.ehome-circular-loop__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.ehome-origin__quote,
+.ehome-circular-loop__card {
+  background: var(--color-cream);
+  border: 1px solid rgba(111, 75, 47, 0.18);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1.4rem;
+}
+
+.ehome-origin__quote blockquote {
+  margin: 0 0 1rem;
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  color: var(--color-primary-dark);
+}
+
+.ehome-origin__quote p,
+.ehome-circular-loop__card p {
+  margin-bottom: 0;
+  color: var(--color-muted);
+}
+
+.ehome-proof {
+  background: linear-gradient(180deg, #f8f4ed 0%, #fff 100%);
+}
+
+.ehome-proof__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.ehome-proof-card {
+  background: #fff;
+  border: 1px solid rgba(43, 95, 76, 0.14);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1.2rem;
+}
+
+.ehome-proof-card__metric {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 3.6rem;
+  min-height: 3.6rem;
+  margin-bottom: 0.9rem;
+  border-radius: 999px;
+  background: rgba(43, 95, 76, 0.1);
+  color: var(--color-primary-dark);
+  font-family: 'Poppins', 'Roboto', sans-serif;
+  font-weight: 800;
+}
+
+.ehome-proof-card p {
+  color: var(--color-muted);
+}
+
+.ehome-proof-card a,
+.eproducts-proof-row a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .ehome-categories {
   padding: 2.2rem 0;
 }
@@ -3510,6 +3597,73 @@ img {
 .shopify-buy__btn:focus {
   border-radius: 999px !important;
   font-weight: 700 !important;
+}
+
+.ehome-review-standards {
+  background: #fff;
+}
+
+.ehome-review-standards__steps {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.ehome-review-standards__steps article {
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(43, 95, 76, 0.06);
+  border: 1px solid rgba(43, 95, 76, 0.13);
+}
+
+.ehome-review-standards__steps strong,
+.ehome-review-standards__steps span {
+  display: block;
+}
+
+.ehome-review-standards__steps span {
+  color: var(--color-muted);
+  margin-top: 0.2rem;
+}
+
+.ehome-circular-loop {
+  background: linear-gradient(135deg, rgba(43, 95, 76, 0.95), rgba(34, 75, 61, 0.9));
+  color: #fff;
+}
+
+.ehome-circular-loop h2,
+.ehome-circular-loop h3 {
+  color: #fff;
+}
+
+.ehome-circular-loop p {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.ehome-circular-loop__flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.ehome-circular-loop__flow span {
+  position: relative;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.ehome-circular-loop__card {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.ehome-circular-loop__card .btn {
+  margin-top: 0.6rem;
+  width: 100%;
 }
 
 .ehome-why,
@@ -3585,6 +3739,85 @@ img {
   color: var(--color-muted);
 }
 
+.eproducts-proof-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin: 0 0 1rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(43, 95, 76, 0.06);
+  border: 1px solid rgba(43, 95, 76, 0.14);
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.eproducts-waitlist,
+.eproducts-review-standards {
+  margin-top: 1.2rem;
+  padding: 1.2rem;
+  border-radius: var(--radius-md);
+  background: #fff;
+  border: 1px solid rgba(209, 213, 219, 0.75);
+  box-shadow: var(--shadow-sm);
+}
+
+.eproducts-waitlist__header,
+.eproducts-review-standards {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.eproducts-waitlist__header p,
+.eproducts-review-standards p {
+  max-width: 68ch;
+  color: var(--color-muted);
+}
+
+.eproducts-waitlist__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.eproducts-waitlist-card {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(43, 95, 76, 0.14);
+  background: var(--color-cream);
+}
+
+.eproducts-waitlist-card__status,
+.ecoming-card__meta {
+  width: fit-content;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(242, 163, 101, 0.22);
+  color: var(--color-brown);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.eproducts-waitlist-card p,
+.eproducts-waitlist-card small,
+.ecoming-card small {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.eproducts-waitlist-card small,
+.ecoming-card small {
+  font-size: 0.82rem;
+}
+
 .eproducts-coming-soon-link {
   margin-top: 1.2rem;
   padding: 1rem;
@@ -3627,7 +3860,7 @@ img {
 .ecoming-grid__cards {
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -3684,7 +3917,10 @@ img {
 
 @media (max-width: 1024px) {
   .ehome-hero__grid,
-  .eproducts-hero__grid {
+  .eproducts-hero__grid,
+  .ehome-origin__grid,
+  .ehome-review-standards__grid,
+  .ehome-circular-loop__grid {
     grid-template-columns: 1fr;
   }
 
@@ -3694,15 +3930,24 @@ img {
 
   .ehome-categories__grid,
   .ecoming-grid__cards,
-  .ecom-shopify-grid {
+  .ecom-shopify-grid,
+  .ehome-proof__grid,
+  .eproducts-waitlist__grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .eproducts-waitlist__header,
+  .eproducts-review-standards {
+    display: block;
   }
 }
 
 @media (max-width: 720px) {
   .ehome-categories__grid,
   .ecoming-grid__cards,
-  .ecom-shopify-grid {
+  .ecom-shopify-grid,
+  .ehome-proof__grid,
+  .eproducts-waitlist__grid {
     grid-template-columns: 1fr;
   }
 

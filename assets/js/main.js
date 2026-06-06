@@ -379,19 +379,19 @@
     nameInput.placeholder = 'Your name';
     nameRow.append(nameLabel, nameInput);
 
-    const phoneRow = document.createElement('div');
-    phoneRow.className = 'wen-notify-form__row';
-    const phoneLabel = document.createElement('label');
-    phoneLabel.setAttribute('for', 'notify-phone');
-    phoneLabel.textContent = 'Phone number';
-    const phoneInput = document.createElement('input');
-    phoneInput.type = 'tel';
-    phoneInput.name = 'phone';
-    phoneInput.id = 'notify-phone';
-    phoneInput.required = true;
-    phoneInput.autocomplete = 'tel';
-    phoneInput.placeholder = 'Best phone number';
-    phoneRow.append(phoneLabel, phoneInput);
+    const emailRow = document.createElement('div');
+    emailRow.className = 'wen-notify-form__row';
+    const emailLabel = document.createElement('label');
+    emailLabel.setAttribute('for', 'notify-email');
+    emailLabel.textContent = 'Email address';
+    const emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.name = 'email';
+    emailInput.id = 'notify-email';
+    emailInput.required = true;
+    emailInput.autocomplete = 'email';
+    emailInput.placeholder = 'you@example.com';
+    emailRow.append(emailLabel, emailInput);
 
     const productInput = document.createElement('input');
     productInput.type = 'hidden';
@@ -409,7 +409,7 @@
     submitBtn.setAttribute('data-loading-text', 'Sending...');
     submitBtn.textContent = 'Notify Me';
 
-    form.append(nameRow, phoneRow, productInput, status, submitBtn);
+    form.append(nameRow, emailRow, productInput, status, submitBtn);
     body.append(message, form);
     modal.append(header, body);
     overlay.appendChild(modal);
@@ -475,7 +475,7 @@
         closeNotifyModal();
         openThankYouModal({
           title: 'You’re on the list',
-          message: `Thanks! We’ll text you when ${selectedProduct} is available.`
+          message: `Thanks! We’ll email you when ${selectedProduct} is available.`
         });
       } catch (error) {
         console.error('Notify-me submission failed', error);

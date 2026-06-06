@@ -97,14 +97,19 @@
       <section class="eproducts-hero">
         <div class="container eproducts-hero__grid">
           <div>
-            <p class="eyebrow">Conversion-first shopping</p>
+            <p class="eyebrow">Shop live products and join product waitlists</p>
             <h1>Shop White Eagle Nutrition</h1>
-            <p>Natural nutrition and regenerative soil solutions.</p>
+            <p>
+              Buy currently available BSFL products with secure checkout, or join waitlists for the named species-specific
+              formulas still in development.
+            </p>
             <nav class="eproducts-nav" aria-label="Product categories">
               <a class="btn btn-outline" href="#dried-larvae">Dried Larvae</a>
               <a class="btn btn-outline" href="#live-larvae">Live Larvae</a>
               <a class="btn btn-outline" href="#frass">Frass</a>
               <a class="btn btn-outline" href="#free-bsfl-sample">More Products</a>
+              <a class="btn btn-outline" href="#waitlist-products">Waitlists</a>
+              <a class="btn btn-outline" href="#review-standards">Reviews</a>
             </nav>
           </div>
           <img src="assets/images/products/basket.png" alt="Clean kraft packages and natural feed products" loading="eager" decoding="async" />
@@ -117,6 +122,10 @@
             <article class="eproducts-group" id="dried-larvae">
               <h2>Dried Larvae</h2>
               <p>For chickens, reptiles, wild birds, and feeders.</p>
+              <div class="eproducts-proof-row">
+                <span>Review status: verified buyer reviews being collected.</span>
+                <a href="research.html#digestive-health">Science: digestibility and gut health context</a>
+              </div>
               <div class="ecom-shopify-grid ecom-shopify-grid--single">
                 <div id="products-dried-component"></div>
               </div>
@@ -125,6 +134,10 @@
             <article class="eproducts-group" id="live-larvae">
               <h2>Live Larvae</h2>
               <p>Fresh live larvae for enrichment feeding.</p>
+              <div class="eproducts-proof-row">
+                <span>Review status: verified buyer reviews being collected.</span>
+                <a href="research.html#species-data">Science: species-specific feeding snapshots</a>
+              </div>
               <div class="ecom-shopify-grid ecom-shopify-grid--single">
                 <div id="products-live-component"></div>
               </div>
@@ -133,6 +146,10 @@
             <article class="eproducts-group" id="frass">
               <h2>Frass</h2>
               <p>Biologically active natural soil amendment.</p>
+              <div class="eproducts-proof-row">
+                <span>Review status: garden outcome notes being collected.</span>
+                <a href="insights-circular-agriculture.html#nellies-garden">Proof: circular agriculture and frass loop</a>
+              </div>
               <div class="ecom-shopify-grid ecom-shopify-grid--single">
                 <div id="products-frass-component"></div>
               </div>
@@ -141,15 +158,82 @@
             <article class="eproducts-group" id="free-bsfl-sample">
               <h2>More Products</h2>
               <p>Additional catalog items available with secure Shopify checkout.</p>
+              <div class="eproducts-proof-row">
+                <span>Review status: product-level reviews will publish with full attribution.</span>
+                <a href="#review-standards">See review standards</a>
+              </div>
               <div class="ecom-shopify-grid ecom-shopify-grid--single">
                 <div id="product-component-1780596602393"></div>
               </div>
             </article>
           </div>
 
+          <section class="eproducts-waitlist" id="waitlist-products" aria-labelledby="waitlist-products-heading">
+            <div class="eproducts-waitlist__header">
+              <div>
+                <p class="eyebrow">Coming soon, with a real next step</p>
+                <h2 id="waitlist-products-heading">Join a waitlist for species-specific formulas.</h2>
+              </div>
+              <p>
+                These products are not available for checkout yet. Each waitlist captures buyer interest by formula so
+                launch alerts, first-batch updates, and early review requests can be sent to the right audience.
+              </p>
+            </div>
+            <div class="eproducts-waitlist__grid">
+              <article class="eproducts-waitlist-card" data-product-card>
+                <span class="eproducts-waitlist-card__status">Waitlist open</span>
+                <h3>Equine FlexRestore Mash</h3>
+                <p>Mobility and recovery-focused BSFL mash for senior horses and performance routines.</p>
+                <small>No product reviews yet - pre-launch formula.</small>
+                <button class="btn btn-primary" type="button" data-notify-me="true">Notify Me</button>
+              </article>
+              <article class="eproducts-waitlist-card" data-product-card>
+                <span class="eproducts-waitlist-card__status">Waitlist open</span>
+                <h3>Canine Longevity Blend</h3>
+                <p>Daily gut, immune, skin, and mobility support concept for dogs.</p>
+                <small>No product reviews yet - pre-launch formula.</small>
+                <button class="btn btn-primary" type="button" data-notify-me="true">Notify Me</button>
+              </article>
+              <article class="eproducts-waitlist-card" data-product-card>
+                <span class="eproducts-waitlist-card__status">Waitlist open</span>
+                <h3>Avian Vitality Crumble</h3>
+                <p>Crumbled BSFL nutrition concept for poultry and companion bird vitality.</p>
+                <small>No product reviews yet - pre-launch formula.</small>
+                <button class="btn btn-primary" type="button" data-notify-me="true">Notify Me</button>
+              </article>
+              <article class="eproducts-waitlist-card" data-product-card>
+                <span class="eproducts-waitlist-card__status">Waitlist open</span>
+                <h3>Aquatic Precision Pellets</h3>
+                <p>Targeted aquaculture and ornamental fish feeding concept built around BSFL protein.</p>
+                <small>No product reviews yet - pre-launch formula.</small>
+                <button class="btn btn-primary" type="button" data-notify-me="true">Notify Me</button>
+              </article>
+              <article class="eproducts-waitlist-card" data-product-card>
+                <span class="eproducts-waitlist-card__status">Waitlist open</span>
+                <h3>Turtle Shell and Flow Bites</h3>
+                <p>Hydrating BSFL bites concept for shell support, appetite, and aquatic turtle routines.</p>
+                <small>No product reviews yet - pre-launch formula.</small>
+                <button class="btn btn-primary" type="button" data-notify-me="true">Notify Me</button>
+              </article>
+            </div>
+          </section>
+
+          <section class="eproducts-review-standards" id="review-standards" aria-labelledby="product-review-standards-heading">
+            <div>
+              <p class="eyebrow">Review standards</p>
+              <h2 id="product-review-standards-heading">No anonymous proof claims.</h2>
+              <p>
+                Product reviews will publish only when they include a rating, customer-approved attribution, product used,
+                animal species, date or feeding window, and a specific outcome. Until then, pages show review status
+                plainly instead of using unattributed quotes as substitute proof.
+              </p>
+            </div>
+            <a class="btn btn-outline" href="contact.html#contact-form">SUBMIT A VERIFIED OUTCOME</a>
+          </section>
+
           <div class="eproducts-coming-soon-link">
-            <p>Looking for future lines?</p>
-            <a class="btn btn-primary" href="coming-soon.html">COMING SOON PRODUCTS</a>
+            <p>Want the full launch overview?</p>
+            <a class="btn btn-primary" href="coming-soon.html">VIEW COMING SOON PAGE</a>
           </div>
         </div>
       </section>
