@@ -1308,6 +1308,35 @@ img {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.page-nellies-garden .page-hero .page-hero__layout {
+  align-items: stretch;
+}
+
+.page-nellies-garden .page-hero .page-hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page-nellies-garden .page-hero .page-hero__visual {
+  flex: 0 1 420px;
+}
+
+.page-nellies-garden .nellies-hero-photo {
+  width: 100%;
+  height: clamp(420px, 55vw, 620px);
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+
+.page-nellies-garden .nellies-feature-photo {
+  width: 100%;
+  height: auto;
+  max-height: 430px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
 @media (max-width: 1024px) {
   .page-ethics .pillars__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1323,6 +1352,14 @@ img {
 
   .page-nellies-garden .impact__stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-nellies-garden .nellies-hero-photo {
+    height: clamp(380px, 52vw, 520px);
+  }
+
+  .page-nellies-garden .nellies-feature-photo {
+    max-height: 390px;
   }
 }
 
@@ -1341,6 +1378,29 @@ img {
 
   .page-nellies-garden .impact__stats {
     grid-template-columns: 1fr;
+  }
+
+  .page-nellies-garden .page-hero .page-hero__layout {
+    align-items: center;
+  }
+
+  .page-nellies-garden .page-hero .page-hero__content {
+    justify-content: flex-start;
+  }
+
+  .page-nellies-garden .page-hero .page-hero__visual {
+    flex: 1 1 260px;
+  }
+
+  .page-nellies-garden .nellies-hero-photo {
+    height: auto;
+    max-height: 420px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .page-nellies-garden .nellies-feature-photo {
+    max-height: 340px;
+    aspect-ratio: 4 / 3;
   }
 }
 
