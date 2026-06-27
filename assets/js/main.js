@@ -5,13 +5,13 @@
   const qs = (selector, scope = document) => scope.querySelector(selector);
   const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
-  const petApp = {
-    href: 'pet-photos-app.html',
-    label: 'Happy Pets'
-  };
   const nelliesGardenPage = {
     href: 'nellies-garden.html',
     label: "Nellie's Garden"
+  };
+  const nelliesBsflPage = {
+    href: 'nellies-bsfl.html',
+    label: "Nellie's BSFL"
   };
 
   const navToggle = qs('.nav-toggle');
@@ -646,36 +646,6 @@
     window.addEventListener('resize', () => window.requestAnimationFrame(update));
   };
 
-  const injectPetAppNavLink = () => {
-    const navList = qs('.site-nav ul');
-    if (!navList) return;
-
-    const already = qsa('a', navList).some((a) => (a.getAttribute('href') || '').includes(petApp.href));
-    if (already) return;
-
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = petApp.href;
-    a.textContent = petApp.label;
-
-    const currentPath = (window.location.pathname || '').split('/').pop() || 'index.html';
-    if (currentPath === petApp.href) {
-      a.classList.add('is-active');
-    }
-
-    li.appendChild(a);
-
-    // Insert just before "About" so About stays the rightmost tab.
-    const aboutLink = qsa('a', navList).find((link) => (link.getAttribute('href') || '') === 'about.html');
-    const aboutLi = aboutLink?.closest('li') || null;
-    if (aboutLi && aboutLi.parentElement === navList) {
-      navList.insertBefore(li, aboutLi);
-      return;
-    }
-
-    navList.appendChild(li);
-  };
-
   const injectNelliesGardenNavLink = () => {
     const navList = qs('.site-nav ul');
     if (!navList) return;
@@ -690,6 +660,36 @@
 
     const currentPath = (window.location.pathname || '').split('/').pop() || 'index.html';
     if (currentPath === nelliesGardenPage.href) {
+      a.classList.add('is-active');
+    }
+
+    li.appendChild(a);
+
+    // Insert just before "About" so About stays toward the right side of nav.
+    const aboutLink = qsa('a', navList).find((link) => (link.getAttribute('href') || '') === 'about.html');
+    const aboutLi = aboutLink?.closest('li') || null;
+    if (aboutLi && aboutLi.parentElement === navList) {
+      navList.insertBefore(li, aboutLi);
+      return;
+    }
+
+    navList.appendChild(li);
+  };
+
+  const injectNelliesBsflNavLink = () => {
+    const navList = qs('.site-nav ul');
+    if (!navList) return;
+
+    const already = qsa('a', navList).some((a) => (a.getAttribute('href') || '').includes(nelliesBsflPage.href));
+    if (already) return;
+
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = nelliesBsflPage.href;
+    a.textContent = nelliesBsflPage.label;
+
+    const currentPath = (window.location.pathname || '').split('/').pop() || 'index.html';
+    if (currentPath === nelliesBsflPage.href) {
       a.classList.add('is-active');
     }
 
@@ -1148,7 +1148,7 @@
     setupNotifyMeButtons();
     syncHeaderHeightVar();
     injectNelliesGardenNavLink();
-    injectPetAppNavLink();
+    injectNelliesBsflNavLink();
     setupPurchaseNavCta();
     setupNavigation();
     if (!hasShopifyBuyButton) {
