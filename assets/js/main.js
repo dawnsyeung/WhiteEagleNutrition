@@ -9,6 +9,10 @@
     href: 'pet-photos-app.html',
     label: 'Happy Pets'
   };
+  const nelliesGardenPage = {
+    href: 'nellies-garden.html',
+    label: "Nellie's Garden"
+  };
 
   const navToggle = qs('.nav-toggle');
   const nav = qs('.site-nav');
@@ -672,6 +676,36 @@
     navList.appendChild(li);
   };
 
+  const injectNelliesGardenNavLink = () => {
+    const navList = qs('.site-nav ul');
+    if (!navList) return;
+
+    const already = qsa('a', navList).some((a) => (a.getAttribute('href') || '').includes(nelliesGardenPage.href));
+    if (already) return;
+
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = nelliesGardenPage.href;
+    a.textContent = nelliesGardenPage.label;
+
+    const currentPath = (window.location.pathname || '').split('/').pop() || 'index.html';
+    if (currentPath === nelliesGardenPage.href) {
+      a.classList.add('is-active');
+    }
+
+    li.appendChild(a);
+
+    // Insert just before "About" so About stays toward the right side of nav.
+    const aboutLink = qsa('a', navList).find((link) => (link.getAttribute('href') || '') === 'about.html');
+    const aboutLi = aboutLink?.closest('li') || null;
+    if (aboutLi && aboutLi.parentElement === navList) {
+      navList.insertBefore(li, aboutLi);
+      return;
+    }
+
+    navList.appendChild(li);
+  };
+
   const setupPwa = () => {
     if (!('serviceWorker' in navigator)) return;
     window.addEventListener('load', () => {
@@ -1081,6 +1115,7 @@
     disableComingSoonProductButtons();
     setupNotifyMeButtons();
     syncHeaderHeightVar();
+    injectNelliesGardenNavLink();
     injectPetAppNavLink();
     setupPurchaseNavCta();
     setupNavigation();
