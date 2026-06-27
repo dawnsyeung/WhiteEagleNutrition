@@ -1099,6 +1099,38 @@
     });
   };
 
+  const setupFrassBuyAnchorRouting = () => {
+    const path = (window.location.pathname || '').toLowerCase();
+    const isProductsPage =
+      path.endsWith('/products') ||
+      path.endsWith('/products/') ||
+      path.endsWith('/products.html') ||
+      path === 'products.html';
+
+    if (!isProductsPage) return;
+
+    const legacyHash = '#frass';
+    const buyHash = '#frass-buy';
+
+    const routeToBuyAnchor = () => {
+      if ((window.location.hash || '').toLowerCase() !== legacyHash) return;
+
+      if (window.history && typeof window.history.replaceState === 'function') {
+        window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}${buyHash}`);
+      } else {
+        window.location.hash = buyHash;
+      }
+
+      const target = document.getElementById('frass-buy');
+      if (target) {
+        target.scrollIntoView({ block: 'start' });
+      }
+    };
+
+    routeToBuyAnchor();
+    window.addEventListener('hashchange', routeToBuyAnchor);
+  };
+
   const updateYear = () => {
     const yearSpan = qs('[data-current-year]');
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
@@ -1129,6 +1161,7 @@
     setupContactForm();
     setupNewsletterForms();
     setupNonSubmittingSearchForms();
+    setupFrassBuyAnchorRouting();
     setupPwa();
     setupInstallPrompt();
     updateYear();
