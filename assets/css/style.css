@@ -1771,7 +1771,6 @@ img {
 .page-ethics h2[id] {
   scroll-margin-top: calc(var(--site-header-height) + 1.25rem);
 }
-
 .citations ol {
   counter-reset: cites;
   margin-left: 1.2rem;
