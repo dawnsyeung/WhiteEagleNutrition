@@ -631,6 +631,39 @@
     purchaseLink.classList.add('nav-purchase');
   };
 
+  const syncActiveNavLink = () => {
+    const links = qsa('.site-nav a');
+    if (!links.length) return;
+
+    const normalizePath = (value) => {
+      const raw = (value || '').split('#')[0].split('?')[0].replace(/^\.?\//, '');
+      if (!raw || raw === '/') return 'index.html';
+      return raw.toLowerCase();
+    };
+
+    const currentPath = normalizePath((window.location.pathname || '').split('/').pop());
+    let activeLink = null;
+
+    links.forEach((link) => {
+      const href = (link.getAttribute('href') || '').trim();
+      if (!href || href.startsWith('#') || /^(https?:|mailto:|tel:)/i.test(href)) {
+        link.classList.remove('is-active');
+        return;
+      }
+
+      const linkPath = normalizePath(href);
+      const isMatch = linkPath === currentPath;
+      link.classList.toggle('is-active', isMatch);
+      if (isMatch) activeLink = link;
+    });
+
+    // Fall back to home nav item for root-style paths.
+    if (!activeLink && currentPath === 'index.html') {
+      const homeLink = links.find((link) => normalizePath(link.getAttribute('href') || '') === 'index.html');
+      if (homeLink) homeLink.classList.add('is-active');
+    }
+  };
+
   const syncHeaderHeightVar = () => {
     const header = qs('.site-header');
     if (!header) return;
@@ -1150,6 +1183,7 @@
     injectNelliesGardenNavLink();
     injectNelliesBsflNavLink();
     setupPurchaseNavCta();
+    syncActiveNavLink();
     setupNavigation();
     if (!hasShopifyBuyButton) {
       setupCart();
