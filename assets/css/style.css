@@ -1737,12 +1737,16 @@ img {
   align-self: flex-start;
 }
 
+.page-ethics .pillars,
+.page-ethics .metrics,
 .page-ethics .certifications,
 .page-ethics .qa,
 .page-ethics .community {
   padding: 4.2rem 0;
 }
 
+.page-ethics .pillars h2,
+.page-ethics .metrics h2,
 .page-ethics .certifications h2,
 .page-ethics .qa h2,
 .page-ethics .community h2,
@@ -1752,6 +1756,8 @@ img {
   margin-bottom: 1.15rem;
 }
 
+.page-ethics .pillars h2::before,
+.page-ethics .metrics h2::before,
 .page-ethics .certifications h2::before,
 .page-ethics .qa h2::before,
 .page-ethics .community h2::before,
