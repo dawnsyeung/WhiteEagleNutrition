@@ -1,9 +1,83 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
   "functions": {
     "api/**/*.js": {
       "maxDuration": 10
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/research",
+      "destination": "/ethics#bsfl-science-hub",
+      "permanent": true
+    },
+    {
+      "source": "/insights-microbiome",
+      "destination": "/insights/microbiome",
+      "permanent": true
+    },
+    {
+      "source": "/insights-multi-species-feeding",
+      "destination": "/insights/multi-species-feeding",
+      "permanent": true
+    },
+    {
+      "source": "/insights-circular-agriculture",
+      "destination": "/regenerative-agriculture",
+      "permanent": true
+    },
+    {
+      "source": "/insights/circular-agriculture",
+      "destination": "/regenerative-agriculture",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/insights/microbiome",
+      "destination": "/insights-microbiome.html"
+    },
+    {
+      "source": "/insights/multi-species-feeding",
+      "destination": "/insights-multi-species-feeding.html"
+    },
+    {
+      "source": "/regenerative-agriculture",
+      "destination": "/insights-circular-agriculture.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
 }
-

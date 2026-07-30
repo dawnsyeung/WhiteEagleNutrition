@@ -1,0 +1,14 @@
+# White Eagle Nutrition — crawl guidance
+User-agent: *
+Allow: /
+
+# Thin / utility pages (also marked noindex in HTML)
+Disallow: /privacy
+Disallow: /terms
+Disallow: /shipping
+Disallow: /research
+Disallow: /whitepaper-2026-in-progress
+Disallow: /coming-soon
+Disallow: /api/
+
+Sitemap: https://www.whiteeaglenutrition.com/sitemap.xml
