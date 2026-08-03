@@ -86,7 +86,7 @@
           },
           {
             "@type": "ItemList",
-            "name": "Featured White Eagle Nutrition products",
+            "name": "White Eagle Nutrition products",
             "itemListElement": [
               {
                 "@type": "ListItem",
@@ -200,7 +200,7 @@
       <section class="ehome-hero">
         <div class="container ehome-hero__grid">
           <div class="ehome-hero__copy">
-            <p class="eyebrow">Texas-rooted BSFL nutrition &middot; Rooted origin &middot; Circular agriculture</p>
+            <p class="eyebrow">Texas-rooted BSFL nutrition &middot; Regenerative feed &middot; Circular agriculture</p>
             <h1>Premium Protein to Nourish Your Flock and All Natural Frass to Enrich Your Soil</h1>
             <p>
               Natural dried larvae, live larvae, and nutrient-rich frass for backyard flocks, feeder routines,
@@ -230,8 +230,8 @@
       <section class="ehome-origin" aria-labelledby="origin-heading">
         <div class="container ehome-origin__grid">
           <div>
-            <p class="eyebrow">Why the name matters</p>
-            <h2 id="origin-heading">White Eagle is a documented Texas story, not a borrowed label.</h2>
+            <p class="eyebrow">Our roots in Texas</p>
+            <h2 id="origin-heading">White Eagle is a Texas story, not a borrowed label.</h2>
             <p>
               In 1927 at the Feast of the Harvest Moon in Quanah, Texas, Chief Baldwin Parker, son of Quanah Parker,
               ceremonially honored West Texas civic leader Robert W. Haynie with Quanah Parker's war bonnet and the
@@ -307,88 +307,6 @@
               <a class="btn btn-primary" href="products.html#live-larvae">SHOP LIVE</a>
             </article>
           </div>
-        </div>
-      </section>
-
-      <section class="ehome-featured" data-shopify-buy-button aria-labelledby="featured-products-heading">
-        <div class="container">
-          <h2 id="featured-products-heading">Featured Products</h2>
-          <p class="section-intro">Buy now with secure Shopify checkout.</p>
-          <div class="ecom-shopify-grid">
-            <div id="home-product-dried"></div>
-            <div id="home-product-live"></div>
-            <div id="home-product-frass"></div>
-          </div>
-          <script type="text/javascript">
-          /*<![CDATA[*/
-          (function () {
-            var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-            if (window.ShopifyBuy) {
-              if (window.ShopifyBuy.UI) {
-                ShopifyBuyInit();
-              } else {
-                loadScript();
-              }
-            } else {
-              loadScript();
-            }
-            function loadScript() {
-              var script = document.createElement('script');
-              script.async = true;
-              script.src = scriptURL;
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-              script.onload = ShopifyBuyInit;
-            }
-            function ShopifyBuyInit() {
-              var client = ShopifyBuy.buildClient({
-                domain: 'ismtus-61.myshopify.com',
-                storefrontAccessToken: '3b590ca1668ed6e062cbd717247d8ce7'
-              });
-              ShopifyBuy.UI.onReady(client).then(function (ui) {
-                var options = {
-                  "product": {
-                    "contents": {
-                      "img": true,
-                      "title": true,
-                      "price": true,
-                      "description": true,
-                      "button": true,
-                      "buttonWithQuantity": false
-                    },
-                    "text": {
-                      "button": "ADD TO CART"
-                    }
-                  },
-                  "cart": {
-                    "text": {
-                      "total": "Subtotal",
-                      "button": "Checkout"
-                    }
-                  }
-                };
-                ui.createComponent('product', {
-                  id: '8975496478860',
-                  node: document.getElementById('home-product-dried'),
-                  moneyFormat: '%24%7B%7Bamount%7D%7D',
-                  options: options
-                });
-                ui.createComponent('product', {
-                  id: '9406751146124',
-                  node: document.getElementById('home-product-live'),
-                  moneyFormat: '%24%7B%7Bamount%7D%7D',
-                  options: options
-                });
-                ui.createComponent('product', {
-                  id: '9398922805388',
-                  node: document.getElementById('home-product-frass'),
-                  moneyFormat: '%24%7B%7Bamount%7D%7D',
-                  options: options
-                });
-              });
-            }
-          })();
-          /*]]>*/
-          </script>
         </div>
       </section>
 
