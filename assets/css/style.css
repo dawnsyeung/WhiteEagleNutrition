@@ -4411,6 +4411,10 @@ img {
     bottom: calc(4.8rem + env(safe-area-inset-bottom));
   }
 
+  .site-footer {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+
   .eproducts-coming-soon-link {
     align-items: stretch;
   }
