@@ -7,7 +7,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "node scripts/structured-data/generate.mjs",
+    "build": "node -e \"console.log('Static site: no build step required.')\"",
+    "build:schema": "node scripts/structured-data/generate.mjs",
     "test": "node --test"
   },
   "dependencies": {
