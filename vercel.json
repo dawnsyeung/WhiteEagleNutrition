@@ -36,7 +36,7 @@
   "rewrites": [
     {
       "source": "/products/:handle",
-      "destination": "/products/:handle.html"
+      "destination": "/product-pages/:handle.html"
     },
     {
       "source": "/insights/microbiome",
