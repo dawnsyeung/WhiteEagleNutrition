@@ -32,35 +32,78 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "AboutPage",
-        "url": "https://www.whiteeaglenutrition.com/about",
-        "name": "About White Eagle Nutrition",
-        "description": "White Eagle Nutrition develops ethically-sourced, non-GMO BSFL nutrition to extend animal health spans through veterinary science and circular agriculture.",
-        "speakable": {
-          "@type": "SpeakableSpecification",
-          "cssSelector": [".mission", ".values"]
-        },
-        "mainEntity": {
-          "@type": "Organization",
-          "name": "White Eagle Nutrition",
-          "url": "https://www.whiteeaglenutrition.com/",
-          "email": "info@whiteeaglenutrition.com",
-          "telephone": "+1-713-497-1745",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "4979 FM 2502",
-            "addressLocality": "Bleiblerville",
-            "addressRegion": "TX",
-            "postalCode": "78931",
-            "addressCountry": "US"
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.whiteeaglenutrition.com/#organization",
+            "name": "White Eagle Nutrition",
+            "url": "https://www.whiteeaglenutrition.com/",
+            "logo": "https://www.whiteeaglenutrition.com/assets/images/logo.png",
+            "description": "Texas-rooted black soldier fly larvae nutrition and frass for animals and regenerative gardens.",
+            "sameAs": [
+              "https://www.instagram.com/whiteeaglenutrition",
+              "https://www.facebook.com/whiteeaglenutrition",
+              "https://www.linkedin.com/company/whiteeaglenutrition"
+            ],
+            "email": "info@whiteeaglenutrition.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "4979 FM 2502",
+              "addressLocality": "Bleiblerville",
+              "addressRegion": "TX",
+              "postalCode": "78931",
+              "addressCountry": "US"
+            },
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "info@whiteeaglenutrition.com",
+                "availableLanguage": "English"
+              }
+            ]
           },
-          "areaServed": "US",
-          "sameAs": [
-            "https://www.instagram.com/whiteeaglenutrition",
-            "https://www.facebook.com/whiteeaglenutrition",
-            "https://www.linkedin.com/company/whiteeaglenutrition"
-          ]
-        }
+          {
+            "@type": "WebSite",
+            "@id": "https://www.whiteeaglenutrition.com/#website",
+            "name": "White Eagle Nutrition",
+            "url": "https://www.whiteeaglenutrition.com/",
+            "publisher": {
+              "@id": "https://www.whiteeaglenutrition.com/#organization"
+            },
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "AboutPage",
+            "@id": "https://www.whiteeaglenutrition.com/about#webpage",
+            "name": "About White Eagle Nutrition",
+            "url": "https://www.whiteeaglenutrition.com/about",
+            "description": "White Eagle Nutrition develops BSFL nutrition through veterinary science and circular agriculture.",
+            "isPartOf": {
+              "@id": "https://www.whiteeaglenutrition.com/#website"
+            },
+            "about": {
+              "@id": "https://www.whiteeaglenutrition.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.whiteeaglenutrition.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "About",
+                "item": "https://www.whiteeaglenutrition.com/about"
+              }
+            ]
+          }
+        ]
       }
     </script>
       <!-- Google tag (gtag.js) -->

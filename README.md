@@ -32,6 +32,14 @@ Deploy as usual. The public feed API routes will be available at:
 And the app UI is at:
 - `/pet-photos-app.html`
 
+## Structured data generation
+
+This repository now generates JSON-LD in server-rendered HTML from live Shopify product data.
+
+- Run `npm run build` before deploy to refresh homepage/products/about/contact JSON-LD.
+- Product and Offer data on `/products` is sourced from Shopify Storefront API product records used by the Buy Button components.
+- Run `npm test` to validate schema-generation utilities and serialization safeguards.
+
 ## Meta Conversions API (CAPI) for Pixel deduplication
 
 This project includes a serverless endpoint at `POST /api/meta-capi` that forwards browser events to Meta CAPI.
