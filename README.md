@@ -37,7 +37,9 @@ And the app UI is at:
 This repository now generates JSON-LD in server-rendered HTML from live Shopify product data.
 
 - Run `npm run build` before deploy to refresh homepage/products/about/contact JSON-LD.
-- Product and Offer data on `/products` is sourced from Shopify Storefront API product records used by the Buy Button components.
+- Product and Offer data is sourced from Shopify Storefront API product records used by the Buy Button components.
+- Product detail pages at `/products/<shopify-handle>` are generated during build and include canonical metadata and Product JSON-LD.
+- `sitemap.xml` is regenerated during build to include generated product detail URLs.
 - Run `npm test` to validate schema-generation utilities and serialization safeguards.
 
 ## Meta Conversions API (CAPI) for Pixel deduplication

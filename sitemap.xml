@@ -80,4 +80,24 @@
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
+  <url>
+    <loc>https://www.whiteeaglenutrition.com/products/2lb-bag-of-whole-dried-black-soldier-fly-larvae-bsfl</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.whiteeaglenutrition.com/products/live-black-soldier-fly-larvae-8-oz-cup</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.whiteeaglenutrition.com/products/frass-soil-amendment-2lb-bag</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.whiteeaglenutrition.com/products/free-bsfl-sample</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

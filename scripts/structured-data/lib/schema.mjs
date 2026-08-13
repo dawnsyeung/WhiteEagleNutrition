@@ -123,7 +123,7 @@ const buildOffersFromVariants = (variants, productUrl) => {
   return offers;
 };
 
-const buildProductSchema = ({ product, productUrl }) => {
+const buildProductSchema = ({ product, productUrl, offerBaseUrl }) => {
   const images = (product.images?.nodes || [])
     .map((imageNode) => imageNode.url)
     .filter(Boolean);
@@ -144,7 +144,7 @@ const buildProductSchema = ({ product, productUrl }) => {
       name: 'White Eagle Nutrition',
     },
     sku: hasAnySku && variants.length === 1 ? variants[0].sku : undefined,
-    offers: buildOffersFromVariants(variants, productUrl),
+    offers: buildOffersFromVariants(variants, offerBaseUrl || productUrl),
   });
 };
 
@@ -192,5 +192,6 @@ export {
   cleanObject,
   normalizePath,
   serializeJsonLd,
+  variantOfferUrl,
   withFragment,
 };

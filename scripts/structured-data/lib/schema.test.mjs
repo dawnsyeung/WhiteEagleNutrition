@@ -10,6 +10,7 @@ import {
   cleanObject,
   normalizePath,
   serializeJsonLd,
+  variantOfferUrl,
 } from './schema.mjs';
 
 test('homepage organization schema includes stable id and core properties', () => {
@@ -54,11 +55,16 @@ test('product schema includes decimal price and offer object', () => {
         ],
       },
     },
-    productUrl: 'https://www.whiteeaglenutrition.com/products#frass-buy',
+    productUrl: 'https://www.whiteeaglenutrition.com/products/frass-soil-amendment-2lb-bag',
+    offerBaseUrl: 'https://www.whiteeaglenutrition.com/products#frass-buy',
   });
 
   assert.equal(schema.offers.price, '18.00');
   assert.equal(schema.offers.priceCurrency, 'USD');
+  assert.equal(
+    schema.offers.url,
+    'https://www.whiteeaglenutrition.com/products?variant=1#frass-buy'
+  );
 });
 
 test('in-stock availability is mapped correctly', () => {
@@ -143,6 +149,13 @@ test('URL normalization handles html and absolute URLs', () => {
   assert.equal(normalizePath('products.html'), '/products');
   assert.equal(normalizePath('https://www.whiteeaglenutrition.com/about'), '/about');
   assert.equal(canonicalUrl('contact.html'), 'https://www.whiteeaglenutrition.com/contact');
+});
+
+test('variant offer URL keeps query before hash fragment', () => {
+  assert.equal(
+    variantOfferUrl('https://www.whiteeaglenutrition.com/products#live-larvae', 'gid://shopify/ProductVariant/555'),
+    'https://www.whiteeaglenutrition.com/products?variant=555#live-larvae'
+  );
 });
 
 test('JSON serialization escapes unsafe script characters', () => {
