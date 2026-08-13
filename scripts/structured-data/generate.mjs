@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import https from 'node:https';
 import path from 'node:path';
 import {
   availabilityUrl,
@@ -22,10 +23,51 @@ const CONTACT_HTML_PATH = path.join(ROOT, 'contact.html');
 const NELLIES_GARDEN_HTML_PATH = path.join(ROOT, 'nellies-garden.html');
 const SITEMAP_XML_PATH = path.join(ROOT, 'sitemap.xml');
 const PRODUCT_DETAILS_DIR_PATH = path.join(ROOT, 'product-pages');
+const SHOPIFY_CACHE_PATH = path.join(ROOT, 'scripts', 'structured-data', 'data', 'shopify-products-cache.json');
 
 const readFile = (filePath) => fs.readFile(filePath, 'utf8');
 
 const writeFile = (filePath, content) => fs.writeFile(filePath, content, 'utf8');
+
+const postJson = (url, headers, payload) =>
+  new Promise((resolve, reject) => {
+    const body = JSON.stringify(payload);
+    const request = https.request(
+      url,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(body),
+          ...headers,
+        },
+      },
+      (response) => {
+        let raw = '';
+        response.setEncoding('utf8');
+        response.on('data', (chunk) => {
+          raw += chunk;
+        });
+        response.on('end', () => {
+          try {
+            const parsed = raw ? JSON.parse(raw) : {};
+            if (response.statusCode < 200 || response.statusCode >= 300) {
+              reject(
+                new Error(`Shopify API request failed: ${response.statusCode} ${JSON.stringify(parsed)}`)
+              );
+              return;
+            }
+            resolve(parsed);
+          } catch (error) {
+            reject(error);
+          }
+        });
+      }
+    );
+    request.on('error', reject);
+    request.write(body);
+    request.end();
+  });
 
 const escapeHtml = (value) =>
   String(value ?? '')
@@ -168,30 +210,33 @@ const fetchShopifyProducts = async ({ domain, token, productGids }) => {
     }
   `;
 
-  const response = await fetch(`https://${domain}/api/2024-10/graphql.json`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const payload = await postJson(
+    `https://${domain}/api/2024-10/graphql.json`,
+    {
       'X-Shopify-Storefront-Access-Token': token,
     },
-    body: JSON.stringify({
+    {
       query,
       variables: {
         ids: productGids,
       },
-    }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Shopify API request failed: ${response.status}`);
-  }
-
-  const payload = await response.json();
+    }
+  );
   if (payload.errors) {
     throw new Error(`Shopify API returned errors: ${JSON.stringify(payload.errors)}`);
   }
 
   return payload.data.nodes.filter(Boolean);
+};
+
+const readCachedShopifyProducts = async () => {
+  const raw = await readFile(SHOPIFY_CACHE_PATH);
+  return JSON.parse(raw);
+};
+
+const writeCachedShopifyProducts = async (products) => {
+  await fs.mkdir(path.dirname(SHOPIFY_CACHE_PATH), { recursive: true });
+  await writeFile(SHOPIFY_CACHE_PATH, `${JSON.stringify(products, null, 2)}\n`);
 };
 
 const buildHomepageGraph = ({ organization, products }) => ({
@@ -520,10 +565,20 @@ const run = async () => {
 
   const shopifyConfig = extractShopifyConfig(productsHtml);
   const productMappings = extractProductComponentMappings(productsHtml);
-  const shopifyProducts = await fetchShopifyProducts({
-    ...shopifyConfig,
-    productGids: productMappings.map((mapping) => mapping.productGid),
-  });
+  let shopifyProducts;
+  try {
+    shopifyProducts = await fetchShopifyProducts({
+      ...shopifyConfig,
+      productGids: productMappings.map((mapping) => mapping.productGid),
+    });
+    await writeCachedShopifyProducts(shopifyProducts);
+  } catch (error) {
+    console.warn(
+      `Live Shopify fetch failed; falling back to cached product snapshot at ${SHOPIFY_CACHE_PATH}:`,
+      error.message
+    );
+    shopifyProducts = await readCachedShopifyProducts();
+  }
 
   const productById = new Map(shopifyProducts.map((product) => [product.id, product]));
   const mappedProducts = productMappings

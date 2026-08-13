@@ -40,6 +40,7 @@ This repository now generates JSON-LD in server-rendered HTML from live Shopify 
 - Product and Offer data is sourced from Shopify Storefront API product records used by the Buy Button components.
 - Product detail pages at `/products/<shopify-handle>` are generated during build and include canonical metadata and Product JSON-LD.
 - `sitemap.xml` is regenerated during build to include generated product detail URLs.
+- If live Shopify fetch fails during build, generation falls back to `scripts/structured-data/data/shopify-products-cache.json` so deploys do not fail hard.
 - Run `npm test` to validate schema-generation utilities and serialization safeguards.
 
 ## Meta Conversions API (CAPI) for Pixel deduplication
