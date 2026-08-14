@@ -49,10 +49,13 @@
             "name": "White Eagle Nutrition",
             "url": "https://www.whiteeaglenutrition.com/",
             "logo": "https://www.whiteeaglenutrition.com/assets/images/logo.png",
-            "image": "https://www.whiteeaglenutrition.com/assets/images/products/basket.png",
             "description": "Texas-rooted black soldier fly larvae nutrition and frass for animals and regenerative gardens.",
+            "sameAs": [
+              "https://www.instagram.com/whiteeaglenutrition",
+              "https://www.facebook.com/whiteeaglenutrition",
+              "https://www.linkedin.com/company/whiteeaglenutrition"
+            ],
             "email": "info@whiteeaglenutrition.com",
-            "telephone": "+1-713-497-1745",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "4979 FM 2502",
@@ -61,50 +64,77 @@
               "postalCode": "78931",
               "addressCountry": "US"
             },
-            "sameAs": [
-              "https://www.instagram.com/whiteeaglenutrition",
-              "https://www.facebook.com/whiteeaglenutrition",
-              "https://www.linkedin.com/company/whiteeaglenutrition"
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "info@whiteeaglenutrition.com",
+                "availableLanguage": "English"
+              }
             ]
           },
           {
             "@type": "WebSite",
             "@id": "https://www.whiteeaglenutrition.com/#website",
-            "url": "https://www.whiteeaglenutrition.com/",
             "name": "White Eagle Nutrition",
-            "publisher": { "@id": "https://www.whiteeaglenutrition.com/#organization" },
+            "url": "https://www.whiteeaglenutrition.com/",
+            "publisher": {
+              "@id": "https://www.whiteeaglenutrition.com/#organization"
+            },
             "inLanguage": "en-US"
           },
           {
             "@type": "WebPage",
             "@id": "https://www.whiteeaglenutrition.com/#webpage",
-            "url": "https://www.whiteeaglenutrition.com/",
             "name": "Buy Dried BSFL, Live Larvae & Frass | White Eagle Nutrition",
-            "isPartOf": { "@id": "https://www.whiteeaglenutrition.com/#website" },
-            "about": { "@id": "https://www.whiteeaglenutrition.com/#organization" },
-            "description": "Buy dried black soldier fly larvae, live larvae, and nutrient-rich frass from White Eagle Nutrition."
+            "url": "https://www.whiteeaglenutrition.com/",
+            "description": "Buy dried black soldier fly larvae, live larvae, and nutrient-rich frass from White Eagle Nutrition.",
+            "isPartOf": {
+              "@id": "https://www.whiteeaglenutrition.com/#website"
+            },
+            "about": {
+              "@id": "https://www.whiteeaglenutrition.com/#organization"
+            }
           },
           {
-            "@type": "ItemList",
-            "name": "White Eagle Nutrition products",
+            "@type": "BreadcrumbList",
             "itemListElement": [
               {
                 "@type": "ListItem",
                 "position": 1,
-                "name": "Dried Black Soldier Fly Larvae",
-                "url": "https://www.whiteeaglenutrition.com/products#dried-larvae"
+                "name": "Home",
+                "item": "https://www.whiteeaglenutrition.com/"
+              }
+            ]
+          },
+          {
+            "@type": "ItemList",
+            "@id": "https://www.whiteeaglenutrition.com/#featured-products",
+            "name": "Featured White Eagle Nutrition products",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Whole Dried Black Soldier Fly Larvae (BSFL)",
+                "url": "https://www.whiteeaglenutrition.com/products/2lb-bag-of-whole-dried-black-soldier-fly-larvae-bsfl"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
-                "name": "Live Black Soldier Fly Larvae",
-                "url": "https://www.whiteeaglenutrition.com/products#live-larvae"
+                "name": "Live Black Soldier Fly Larvae 8 oz cup",
+                "url": "https://www.whiteeaglenutrition.com/products/live-black-soldier-fly-larvae-8-oz-cup"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
-                "name": "BSFL Frass Soil Amendment",
-                "url": "https://www.whiteeaglenutrition.com/products#frass-buy"
+                "name": "Frass Soil Amendment, 2lb Bag",
+                "url": "https://www.whiteeaglenutrition.com/products/frass-soil-amendment-2lb-bag"
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Free BSFL Sample",
+                "url": "https://www.whiteeaglenutrition.com/products/free-bsfl-sample"
               }
             ]
           }

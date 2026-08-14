@@ -32,41 +32,80 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ContactPage",
-        "name": "Contact White Eagle Nutrition",
-        "url": "https://www.whiteeaglenutrition.com/contact",
-        "mainEntity": {
-          "@type": "Organization",
-          "name": "White Eagle Nutrition",
-          "url": "https://www.whiteeaglenutrition.com/",
-          "email": "info@whiteeaglenutrition.com",
-          "telephone": "+1-917-816-7577",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "4979 FM 2502",
-            "addressLocality": "Bleiblerville",
-            "addressRegion": "TX",
-            "postalCode": "78931",
-            "addressCountry": "US"
-          },
-          "contactPoint": [
-            {
-              "@type": "ContactPoint",
-              "contactType": "customer service",
-              "email": "info@whiteeaglenutrition.com",
-              "telephone": "+1-917-816-7577",
-              "areaServed": "US",
-              "availableLanguage": "English"
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.whiteeaglenutrition.com/#organization",
+            "name": "White Eagle Nutrition",
+            "url": "https://www.whiteeaglenutrition.com/",
+            "logo": "https://www.whiteeaglenutrition.com/assets/images/logo.png",
+            "description": "Texas-rooted black soldier fly larvae nutrition and frass for animals and regenerative gardens.",
+            "sameAs": [
+              "https://www.instagram.com/whiteeaglenutrition",
+              "https://www.facebook.com/whiteeaglenutrition",
+              "https://www.linkedin.com/company/whiteeaglenutrition"
+            ],
+            "email": "info@whiteeaglenutrition.com",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "4979 FM 2502",
+              "addressLocality": "Bleiblerville",
+              "addressRegion": "TX",
+              "postalCode": "78931",
+              "addressCountry": "US"
             },
-            {
-              "@type": "ContactPoint",
-              "contactType": "sales",
-              "email": "partners@whiteeaglenutrition.com",
-              "areaServed": "US",
-              "availableLanguage": "English"
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "email": "info@whiteeaglenutrition.com",
+                "availableLanguage": "English"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.whiteeaglenutrition.com/#website",
+            "name": "White Eagle Nutrition",
+            "url": "https://www.whiteeaglenutrition.com/",
+            "publisher": {
+              "@id": "https://www.whiteeaglenutrition.com/#organization"
+            },
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "ContactPage",
+            "@id": "https://www.whiteeaglenutrition.com/contact#webpage",
+            "name": "Contact White Eagle Nutrition",
+            "url": "https://www.whiteeaglenutrition.com/contact",
+            "isPartOf": {
+              "@id": "https://www.whiteeaglenutrition.com/#website"
+            },
+            "about": {
+              "@id": "https://www.whiteeaglenutrition.com/#organization"
+            },
+            "mainEntity": {
+              "@id": "https://www.whiteeaglenutrition.com/#organization"
             }
-          ]
-        }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.whiteeaglenutrition.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Contact",
+                "item": "https://www.whiteeaglenutrition.com/contact"
+              }
+            ]
+          }
+        ]
       }
     </script>
       <!-- Google tag (gtag.js) -->

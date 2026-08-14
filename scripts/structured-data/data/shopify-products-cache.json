@@ -1,0 +1,198 @@
+[
+  {
+    "id": "gid://shopify/Product/8975496478860",
+    "title": "Whole Dried Black Soldier Fly Larvae (BSFL)",
+    "handle": "2lb-bag-of-whole-dried-black-soldier-fly-larvae-bsfl",
+    "description": "Premium Protein. Naturally Sustainable. Irresistibly Nutritious. Give your animals a clean, high-value protein they instinctively crave. Our Whole Dried Black Soldier Fly Larvae (BSFL) are gently processed to preserve nutrients, flavor, and crunch—making them a powerful, sustainable addition to everyday feeding routines. Raised in Canada, our BSFL are rich in protein and beneficial fats. BSFL support strong growth, energy, and feed efficiency across a wide range of animals—all with a fraction of the environmental footprint of traditional feeds. Why BSFL? High-Protein, Whole-Food Nutrition – Naturally dense in protein and fats without fillers or additives. Excellent source of calcium, lauric acid, omegas Highly Palatable – Animals love the taste and texture Sustainable by Design – Requires far less land, water, and feed than conventional protein sources Clean & Simple – 100% whole dried larvae, nothing else Ideal For Poultry (chickens, ducks, turkeys) Wild birds and backyard feeders Reptiles and amphibians Fish and aquaculture species Other insect-eating animals Use as a supplement, topper, or enrichment feed alongside a complete and balanced diet. Product Details Form: Whole, dried larvae Ingredients: 100% Black Soldier Fly Larvae Processing: Carefully dried to maintain nutritional integrity Use: Animal feed ingredient – not for human consumption Produced in USA or Canada",
+    "vendor": "White Eagle Nutrition",
+    "featuredImage": {
+      "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/BSFL_label.jpg?v=1778971249",
+      "altText": null
+    },
+    "images": {
+      "nodes": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/BSFL_label.jpg?v=1778971249",
+          "altText": null
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/ChatGPT_Image_May_16_2026_05_30_30_PM.png?v=1778971262",
+          "altText": null
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/ChatGPT_Image_May_16_2026_05_30_25_PM.png?v=1778971258",
+          "altText": null
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/BSFL.png?v=1778451070",
+          "altText": null
+        }
+      ]
+    },
+    "variants": {
+      "nodes": [
+        {
+          "id": "gid://shopify/ProductVariant/46258125406348",
+          "title": "2 LB BAG (32 OZ)",
+          "sku": null,
+          "availableForSale": true,
+          "price": {
+            "amount": "9.9",
+            "currencyCode": "USD"
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/46258125439116",
+          "title": "5 LB BAG (80 OZ)",
+          "sku": null,
+          "availableForSale": true,
+          "price": {
+            "amount": "19.0",
+            "currencyCode": "USD"
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/46258125471884",
+          "title": "10 LB BAG (176 OZ)",
+          "sku": null,
+          "availableForSale": true,
+          "price": {
+            "amount": "38.5",
+            "currencyCode": "USD"
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/46258125504652",
+          "title": "22 LB BAG (352 OZ)",
+          "sku": null,
+          "availableForSale": true,
+          "price": {
+            "amount": "78.65",
+            "currencyCode": "USD"
+          }
+        },
+        {
+          "id": "gid://shopify/ProductVariant/49700309139596",
+          "title": "750 LB Tote",
+          "sku": null,
+          "availableForSale": true,
+          "price": {
+            "amount": "1950.0",
+            "currencyCode": "USD"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "gid://shopify/Product/9406751146124",
+    "title": "Live Black Soldier Fly Larvae 8 oz cup",
+    "handle": "live-black-soldier-fly-larvae-8-oz-cup",
+    "description": "Give your animals a naturally nutrient-rich treat with live black soldier fly larvae from White Eagle Nutrition. These active feeder larvae are a high-value supplemental treat for chickens, ducks, quail, reptiles, fish, wild birds, and other insect-loving animals. Packed fresh in a ventilated 8 oz container, our live BSFL are easy to feed, easy to store, and naturally appealing to animals that thrive on whole insect nutrition. They provide a rich source of protein, healthy fats, calcium, and natural insect-based compounds that support a varied, species-appropriate diet. Use them as a training reward, enrichment treat, foraging supplement, or occasional high-protein snack. Key Benefits Live feeder larvae for poultry, reptiles, fish, and birds Naturally high in protein, fat, and calcium Great for flock enrichment and natural foraging behavior Whole insect nutrition with no unnecessary fillers Packed in an 8 oz ventilated cup for freshness GROWN IN TEXAS, USA Suggested Use Poultry: Scatter freely as a supplemental treat.Reptiles: Offer as part of a varied diet.Fish: Feed only what can be consumed within 1–2 minutes.Wild Birds: Offer in limited quantities as an occasional treat. Storage Keep in a cool, shaded area. Do not leave in direct sunlight or a hot vehicle. For best results, use promptly after arrival. Package is not completely full to allow movement and air for the larvae.",
+    "vendor": "White Eagle Nutrition",
+    "featuredImage": {
+      "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/livelarvaepackage.png?v=1779212109",
+      "altText": null
+    },
+    "images": {
+      "nodes": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/livelarvaepackage.png?v=1779212109",
+          "altText": null
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/livelarvaenolabel.png?v=1779212110",
+          "altText": null
+        }
+      ]
+    },
+    "variants": {
+      "nodes": [
+        {
+          "id": "gid://shopify/ProductVariant/50004793098380",
+          "title": "Default Title",
+          "sku": null,
+          "availableForSale": true,
+          "price": {
+            "amount": "19.8",
+            "currencyCode": "USD"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "gid://shopify/Product/9398922805388",
+    "title": "Frass Soil Amendment, 2lb Bag",
+    "handle": "frass-soil-amendment-2lb-bag",
+    "description": "Revitalize your garden with this all-natural soil amendment designed to enhance soil health and plant vitality. Formulated from organic ingredients, this bio-stimulant works to improve nutrient availability, boost microbial activity, and strengthen soil structure. Completely non-toxic and safe for vegetables, flowers, and ornamentals, it's an ideal choice for gardeners seeking sustainable growing solutions. Simply work into soil or mix with water for easy application. Perfect for raised beds, containers, and in-ground gardens. MADE IN TEXAS, USA",
+    "vendor": "White Eagle Nutrition",
+    "featuredImage": {
+      "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/FrassLabel.png?v=1778972556",
+      "altText": null
+    },
+    "images": {
+      "nodes": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/FrassLabel.png?v=1778972556",
+          "altText": null
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/backlabelfrass.png?v=1778972556",
+          "altText": null
+        },
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/FrassBag.png?v=1778972556",
+          "altText": null
+        }
+      ]
+    },
+    "variants": {
+      "nodes": [
+        {
+          "id": "gid://shopify/ProductVariant/49929034498188",
+          "title": "Default Title",
+          "sku": null,
+          "availableForSale": true,
+          "price": {
+            "amount": "18.0",
+            "currencyCode": "USD"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "gid://shopify/Product/9462552461452",
+    "title": "Free BSFL Sample",
+    "handle": "free-bsfl-sample",
+    "description": "1 LB Complimentary Container to Test with Your Flock. Whole dried black soldier fly larvae.",
+    "vendor": "White Eagle Nutrition",
+    "featuredImage": {
+      "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/IMG-7224.png?v=1780545485",
+      "altText": null
+    },
+    "images": {
+      "nodes": [
+        {
+          "url": "https://cdn.shopify.com/s/files/1/0754/5923/1884/files/IMG-7224.png?v=1780545485",
+          "altText": null
+        }
+      ]
+    },
+    "variants": {
+      "nodes": [
+        {
+          "id": "gid://shopify/ProductVariant/50446087487628",
+          "title": "Default Title",
+          "sku": null,
+          "availableForSale": true,
+          "price": {
+            "amount": "0.01",
+            "currencyCode": "USD"
+          }
+        }
+      ]
+    }
+  }
+]
