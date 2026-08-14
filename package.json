@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "node -e \"console.log('Static site: no build step required.')\"",
+    "build": "npm run build:schema && node scripts/structured-data/create-public-dir.mjs",
     "build:schema": "node scripts/structured-data/generate.mjs",
     "test": "node --test"
   },
