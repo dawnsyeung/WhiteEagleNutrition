@@ -35,10 +35,6 @@
   ],
   "rewrites": [
     {
-      "source": "/products/:handle",
-      "destination": "/product-pages/:handle.html"
-    },
-    {
       "source": "/insights/microbiome",
       "destination": "/insights-microbiome.html"
     },

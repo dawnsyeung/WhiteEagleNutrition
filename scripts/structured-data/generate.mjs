@@ -22,7 +22,7 @@ const ABOUT_HTML_PATH = path.join(ROOT, 'about.html');
 const CONTACT_HTML_PATH = path.join(ROOT, 'contact.html');
 const NELLIES_GARDEN_HTML_PATH = path.join(ROOT, 'nellies-garden.html');
 const SITEMAP_XML_PATH = path.join(ROOT, 'sitemap.xml');
-const PRODUCT_DETAILS_DIR_PATH = path.join(ROOT, 'product-pages');
+const PRODUCT_DETAILS_DIR_PATH = path.join(ROOT, 'products');
 const SHOPIFY_CACHE_PATH = path.join(ROOT, 'scripts', 'structured-data', 'data', 'shopify-products-cache.json');
 
 const readFile = (filePath) => fs.readFile(filePath, 'utf8');

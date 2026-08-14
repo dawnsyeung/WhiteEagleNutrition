@@ -4,7 +4,7 @@ import path from 'node:path';
 const ROOT = process.cwd();
 const OUTPUT_DIR = path.join(ROOT, 'public');
 
-const DIRS_TO_COPY = ['assets', 'product-pages'];
+const DIRS_TO_COPY = ['assets', 'products'];
 const ROOT_FILE_EXTENSIONS = new Set(['.html', '.xml', '.txt', '.webmanifest', '.js']);
 const ROOT_FILES_TO_COPY = new Set(['Nelliesfrass.png']);
 
