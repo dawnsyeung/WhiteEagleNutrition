@@ -2109,7 +2109,29 @@ img {
 
 .social-links {
   display: inline-flex;
-  gap: 1rem;
+  gap: 1.25rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.social-links a:hover,
+.social-links a:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+.social-links svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
 }
 
 .scroll-top {
