@@ -4429,6 +4429,14 @@ img {
     display: block;
   }
 
+  .site-footer {
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+  }
+
+  .footer__legal {
+    padding-bottom: 1rem;
+  }
+
   .scroll-top {
     bottom: calc(4.8rem + env(safe-area-inset-bottom));
   }
