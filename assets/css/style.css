@@ -4589,3 +4589,41 @@ button {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
+
+/* --- Mobile SHOP NOW stability fix (Oct 2026) ---
+   The pill was centered with a transform, which lags and bounces in iOS
+   momentum scrolling. It is now centered with inset + auto margins (no
+   transform), sits on the safe-area edge, and slides away while the reader
+   is actively scrolling down, returning when scrolling stops or reverses. */
+@media (max-width: 720px) {
+  .mobile-shop-cta {
+    left: 0;
+    right: 0;
+    width: min(92vw, 360px);
+    min-width: 0;
+    margin-inline: auto;
+    transform: none;
+    translate: 0 0;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    transition:
+      translate 240ms ease,
+      opacity 240ms ease,
+      background-color 200ms ease;
+  }
+
+  .mobile-shop-cta.is-scrolling {
+    translate: 0 calc(100% + 1.25rem);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .site-footer {
+    padding-bottom: 6.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-shop-cta {
+    transition: none;
+  }
+}

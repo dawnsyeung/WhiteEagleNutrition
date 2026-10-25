@@ -1164,6 +1164,43 @@
     window.addEventListener('hashchange', routeToBuyAnchor);
   };
 
+  const setupMobileShopCta = () => {
+    const cta = qs('.mobile-shop-cta');
+    if (!cta) return;
+
+    let ticking = false;
+    let lastY = window.scrollY;
+    let hideTimer;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const scrollingDown = y > lastY + 4;
+      const scrollingUp = y < lastY - 4;
+
+      if (scrollingDown && y > 140) {
+        cta.classList.add('is-scrolling');
+      } else if (scrollingUp) {
+        cta.classList.remove('is-scrolling');
+      }
+
+      lastY = y;
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(() => cta.classList.remove('is-scrolling'), 220);
+      ticking = false;
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          window.requestAnimationFrame(onScroll);
+        }
+      },
+      { passive: true }
+    );
+  };
+
   const updateYear = () => {
     const yearSpan = qs('[data-current-year]');
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
@@ -1196,6 +1233,7 @@
     setupNewsletterForms();
     setupNonSubmittingSearchForms();
     setupFrassBuyAnchorRouting();
+    setupMobileShopCta();
     setupPwa();
     setupInstallPrompt();
     updateYear();
