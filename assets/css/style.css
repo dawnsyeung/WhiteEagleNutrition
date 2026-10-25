@@ -4566,3 +4566,26 @@ img {
     width: 94vw;
   }
 }
+
+/* --- Scroll performance pass (Oct 2026) ---
+   Below-fold sections render on demand so the page scrolls smoothly on
+   phones, and taps respond without the old double-tap delay. */
+.ehome-origin,
+.ehome-proof,
+.ehome-categories,
+.ehome-review-standards,
+.ehome-circular-loop,
+.ehome-earlylight,
+.ehome-why,
+.ehome-education,
+.ehome-final-cta,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+
+a,
+button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
