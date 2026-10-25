@@ -14,7 +14,7 @@
   --shadow-lg: 0 24px 60px rgba(17, 24, 39, 0.12);
   --max-width: 1200px;
   /* Updated at runtime (assets/js/main.js) to keep layout aligned with fixed header */
-  --site-header-height: 72px;
+  --site-header-height: 84px;
   --radius-md: 16px;
   --radius-lg: 28px;
   --radius-sm: 10px;
@@ -156,9 +156,9 @@ img {
 /* Header logo emphasis (bigger + horizontally stretched wordmark). */
 .site-header .logo-mark {
   /* Use the full wordmark image in the header. */
-  width: 260px;
-  height: 44px;
-  max-width: 52vw;
+  width: 344px;
+  height: 54px;
+  max-width: 60vw;
   background-position: left center;
 }
 
@@ -177,9 +177,9 @@ img {
 
 @media (max-width: 640px) {
   .site-header .logo-mark {
-    width: 210px;
+    width: 252px;
     height: 40px;
-    max-width: 60vw;
+    max-width: 68vw;
   }
 
   .site-header .logo-text {
