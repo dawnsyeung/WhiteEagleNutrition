@@ -3909,6 +3909,75 @@ img {
   padding: 2.2rem 0;
 }
 
+.ehome-reviews {
+  padding: 2.8rem 0;
+  background: #fff;
+}
+
+.ehome-reviews__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.ehome-reviews__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(43, 95, 76, 0.1);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.ehome-reviews__badge-stars {
+  color: var(--color-accent-dark);
+  letter-spacing: 0.08em;
+}
+
+.ehome-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.ehome-review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: var(--color-cream);
+  border: 1px solid rgba(111, 75, 47, 0.18);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1.2rem;
+}
+
+.ehome-review-card__stars {
+  color: var(--color-accent-dark);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.ehome-review-card blockquote {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.ehome-review-card__source {
+  margin-top: auto;
+  margin-bottom: 0;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.ehome-review-card__source strong {
+  color: var(--color-primary-dark);
+}
+
 .ehome-categories__grid {
   margin-top: 1.2rem;
   display: grid;
@@ -4406,6 +4475,7 @@ img {
   .ecoming-grid__cards,
   .ecom-shopify-grid,
   .ehome-proof__grid,
+  .ehome-reviews__grid,
   .eproducts-waitlist__grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -4421,6 +4491,7 @@ img {
   .ecoming-grid__cards,
   .ecom-shopify-grid,
   .ehome-proof__grid,
+  .ehome-reviews__grid,
   .eproducts-waitlist__grid {
     grid-template-columns: 1fr;
   }
@@ -4572,6 +4643,7 @@ img {
    phones, and taps respond without the old double-tap delay. */
 .ehome-origin,
 .ehome-proof,
+.ehome-reviews,
 .ehome-categories,
 .ehome-review-standards,
 .ehome-circular-loop,
