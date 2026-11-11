@@ -22,7 +22,7 @@
     var original = event.properties || {};
     var properties = {};
     // Retain only anonymous SDK metadata and basic browser information.
-    ['distinct_id', '$device_id', '$session_id', '$window_id', '$lib', '$lib_version',
+    ['token', 'distinct_id', '$device_id', '$session_id', '$window_id', '$lib', '$lib_version',
       '$browser', '$browser_version', '$os', '$os_version', '$device_type',
       '$screen_height', '$screen_width', '$viewport_height', '$viewport_width',
       '$pageview_id'].forEach(function (key) {

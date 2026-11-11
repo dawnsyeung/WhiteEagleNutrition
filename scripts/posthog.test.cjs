@@ -46,3 +46,9 @@ test('invalid URL properties fall back to the current safe page URL', () => {
  const { config } = load();
  assert.equal(config.before_send({event:'$pageview', properties:{$current_url:'javascript:secret'}}).properties.$current_url,'https://site.example/path');
 });
+
+test('retains the public project token required by the SDK event validator', () => {
+  const { config } = load();
+  const event = config.before_send({ event: '$pageview', properties: { token: 'phc_testPublicProjectToken', $current_url: 'https://site.example/path' } });
+  assert.equal(event.properties.token, 'phc_testPublicProjectToken');
+});
