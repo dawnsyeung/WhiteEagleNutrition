@@ -16,6 +16,8 @@ import {
 } from './lib/schema.mjs';
 
 const ROOT = process.cwd();
+const PRODUCT_FOOTER = await fs.readFile(path.join(ROOT, 'scripts/structured-data/templates/product-footer.html'), 'utf8');
+const DRIED_BSFL_REVIEWS = await fs.readFile(path.join(ROOT, 'scripts/structured-data/templates/dried-bsfl-reviews.html'), 'utf8');
 const PRODUCTS_HTML_PATH = path.join(ROOT, 'products.html');
 const INDEX_HTML_PATH = path.join(ROOT, 'index.html');
 const ABOUT_HTML_PATH = path.join(ROOT, 'about.html');
@@ -242,7 +244,7 @@ const writeCachedShopifyProducts = async (products) => {
 const buildHomepageGraph = ({ organization, products }) => ({
   '@context': 'https://schema.org',
   '@graph': [
-    organization,
+    { ...organization, sameAs: ['https://earlylight.bio', ...organization.sameAs] },
     buildWebsite(),
     buildWebPageSchema({
       pagePath: '/',
@@ -412,9 +414,7 @@ const renderProductDetailHtml = ({ mappedProduct, jsonLdGraph }) => {
               <p><strong>Price:</strong> $${Number(variant.price.amount).toFixed(2)} ${escapeHtml(variant.price.currencyCode)}</p>
               <p><strong>Availability:</strong> ${escapeHtml(isInStock ? 'In stock' : 'Out of stock')}</p>
               <p><strong>Condition:</strong> New</p>
-              <a class="btn btn-primary" href="${escapeHtml(variantUrl)}">${
-                isInStock ? 'Buy this option' : 'View option'
-              }</a>
+              ${isInStock ? `<a class="btn btn-primary" href="${escapeHtml(variantUrl)}">Buy this option on Shopify</a>` : '<span class="btn btn-outline" aria-disabled="true">Out of stock</span>'}
             </article>`;
     })
     .join('\n');
@@ -497,7 +497,7 @@ ${serializeJsonLd(jsonLdGraph)
             <h1>${escapeHtml(mappedProduct.title)}</h1>
             <p>${escapeHtml(mappedProduct.description)}</p>
             <div class="cta__buttons">
-              <a class="btn btn-primary" href="${escapeHtml(mappedProduct.purchaseBaseUrl)}">Buy on product hub</a>
+              <a class="btn btn-primary" href="#variant-options-heading">Choose an option</a>
               <a class="btn btn-outline" href="/products">Back to all products</a>
             </div>
           </div>
@@ -524,22 +524,10 @@ ${imageCards}
           </div>
         </div>
       </section>
+${mappedProduct.id === 'gid://shopify/Product/8975496478860' ? DRIED_BSFL_REVIEWS : ''}
     </main>
 
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer__brand">
-          <a href="/" class="logo">
-            <span class="logo-text">White Eagle Nutrition</span>
-          </a>
-          <p class="footer-tagline"><em>Rise.&nbsp;&nbsp; Renew.&nbsp;&nbsp; Thrive.</em></p>
-          <p>Premium BSFL nutrition for backyard chickens, live feeder routines, and regenerative gardens.</p>
-        </div>
-      </div>
-      <div class="container footer__legal">
-        <p>© <span data-current-year></span> White Eagle Nutrition. All rights reserved.</p>
-      </div>
-    </footer>
+${PRODUCT_FOOTER}
 
     <a href="#top" class="scroll-top" aria-label="Back to top">↑</a>
     <script src="/assets/js/main.js" defer></script>
@@ -593,6 +581,7 @@ const run = async () => {
       const purchaseBaseUrl = `${canonicalUrl('/products')}#${mapping.anchor}`;
       return {
         ...product,
+        anchor: mapping.anchor,
         detailPath,
         detailUrl,
         purchaseBaseUrl,
@@ -638,10 +627,26 @@ const run = async () => {
     indexHtml,
     buildHomepageGraph({ organization, products: mappedProducts })
   );
-  const updatedProductsHtml = replaceFirstJsonLdScript(
+  let updatedProductsHtml = replaceFirstJsonLdScript(
     productsHtml,
     buildProductsGraph({ organization, products: mappedProducts })
   );
+  // Real links remain usable if the embedded Buy Button SDK is blocked or fails.
+  for (const product of mappedProducts) {
+    const links = product.variants.map((variant) => {
+      const label = variant.title === 'Default Title' ? product.title : variant.title;
+      return variant.availableForSale
+        ? `<li><a href="${escapeHtml(variantOfferUrl(product.purchaseBaseUrl, variant.id))}">${escapeHtml(label)} — $${Number(variant.price.amount).toFixed(2)} ${escapeHtml(variant.price.currencyCode)}</a></li>`
+        : `<li>${escapeHtml(label)} — Out of stock</li>`;
+    }).join('\n');
+    const start = `<!-- SHOPIFY-DIRECT:${product.anchor} -->`;
+    const end = `<!-- /SHOPIFY-DIRECT:${product.anchor} -->`;
+    const startIndex = updatedProductsHtml.indexOf(start);
+    const endIndex = updatedProductsHtml.indexOf(end, startIndex);
+    if (startIndex < 0 || endIndex < 0) throw new Error(`Missing direct purchase slot: ${product.anchor}`);
+    const block = `${start}\n<p>Buy one option directly with secure Shopify checkout:</p>\n<ul>${links}</ul>\n${end}`;
+    updatedProductsHtml = updatedProductsHtml.slice(0, startIndex) + block + updatedProductsHtml.slice(endIndex + end.length);
+  }
   const updatedAboutHtml = replaceFirstJsonLdScript(aboutHtml, buildAboutGraph({ organization }));
   const updatedContactHtml = replaceFirstJsonLdScript(contactHtml, buildContactGraph({ organization }));
   const updatedNelliesGardenHtml = fixNelliesGardenTwitterDescription(nelliesGardenHtml);

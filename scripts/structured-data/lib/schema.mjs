@@ -96,13 +96,11 @@ const buildBreadcrumbList = (items) => ({
 const availabilityUrl = (availableForSale) =>
   availableForSale ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock';
 
+// Cart permalinks preserve the exact selected variant and open Shopify checkout.
 const variantOfferUrl = (productUrl, variantId) => {
   const numericVariantId = String(variantId || '').split('/').pop();
-  if (!numericVariantId) return productUrl;
-  const [baseAndQuery, hash = ''] = productUrl.split('#');
-  const joinChar = baseAndQuery.includes('?') ? '&' : '?';
-  const withVariant = `${baseAndQuery}${joinChar}variant=${numericVariantId}`;
-  return hash ? `${withVariant}#${hash}` : withVariant;
+  if (!/^\d+$/.test(numericVariantId)) throw new Error('A numeric Shopify variant ID is required');
+  return `https://whiteeaglenutrition.myshopify.com/cart/${numericVariantId}:1`;
 };
 
 const buildOffersFromVariants = (variants, productUrl) => {

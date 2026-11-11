@@ -63,7 +63,7 @@ test('product schema includes decimal price and offer object', () => {
   assert.equal(schema.offers.priceCurrency, 'USD');
   assert.equal(
     schema.offers.url,
-    'https://www.whiteeaglenutrition.com/products?variant=1#frass-buy'
+    'https://whiteeaglenutrition.myshopify.com/cart/1:1'
   );
 });
 
@@ -151,10 +151,10 @@ test('URL normalization handles html and absolute URLs', () => {
   assert.equal(canonicalUrl('contact.html'), 'https://www.whiteeaglenutrition.com/contact');
 });
 
-test('variant offer URL keeps query before hash fragment', () => {
+test('variant offer URL goes directly to Shopify with the selected variant', () => {
   assert.equal(
     variantOfferUrl('https://www.whiteeaglenutrition.com/products#live-larvae', 'gid://shopify/ProductVariant/555'),
-    'https://www.whiteeaglenutrition.com/products?variant=555#live-larvae'
+    'https://whiteeaglenutrition.myshopify.com/cart/555:1'
   );
 });
 
@@ -182,4 +182,14 @@ test('cleanObject removes null and undefined properties', () => {
       keep: 'ok',
     },
   });
+});
+
+test('invalid variant IDs cannot create purchase links', () => {
+  assert.throws(() => variantOfferUrl('https://example.com', 'invalid'));
+  assert.throws(() => variantOfferUrl('https://example.com', null));
+});
+
+test('750 lb tote uses the retained higher-price variant', () => {
+  assert.equal(variantOfferUrl('', 'gid://shopify/ProductVariant/49700309139596'),
+    'https://whiteeaglenutrition.myshopify.com/cart/49700309139596:1');
 });

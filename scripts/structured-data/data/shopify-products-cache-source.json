@@ -1,0 +1,6 @@
+{
+  "retrievedAt": "2026-11-11",
+  "source": "https://whiteeaglenutrition.myshopify.com/api/2024-10/graphql.json",
+  "method": "Storefront ProductsByIds query from generate.mjs, fetched with curl because the local Node HTTPS proxy tunnel timed out",
+  "scope": "The four products embedded on products.html; all eight variants available for sale at retrieval"
+}
