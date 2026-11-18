@@ -1271,7 +1271,6 @@
         site: site,
         page: location.pathname,
         destination_host: target.hostname,
-        destination_path: target.pathname,
         conversion_stage: 'outbound_click'
       });
     }
