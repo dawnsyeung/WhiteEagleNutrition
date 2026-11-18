@@ -461,6 +461,7 @@ ${serializeJsonLd(jsonLdGraph)
   .map((line) => `      ${line}`)
   .join('\n')}
     </script>
+    <script src="/posthog.js" defer></script>
   </head>
   <body class="page-product-detail">
     <header class="site-header" id="top">
@@ -685,3 +686,4 @@ run().catch((error) => {
   console.error(error);
   process.exit(1);
 });
+

@@ -9,7 +9,8 @@
   "scripts": {
     "build": "npm run build:schema && node scripts/structured-data/create-public-dir.mjs",
     "build:schema": "node scripts/structured-data/generate.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "build:analytics": "node scripts/build-posthog.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.0.0",
