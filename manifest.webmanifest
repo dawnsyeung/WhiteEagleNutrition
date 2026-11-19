@@ -5,7 +5,7 @@
   "start_url": "/pet-photos-app.html",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#070708",
+  "background_color": "#FFFFFF",
   "theme_color": "#E86E12",
   "icons": [
     {

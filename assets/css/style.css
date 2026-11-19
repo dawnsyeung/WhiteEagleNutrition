@@ -1,17 +1,17 @@
 :root {
-  --color-bg: #070708;
-  --color-surface: #161614;
-  --color-primary: #E86E12;
-  --color-primary-dark: #E86E12;
+  --color-bg: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-primary: #A1440C;
+  --color-primary-dark: #A1440C;
   --color-accent: #E86E12;
-  --color-accent-dark: #F6B26B;
-  --color-brown: #8B7E5D;
-  --color-text: #F4F1EA;
-  --color-muted: #C3C3BD;
+  --color-accent-dark: #A1440C;
+  --color-brown: #6B5E42;
+  --color-text: #070708;
+  --color-muted: #3E3E39;
   --color-border: #8B7E5D;
-  --color-cream: #1A1A17;
-  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.45);
+  --color-cream: #FAF8F3;
+  --shadow-sm: 0 8px 24px rgba(7, 7, 8, 0.06);
+  --shadow-lg: 0 24px 60px rgba(7, 7, 8, 0.10);
   --max-width: 1200px;
   /* Updated at runtime (assets/js/main.js) to keep layout aligned with fixed header */
   --site-header-height: 84px;
@@ -336,7 +336,7 @@ img {
 
 .hero {
   background: radial-gradient(circle at top right, rgba(232, 110, 18, 0.12), transparent 55%),
-    linear-gradient(180deg, #161614 0%, #121210 100%);
+    linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
   padding: 5.5rem 0 4rem;
 }
 
@@ -626,7 +626,7 @@ img {
 }
 
 .product-card {
-  background: #1c1c19;
+  background: #FAF8F3;
   border-radius: var(--radius-lg);
   padding: 2.75rem 2rem 2rem;
   position: relative;
@@ -638,12 +638,12 @@ img {
 }
 
 .product-card--featured {
-  background: #2a2418;
+  background: #FAF8F3;
   border-color: rgba(184, 138, 68, 0.5);
 }
 
 .product-card--shipping {
-  background: #1c1c19;
+  background: #FAF8F3;
   border-color: rgba(184, 138, 68, 0.35);
 }
 
@@ -856,7 +856,7 @@ img {
 
 .testimonials {
   padding: 4.5rem 0;
-  background: linear-gradient(180deg, #121210 0%, #161614 100%);
+  background: linear-gradient(180deg, #FAF8F3 0%, #FFFFFF 100%);
 }
 
 .testimonial-grid {
@@ -933,7 +933,7 @@ img {
 
 .page-hero {
   padding: 4rem 0 2.5rem;
-  background: linear-gradient(180deg, #161614 0%, #121210 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
 }
 
 .page-hero h1 {
@@ -1024,7 +1024,7 @@ img {
   padding: 0.75rem 1.2rem;
   font-size: 1rem;
   font-family: inherit;
-  background: #161614;
+  background: #FFFFFF;
   transition: var(--transition);
 }
 
@@ -1107,7 +1107,7 @@ img {
 }
 
 .product-tile {
-  background: #1c1c19;
+  background: #FAF8F3;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -1117,12 +1117,12 @@ img {
 }
 
 .product-tile--featured {
-  background: #2a2418;
+  background: #FAF8F3;
   border-color: rgba(184, 138, 68, 0.5);
 }
 
 .product-tile--shipping {
-  background: #1c1c19;
+  background: #FAF8F3;
   border-color: rgba(184, 138, 68, 0.35);
 }
 
@@ -1461,7 +1461,7 @@ img {
 
 .nellies-rothko {
   padding: 4rem 0;
-  background: linear-gradient(180deg, #121210 0%, #121210 100%);
+  background: linear-gradient(180deg, #FAF8F3 0%, #FAF8F3 100%);
 }
 
 .nellies-rothko .container {
@@ -1686,7 +1686,7 @@ img {
   justify-content: center;
   min-height: 148px;
   padding: 1rem 1.1rem;
-  background: #161614;
+  background: #FFFFFF;
   border: 1px solid rgba(139, 126, 93, 0.7);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
@@ -2161,7 +2161,7 @@ img {
   right: 0;
   width: min(420px, 90vw);
   height: 100dvh;
-  background: #161614;
+  background: #FFFFFF;
   transform: translateX(100%);
   transition: var(--transition);
   box-shadow: -20px 0 40px rgba(17, 24, 39, 0.16);
@@ -2592,7 +2592,7 @@ img {
   padding: 4rem 0 2.85rem;
   background:
     radial-gradient(circle at 86% 18%, rgba(43, 95, 76, 0.14), transparent 48%),
-    linear-gradient(180deg, #161614 0%, #121210 100%);
+    linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
 }
 
 .page-pet-photos-app .page-hero__layout {
@@ -2620,7 +2620,7 @@ img {
 
 .pet-app {
   padding: 3.3rem 0 5rem;
-  background: linear-gradient(180deg, #121210 0%, #121210 100%);
+  background: linear-gradient(180deg, #FAF8F3 0%, #FAF8F3 100%);
   border-top: 1px solid rgba(232, 110, 18, 0.08);
 }
 
@@ -2643,7 +2643,7 @@ img {
 }
 
 .pet-app__panel {
-  background: #161614;
+  background: #FFFFFF;
   border-radius: 18px;
   border: 1px solid rgba(139, 126, 93, 0.7);
   box-shadow: 0 8px 26px rgba(17, 24, 39, 0.06);
@@ -2673,7 +2673,7 @@ img {
 .pet-form textarea {
   border-radius: 12px;
   border: 1px solid rgba(232, 110, 18, 0.18);
-  background: #161614;
+  background: #FFFFFF;
   padding: 0.72rem 0.95rem;
 }
 
@@ -2734,7 +2734,7 @@ img {
   grid-template-columns: 1fr;
   gap: 0.55rem;
   width: 100%;
-  background: #121210;
+  background: #FAF8F3;
   border: 1px solid rgba(232, 110, 18, 0.15);
   border-radius: 12px;
   padding: 0.65rem;
@@ -2746,7 +2746,7 @@ img {
   border-radius: 10px;
   border: 1px solid rgba(232, 110, 18, 0.16);
   padding: 0.62rem 0.8rem;
-  background: #161614;
+  background: #FFFFFF;
 }
 
 .pet-tabs {
@@ -2788,7 +2788,7 @@ img {
   padding: 1.1rem 1.2rem;
   border-radius: 12px;
   border: 1px dashed rgba(232, 110, 18, 0.28);
-  background: #121210;
+  background: #FAF8F3;
   color: var(--color-muted);
 }
 
@@ -3118,7 +3118,7 @@ img {
 /* Bio section */
 .ac-bio {
   padding: 5rem 0;
-  background: linear-gradient(180deg, #161614 0%, #121210 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
 }
 
 .ac-bio__layout {
@@ -3204,7 +3204,7 @@ img {
 
 .ac-happy-pets {
   padding: 4.5rem 0 5rem;
-  background: linear-gradient(180deg, #161614 0%, #121210 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
 }
 
 .ac-happy-pets__intro {
@@ -3249,17 +3249,17 @@ img {
 /* --- Regenerative Agriculture page --- */
 
 .page-regen-ag {
-  --regen-olive: #E86E12;
-  --regen-olive-dark: #F4F1EA;
-  --regen-olive-light: #C3C3BD;
+  --regen-olive: #A1440C;
+  --regen-olive-dark: #070708;
+  --regen-olive-light: #3E3E39;
   --regen-gold: #8B7E5D;
-  --regen-cream: #121210;
+  --regen-cream: #FAF8F3;
   --regen-border: #8B7E5D;
 }
 
 .regen-hero {
   padding: 4.5rem 0 2rem;
-  background: linear-gradient(180deg, #161614 0%, var(--regen-cream) 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--regen-cream) 100%);
   text-align: center;
 }
 
@@ -3763,7 +3763,7 @@ img {
 /* --- Ecommerce conversion refresh: home + products + coming-soon --- */
 .ehome-hero {
   padding: 3.5rem 0 2rem;
-  background: linear-gradient(180deg, #161614 0%, #121210 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
 }
 
 .ehome-hero__grid {
@@ -3797,7 +3797,7 @@ img {
   margin: 0;
   padding: 0.8rem 0.85rem;
   border-radius: var(--radius-sm);
-  background: #161614;
+  background: #FFFFFF;
   border: 1px solid rgba(232, 110, 18, 0.12);
   font-size: 0.9rem;
   font-weight: 600;
@@ -3826,7 +3826,7 @@ img {
 }
 
 .ehome-origin {
-  background: #161614;
+  background: #FFFFFF;
 }
 
 .ehome-origin__grid,
@@ -3862,7 +3862,7 @@ img {
 }
 
 .ehome-proof {
-  background: linear-gradient(180deg, #121210 0%, #161614 100%);
+  background: linear-gradient(180deg, #FAF8F3 0%, #FFFFFF 100%);
 }
 
 .ehome-proof__grid {
@@ -3873,7 +3873,7 @@ img {
 }
 
 .ehome-proof-card {
-  background: #161614;
+  background: #FFFFFF;
   border: 1px solid rgba(232, 110, 18, 0.14);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
@@ -3911,7 +3911,7 @@ img {
 
 .ehome-reviews {
   padding: 2.8rem 0;
-  background: #161614;
+  background: #FFFFFF;
 }
 
 .ehome-reviews__badges {
@@ -3986,7 +3986,7 @@ img {
 }
 
 .ehome-category-card {
-  background: #161614;
+  background: #FFFFFF;
   border: 1px solid rgba(139, 126, 93, 0.7);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
@@ -4009,7 +4009,7 @@ img {
 
 .ehome-featured {
   padding: 2.6rem 0;
-  background: #121210;
+  background: #FAF8F3;
 }
 
 .ecom-shopify-grid {
@@ -4042,7 +4042,7 @@ img {
   padding: 0.95rem !important;
   border-radius: var(--radius-md) !important;
   border: 1px solid rgba(139, 126, 93, 0.75) !important;
-  background: #161614 !important;
+  background: #FFFFFF !important;
   box-shadow: var(--shadow-sm) !important;
 }
 
@@ -4143,7 +4143,7 @@ img {
 }
 
 .ehome-review-standards {
-  background: #161614;
+  background: #FFFFFF;
 }
 
 .ehome-review-standards__steps {
@@ -4231,7 +4231,7 @@ img {
 
 .eproducts-hero {
   padding: 3rem 0 1.9rem;
-  background: linear-gradient(180deg, #161614 0%, #121210 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
 }
 
 .eproducts-hero__grid {
@@ -4268,7 +4268,7 @@ img {
   padding: 1rem;
   border: 1px solid rgba(139, 126, 93, 0.8);
   border-radius: var(--radius-md);
-  background: #161614;
+  background: #FFFFFF;
   box-shadow: var(--shadow-sm);
   scroll-margin-top: 5.5rem;
 }
@@ -4301,7 +4301,7 @@ img {
   margin-top: 1.2rem;
   padding: 1.2rem;
   border-radius: var(--radius-md);
-  background: #161614;
+  background: #FFFFFF;
   border: 1px solid rgba(139, 126, 93, 0.75);
   box-shadow: var(--shadow-sm);
 }
@@ -4388,7 +4388,7 @@ img {
 
 .ecoming-hero {
   padding: 3rem 0 1.8rem;
-  background: linear-gradient(180deg, #161614 0%, #121210 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF8F3 100%);
 }
 
 .ecoming-hero p {
@@ -4411,7 +4411,7 @@ img {
   padding: 0.9rem;
   border-radius: var(--radius-md);
   border: 1px solid rgba(139, 126, 93, 0.75);
-  background: #161614;
+  background: #FFFFFF;
   box-shadow: var(--shadow-sm);
   display: grid;
   gap: 0.7rem;
@@ -4703,13 +4703,13 @@ button {
 
 /* White Eagle Nutrition brand lock */
 .site-header {
-  background: #070708;
-  border-bottom: 1px solid rgba(139, 126, 93, 0.75);
+  background: #FFFFFF;
+  border-bottom: 1px solid #8B7E5D;
   box-shadow: none;
 }
 
 .site-header .logo-mark {
-  width: 74px;
+  width: 76px;
   height: 76px;
   max-width: none;
   background-image: url('../images/logo-header.png');
@@ -4719,19 +4719,20 @@ button {
   );
   background-position: center;
   background-size: contain;
-  border-radius: 0;
+  border-radius: 50%;
 }
 
 .footer__brand .logo {
   position: relative;
   display: block;
   width: 168px;
-  height: 174px;
+  height: 168px;
   background: url('../images/logo-600.png') center / contain no-repeat;
   background-image: image-set(
     url('../images/logo-600.webp') type('image/webp'),
     url('../images/logo-600.png') type('image/png')
   );
+  border-radius: 50%;
   text-decoration: none;
 }
 
@@ -4748,22 +4749,24 @@ button {
 
 .brand-tagline {
   font-family: 'Rye', 'Oswald', serif;
-  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
   line-height: 1.25;
   letter-spacing: 0.02em;
   color: #E86E12;
   margin: 0 0 0.85rem;
 }
 
-.eyebrow {
+.eyebrow,
+.eyebrow--light {
   font-family: 'Oswald', 'Barlow', sans-serif;
-  color: #8B7E5D;
+  color: #6B5E42;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Oswald', 'Barlow', sans-serif;
   font-weight: 600;
   letter-spacing: 0.03em;
+  color: #070708;
 }
 
 .btn {
@@ -4777,15 +4780,19 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
-.btn-primary {
+.btn-primary,
+.mobile-shop-cta,
+.scroll-top {
   background: #E86E12;
   color: #070708;
 }
 
 .btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:focus,
+.mobile-shop-cta:hover,
+.mobile-shop-cta:focus {
   background: #A1440C;
-  color: #F4F1EA;
+  color: #FFFFFF;
 }
 
 .btn-accent {
@@ -4796,48 +4803,66 @@ h1, h2, h3, h4, h5, h6 {
 .btn-accent:hover,
 .btn-accent:focus {
   background: #3E3E39;
-  color: #F4F1EA;
+  color: #FFFFFF;
 }
 
 .btn-outline {
   background: transparent;
-  color: #E86E12;
+  color: #A1440C;
   border: 1.5px solid #E86E12;
 }
 
 .btn-outline:hover,
 .btn-outline:focus {
-  background: rgba(232, 110, 18, 0.14);
-  color: #F4F1EA;
+  background: rgba(232, 110, 18, 0.12);
+  color: #A1440C;
 }
 
 .btn-free-sample {
-  background: #F4F1EA;
+  background: #FAF8F3;
   color: #070708;
   border: 1.5px solid #8B7E5D;
 }
 
 .btn-free-sample:hover,
 .btn-free-sample:focus {
-  background: #C3C3BD;
+  background: #FFFFFF;
+  color: #070708;
+}
+
+.site-nav a {
   color: #070708;
 }
 
 .site-nav a.is-active {
-  color: #E86E12;
+  color: #A1440C;
   background: rgba(232, 110, 18, 0.14);
   box-shadow: inset 0 0 0 1px rgba(139, 126, 93, 0.75);
 }
 
+.site-nav a.nav-purchase {
+  color: #A1440C;
+  background: rgba(232, 110, 18, 0.16);
+  border-color: #E86E12;
+}
+
+.site-nav a.nav-purchase.is-active,
+.site-nav a.nav-purchase:hover,
+.site-nav a.nav-purchase:focus {
+  background: #E86E12;
+  color: #070708;
+}
+
 .site-footer {
-  background: #070708;
-  color: #C3C3BD;
-  border-top: 1px solid rgba(139, 126, 93, 0.65);
+  background: #FAF8F3;
+  color: #3E3E39;
+  border-top: 1px solid #8B7E5D;
 }
 
 .site-footer h3,
-.footer-tagline {
-  color: #E86E12;
+.footer-tagline,
+.footer-tagline em {
+  color: #A1440C;
 }
 
 .footer-tagline,
@@ -4852,19 +4877,19 @@ h1, h2, h3, h4, h5, h6 {
 .site-footer a,
 .footer__legal,
 .social-links a {
-  color: #C3C3BD;
+  color: #3E3E39;
 }
 
 .social-links a:hover,
 .social-links a:focus,
 .site-footer a:hover,
 .site-footer a:focus {
-  color: #F4F1EA;
+  color: #A1440C;
 }
 
-.scroll-top {
-  background: #E86E12;
-  color: #070708;
+.stat-card__number,
+.ehome-proof-card__metric {
+  color: #E86E12;
 }
 
 .product-filter input,
@@ -4878,8 +4903,8 @@ h1, h2, h3, h4, h5, h6 {
 .pet-form select,
 .pet-form textarea,
 .wen-notify-form__row input {
-  background: #121210;
-  color: #F4F1EA;
+  background: #FFFFFF;
+  color: #070708;
   border-color: #8B7E5D;
 }
 
@@ -4889,36 +4914,58 @@ h1, h2, h3, h4, h5, h6 {
 .subscription-form input::placeholder,
 .form-grid input::placeholder,
 .form-grid textarea::placeholder {
-  color: #C3C3BD;
+  color: #3E3E39;
 }
 
-.ehome-circular-loop {
-  background: linear-gradient(135deg, #141412 0%, #3E3E39 100%);
-  color: #F4F1EA;
+.ehome-circular-loop,
+.ehome-earlylight,
+.ehome-final-cta,
+.regen-circular,
+.regen-contact,
+.regen-partnership {
+  background: #FAF8F3;
+  color: #070708;
 }
 
-.ehome-earlylight {
-  background: linear-gradient(160deg, #070708 0%, #3E3E39 100%);
-  color: #F4F1EA;
+.ehome-circular-loop h2,
+.ehome-circular-loop h3,
+.ehome-circular-loop p,
+.ehome-earlylight h2,
+.ehome-earlylight h3,
+.ehome-earlylight p,
+.ehome-final-cta h2,
+.regen-circular__title,
+.regen-circular__desc,
+.regen-pillar h3,
+.regen-pillar p,
+.regen-partnership__title,
+.regen-partnership p,
+.regen-contact,
+.regen-contact a,
+.regen-flow__arrow {
+  color: #070708;
 }
 
-.eyebrow--light {
-  color: #E86E12;
+.regen-contact a:hover,
+.regen-contact a:focus {
+  color: #A1440C;
 }
 
-.regen-circular {
-  background: linear-gradient(135deg, #141412 0%, #3E3E39 100%);
+.ehome-circular-loop__flow span,
+.ehome-circular-loop__card,
+.ehome-earlylight__cards article,
+.regen-pillar,
+.regen-flow,
+.regen-flow__node {
+  background: #FFFFFF;
+  border: 1px solid #8B7E5D;
+  color: #070708;
 }
 
 .regen-flow__node--process {
-  background: #070708;
+  background: #E86E12;
   border: 2px solid #E86E12;
-  color: #F4F1EA;
-}
-
-.regen-contact {
-  background: #141412;
-  border-top: 1px solid rgba(139, 126, 93, 0.65);
+  color: #070708;
 }
 
 .regen-brand__logo--we {
@@ -4933,14 +4980,14 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #F7F3E8;
-  border: 1px solid #8B7E5D;
-  border-radius: 16px;
-  padding: 0.9rem 1.1rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
   line-height: 0;
   text-decoration: none;
   max-width: 100%;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  box-shadow: none;
 }
 
 .nellies-logo-panel img {
@@ -4966,60 +5013,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
 }
 
-.regen-brand .nellies-logo-panel {
-  padding: 0.55rem 0.7rem;
-  box-shadow: none;
-}
-
 .regen-brand .nellies-logo-panel img {
   width: 190px;
 }
 
 .page-hero__content .nellies-logo-panel {
   margin-bottom: 1rem;
-}
-
-@media (max-width: 1024px) {
-  .site-nav {
-    background: rgba(7, 7, 8, 0.98);
-  }
-}
-
-@media (max-width: 640px) {
-  .site-header .logo-mark {
-    width: 58px;
-    height: 60px;
-    max-width: none;
-  }
-
-  .nellies-logo-panel {
-    width: 100%;
-  }
-
-  .footer__brand .logo {
-    width: 132px;
-    height: 136px;
-  }
-}
-
-.site-nav a.nav-purchase {
-  color: #F4F1EA;
-}
-
-.site-nav a.nav-purchase.is-active {
-  background: #E86E12;
-  color: #070708;
-}
-
-.mobile-shop-cta {
-  background: #E86E12;
-  color: #070708;
-}
-
-.mobile-shop-cta:hover,
-.mobile-shop-cta:focus {
-  background: #A1440C;
-  color: #F4F1EA;
 }
 
 .page-nellies-garden .nellies-hero-figure {
@@ -5039,14 +5038,18 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0.75rem 0 0;
   font-size: 0.95rem;
   line-height: 1.45;
-  color: #C3C3BD;
+  color: #3E3E39;
 }
 
 .nellies-hero-caption a {
-  color: #E86E12;
+  color: #A1440C;
 }
 
 @media (max-width: 1024px) {
+  .site-nav {
+    background: #FFFFFF;
+  }
+
   .page-nellies-garden .nellies-hero-photo {
     height: auto;
     max-height: none;
@@ -5056,6 +5059,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 640px) {
+  .site-header .logo-mark {
+    width: 60px;
+    height: 60px;
+    max-width: none;
+  }
+
+  .nellies-logo-panel {
+    width: 100%;
+  }
+
+  .footer__brand .logo {
+    width: 132px;
+    height: 132px;
+  }
+
   .page-nellies-garden .nellies-hero-photo {
     height: auto;
     max-height: none;

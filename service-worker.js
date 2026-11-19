@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 (() => {
-  const VERSION = 'wen-brand-v8';
+  const VERSION = 'wen-brand-v9';
   const CORE_ASSETS = [
     '/',
     '/index.html',
