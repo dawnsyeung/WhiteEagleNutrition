@@ -11,7 +11,7 @@
   };
   const nelliesBsflPage = {
     href: 'nellies-bsfl.html',
-    label: "Nellie's BSFL"
+    label: "White Eagle BSFL"
   };
 
   const navToggle = qs('.nav-toggle');

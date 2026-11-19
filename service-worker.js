@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 (() => {
-  const VERSION = 'pet-photos-v7';
+  const VERSION = 'wen-brand-v8';
   const CORE_ASSETS = [
     '/',
     '/index.html',
@@ -9,8 +9,9 @@
     '/assets/js/main.js',
     '/assets/js/pet-photos-app.js',
     '/manifest.webmanifest',
-    '/assets/images/favicon.svg',
-    '/assets/images/logo.png'
+    '/assets/images/favicon-32.png',
+    '/assets/images/logo.png',
+    '/assets/images/logo-header.webp'
   ];
 
   self.addEventListener('install', (event) => {
