@@ -480,10 +480,13 @@ ${serializeJsonLd(jsonLdGraph)
         <nav id="primary-navigation" class="site-nav" aria-label="Primary">
           <ul>
             <li><a href="/products">Products</a></li>
-            <li><a href="/animal-connection">Animal Connection</a></li>
             <li><a href="/ethics">Ethics &amp; Sustainability</a></li>
-            <li><a href="/about">About</a></li>
+            <li><a href="/white-eagle-bsfl">White Eagle BSFL</a></li>
+            <li><a href="/nellies-garden">Nellie's Garden</a></li>
+            <li><a href="/animal-connection">Animal Connection</a></li>
             <li><a href="/chief-white-eagle">Chief White Eagle</a></li>
+            <li><a href="/about">About</a></li>
+          
           </ul>
         </nav>
       </div>
