@@ -63,9 +63,31 @@ module.exports = async function handler(req, res) {
     const pixelId = trimString(process.env.META_PIXEL_ID, 64) || DEFAULT_PIXEL_ID;
     const body = await parseJsonBody(req);
 
+    if (body.marketing_consent !== true || req.headers?.['sec-gpc'] === '1' || req.headers?.dnt === '1') {
+      json(res, 403, { error: 'Explicit Meta tracking consent is required.' }); return;
+    }
+    if (!['PageView', 'ViewContent'].includes(body.event_name)) {
+      json(res, 400, { error: 'Unsupported event.' }); return;
+    }
+    const customData = body.event_name === 'ViewContent'
+      ? { content_type: 'product_group', content_ids: ['8975496478860'] } : {};
+    if (body.event_name === 'ViewContent' &&
+        (body.custom_data?.content_type !== 'product_group' ||
+         JSON.stringify(body.custom_data?.content_ids) !== '["8975496478860"]')) {
+      json(res, 400, { error: 'Unsupported product mapping.' }); return;
+    }
     const eventName = trimString(body?.event_name, 64) || 'PageView';
     const eventId = trimString(body?.event_id, 128);
     const eventSourceUrl = trimString(body?.event_source_url, 2048);
+    let source;
+    try { source = new URL(eventSourceUrl); } catch (_) {}
+    if (!source || !['www.whiteeaglenutrition.com', 'whiteeaglenutrition.com'].includes(source.hostname) || source.protocol !== 'https:') {
+      json(res, 400, { error: 'Unsupported source.' }); return;
+    }
+    if (eventName === 'ViewContent' && !/^\/products\/2lb-bag-of-whole-dried-black-soldier-fly-larvae-bsfl(?:\.html)?\/?$/.test(source.pathname)) {
+      json(res, 400, { error: 'Unsupported product page.' }); return;
+    }
+    source.search = ''; source.hash = '';
     const fbp = trimString(body?.fbp, 128);
     const fbc = trimString(body?.fbc, 128);
 
@@ -88,8 +110,9 @@ module.exports = async function handler(req, res) {
           event_time: Math.floor(Date.now() / 1000),
           event_id: eventId,
           action_source: 'website',
-          event_source_url: eventSourceUrl,
-          user_data: userData
+          event_source_url: source.href,
+          user_data: userData,
+          custom_data: customData
         }
       ]
     };
