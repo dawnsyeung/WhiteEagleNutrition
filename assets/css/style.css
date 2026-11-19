@@ -4793,6 +4793,20 @@ h1, h2, h3, h4, h5, h6 {
   color: #070708;
 }
 
+.btn.btn-lg {
+  padding: 18px 40px;
+  font-size: 1.2rem;
+  min-width: 320px;
+}
+
+@media (max-width: 720px) {
+  .btn.btn-lg {
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+}
+
 .btn-primary:hover,
 .btn-primary:focus,
 .mobile-shop-cta:hover,

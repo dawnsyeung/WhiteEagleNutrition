@@ -698,14 +698,6 @@
 
     li.appendChild(a);
 
-    // Insert just before "About" so About stays toward the right side of nav.
-    const aboutLink = qsa('a', navList).find((link) => (link.getAttribute('href') || '') === 'about.html');
-    const aboutLi = aboutLink?.closest('li') || null;
-    if (aboutLi && aboutLi.parentElement === navList) {
-      navList.insertBefore(li, aboutLi);
-      return;
-    }
-
     navList.appendChild(li);
   };
 
@@ -727,16 +719,34 @@
     }
 
     li.appendChild(a);
-
-    // Insert just before "About" so About stays toward the right side of nav.
-    const aboutLink = qsa('a', navList).find((link) => (link.getAttribute('href') || '') === 'about.html');
-    const aboutLi = aboutLink?.closest('li') || null;
-    if (aboutLi && aboutLi.parentElement === navList) {
-      navList.insertBefore(li, aboutLi);
-      return;
-    }
-
     navList.appendChild(li);
+  };
+
+  const reorderPrimaryNav = () => {
+    const navList = qs('.site-nav ul');
+    if (!navList) return;
+
+    const order = [
+      /(^|\/)products(\.html)?$/i,
+      /(^|\/)ethics(\.html)?$/i,
+      /(^|\/)white-eagle-bsfl(\.html)?$/i,
+      /(^|\/)nellies-garden(\.html)?$/i,
+      /(^|\/)animal-connection(\.html)?$/i,
+      /(^|\/)chief-white-eagle(\.html)?$/i,
+      /(^|\/)about(\.html)?$/i
+    ];
+
+    const rank = (li) => {
+      const href = (qs('a', li)?.getAttribute('href') || '').split('#')[0].split('?')[0].replace(/^\.\//, '');
+      const path = href.replace(/^\//, '');
+      const index = order.findIndex((pattern) => pattern.test(path));
+      return index === -1 ? 100 : index;
+    };
+
+    qsa('li', navList)
+      .map((li, index) => ({ li, index, rank: rank(li) }))
+      .sort((a, b) => a.rank - b.rank || a.index - b.index)
+      .forEach(({ li }) => navList.appendChild(li));
   };
 
   const setupPwa = () => {
@@ -1220,6 +1230,7 @@
     injectNelliesGardenNavLink();
     injectWhiteEagleBsflNavLink();
     setupPurchaseNavCta();
+    reorderPrimaryNav();
     syncActiveNavLink();
     setupNavigation();
     if (!hasShopifyBuyButton) {
