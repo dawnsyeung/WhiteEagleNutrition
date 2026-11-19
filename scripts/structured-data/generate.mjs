@@ -530,6 +530,7 @@ ${mappedProduct.id === 'gid://shopify/Product/8975496478860' ? DRIED_BSFL_REVIEW
 ${PRODUCT_FOOTER}
 
     <a href="#top" class="scroll-top" aria-label="Back to top">↑</a>
+    <script src="/assets/js/meta-consent.js" defer></script>
     <script src="/assets/js/main.js" defer></script>
   </body>
 </html>
