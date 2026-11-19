@@ -5,12 +5,12 @@
   "start_url": "/pet-photos-app.html",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f6f5f3",
-  "theme_color": "#2b5f4c",
+  "background_color": "#FFFFFF",
+  "theme_color": "#E86E12",
   "icons": [
     {
-      "src": "/assets/images/favicon.svg",
-      "type": "image/svg+xml",
+      "src": "/assets/images/favicon-32.png",
+      "type": "image/png",
       "sizes": "any",
       "purpose": "any maskable"
     },
@@ -29,8 +29,8 @@
       "url": "/pet-photos-app.html#new-post",
       "icons": [
         {
-          "src": "/assets/images/favicon.svg",
-          "type": "image/svg+xml",
+          "src": "/assets/images/favicon-32.png",
+          "type": "image/png",
           "sizes": "any"
         }
       ]

@@ -12,11 +12,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Oswald:wght@500;600;700&family=Rye&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
     <link rel="canonical" href="https://www.whiteeaglenutrition.com/nellies-garden" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Buy BSFL Frass for Gardens | Nellie's Garden by White Eagle Nutrition" />
@@ -24,7 +25,7 @@
       property="og:description"
       content="See Nellie's Garden frass products, benefits, and use cases. Nellie's Garden is part of White Eagle Nutrition's regenerative agriculture ecosystem."
     />
-    <meta property="og:image" content="https://www.whiteeaglenutrition.com/assets/images/products/basket.png" />
+    <meta property="og:image" content="https://www.whiteeaglenutrition.com/assets/images/logo.png" />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17813054995"></script>
     <script>
@@ -66,7 +67,7 @@
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="Buy BSFL Frass for Gardens | Nellie's Garden by White Eagle Nutrition" />
       <meta name="twitter:description" content="See Nellie's Garden frass products, benefits, and use cases inside White Eagle Nutrition's regenerative agriculture ecosystem." />
-      <meta name="twitter:image" content="https://www.whiteeaglenutrition.com/assets/images/products/basket.png" />
+      <meta name="twitter:image" content="https://www.whiteeaglenutrition.com/assets/images/logo.png" />
   </head>
   <body class="page-nellies-garden">
     <header class="site-header" id="top">
@@ -101,6 +102,12 @@
       <section class="page-hero">
         <div class="container page-hero__layout">
           <div class="page-hero__content">
+            <a class="nellies-logo-panel nellies-logo-panel--hero" href="https://nelliesgarden.com" target="_blank" rel="noopener">
+              <picture>
+                <source type="image/webp" srcset="assets/images/nellies-garden-logo-600.webp 600w, assets/images/nellies-garden-logo-1200.webp 1200w" sizes="(max-width: 720px) 88vw, 640px" />
+                <img src="assets/images/nellies-garden-logo-1200.png" srcset="assets/images/nellies-garden-logo-600.png 600w, assets/images/nellies-garden-logo-1200.png 1200w" sizes="(max-width: 720px) 88vw, 640px" alt="Nellie's Garden logo" width="1200" height="294" />
+              </picture>
+            </a>
             <p class="eyebrow">White Eagle Nutrition soil health division</p>
             <h1>Nellie's Garden helps growers build healthier, more resilient soil with USA-grown BSFL frass.</h1>
             <p>
@@ -110,7 +117,7 @@
             </p>
             <div class="cta__buttons">
               <a class="btn btn-primary" href="https://nelliesgarden.com" target="_blank" rel="noopener">VISIT NELLIESGARDEN.COM</a>
-              <a class="btn btn-outline" href="products.html#frass-buy">SHOP WHITE EAGLE FRASS</a>
+              <a class="btn btn-outline" href="products.html#frass-buy">SHOP NELLIE'S GARDEN FRASS</a>
             </div>
             <div class="page-hero__stats" aria-label="Nellie's Garden performance highlights">
               <div class="stat-card">
@@ -127,15 +134,30 @@
               </div>
             </div>
           </div>
-          <div class="page-hero__visual" role="presentation">
-            <img
-              class="nellies-hero-photo"
-              src="assets/images/STRONGMAN.png"
-              alt="Strongman visual representing strength and resilience in regenerative growing"
-              loading="eager"
-              decoding="async"
-              sizes="(max-width: 720px) 92vw, (max-width: 1200px) 42vw, 440px"
-            />
+          <div class="page-hero__visual">
+            <figure class="nellies-hero-figure">
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="assets/images/nellie-middle-ground-768.webp 768w, assets/images/nellie-middle-ground-1280.webp 1280w"
+                  sizes="(max-width: 720px) 92vw, (max-width: 1200px) 46vw, 520px"
+                />
+                <img
+                  class="nellies-hero-photo"
+                  src="assets/images/nellie-middle-ground-1280.jpg"
+                  srcset="assets/images/nellie-middle-ground-768.jpg 768w, assets/images/nellie-middle-ground-1280.jpg 1280w"
+                  sizes="(max-width: 720px) 92vw, (max-width: 1200px) 46vw, 520px"
+                  width="1280"
+                  height="720"
+                  alt="Inspired by Nellie, a young widow who worked the Blackland Prairie soil of Texas to feed her family"
+                  loading="eager"
+                  decoding="async"
+                />
+              </picture>
+              <figcaption class="nellies-hero-caption">
+                <a href="https://nelliesgarden.com/nellie.html" target="_blank" rel="noopener">Inspired by Nellie, who drew strength from Texas soil.</a>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>

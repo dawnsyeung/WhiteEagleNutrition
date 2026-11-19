@@ -104,7 +104,7 @@ const baseSitemapRoutes = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/products', changefreq: 'weekly', priority: '0.95' },
   { path: '/nellies-garden', changefreq: 'monthly', priority: '0.85' },
-  { path: '/nellies-bsfl', changefreq: 'monthly', priority: '0.85' },
+  { path: '/white-eagle-bsfl', changefreq: 'monthly', priority: '0.85' },
   { path: '/ethics', changefreq: 'monthly', priority: '0.85' },
   { path: '/about', changefreq: 'monthly', priority: '0.8' },
   { path: '/chief-white-eagle', changefreq: 'monthly', priority: '0.8' },

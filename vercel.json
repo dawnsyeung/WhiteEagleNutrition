@@ -8,6 +8,16 @@
   },
   "redirects": [
     {
+      "source": "/nellies-bsfl",
+      "destination": "/white-eagle-bsfl",
+      "permanent": true
+    },
+    {
+      "source": "/nellies-bsfl.html",
+      "destination": "/white-eagle-bsfl",
+      "permanent": true
+    },
+    {
       "source": "/research",
       "destination": "/ethics#bsfl-science-hub",
       "permanent": true
