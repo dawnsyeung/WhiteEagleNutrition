@@ -1311,34 +1311,34 @@ img {
 }
 
 .page-nellies-garden .metrics__grid,
-.page-nellies-bsfl .metrics__grid {
+.page-white-eagle-bsfl .metrics__grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .page-nellies-garden .impact__stats,
-.page-nellies-bsfl .impact__stats {
+.page-white-eagle-bsfl .impact__stats {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .page-nellies-garden .page-hero .page-hero__layout,
-.page-nellies-bsfl .page-hero .page-hero__layout {
+.page-white-eagle-bsfl .page-hero .page-hero__layout {
   align-items: stretch;
 }
 
 .page-nellies-garden .page-hero .page-hero__content,
-.page-nellies-bsfl .page-hero .page-hero__content {
+.page-white-eagle-bsfl .page-hero .page-hero__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .page-nellies-garden .page-hero .page-hero__visual,
-.page-nellies-bsfl .page-hero .page-hero__visual {
+.page-white-eagle-bsfl .page-hero .page-hero__visual {
   flex: 0 1 420px;
 }
 
 .page-nellies-garden .nellies-hero-photo,
-.page-nellies-bsfl .nellies-hero-photo {
+.page-white-eagle-bsfl .nellies-hero-photo {
   width: 100%;
   height: clamp(420px, 55vw, 620px);
   aspect-ratio: 3 / 4;
@@ -1347,7 +1347,7 @@ img {
 }
 
 .page-nellies-garden .nellies-feature-photo,
-.page-nellies-bsfl .nellies-feature-photo {
+.page-white-eagle-bsfl .nellies-feature-photo {
   width: 100%;
   height: auto;
   max-height: 430px;
@@ -1364,22 +1364,22 @@ img {
   }
 
   .page-nellies-garden .metrics__grid,
-  .page-nellies-bsfl .metrics__grid {
+  .page-white-eagle-bsfl .metrics__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .page-nellies-garden .impact__stats,
-  .page-nellies-bsfl .impact__stats {
+  .page-white-eagle-bsfl .impact__stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .page-nellies-garden .nellies-hero-photo,
-  .page-nellies-bsfl .nellies-hero-photo {
+  .page-white-eagle-bsfl .nellies-hero-photo {
     height: clamp(380px, 52vw, 520px);
   }
 
   .page-nellies-garden .nellies-feature-photo,
-  .page-nellies-bsfl .nellies-feature-photo {
+  .page-white-eagle-bsfl .nellies-feature-photo {
     max-height: 390px;
   }
 }
@@ -1394,39 +1394,39 @@ img {
   }
 
   .page-nellies-garden .metrics__grid,
-  .page-nellies-bsfl .metrics__grid {
+  .page-white-eagle-bsfl .metrics__grid {
     grid-template-columns: 1fr;
   }
 
   .page-nellies-garden .impact__stats,
-  .page-nellies-bsfl .impact__stats {
+  .page-white-eagle-bsfl .impact__stats {
     grid-template-columns: 1fr;
   }
 
   .page-nellies-garden .page-hero .page-hero__layout,
-  .page-nellies-bsfl .page-hero .page-hero__layout {
+  .page-white-eagle-bsfl .page-hero .page-hero__layout {
     align-items: center;
   }
 
   .page-nellies-garden .page-hero .page-hero__content,
-  .page-nellies-bsfl .page-hero .page-hero__content {
+  .page-white-eagle-bsfl .page-hero .page-hero__content {
     justify-content: flex-start;
   }
 
   .page-nellies-garden .page-hero .page-hero__visual,
-  .page-nellies-bsfl .page-hero .page-hero__visual {
+  .page-white-eagle-bsfl .page-hero .page-hero__visual {
     flex: 1 1 260px;
   }
 
   .page-nellies-garden .nellies-hero-photo,
-  .page-nellies-bsfl .nellies-hero-photo {
+  .page-white-eagle-bsfl .nellies-hero-photo {
     height: auto;
     max-height: 420px;
     aspect-ratio: 4 / 3;
   }
 
   .page-nellies-garden .nellies-feature-photo,
-  .page-nellies-bsfl .nellies-feature-photo {
+  .page-white-eagle-bsfl .nellies-feature-photo {
     max-height: 340px;
     aspect-ratio: 4 / 3;
   }

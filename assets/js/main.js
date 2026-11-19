@@ -9,8 +9,8 @@
     href: 'nellies-garden.html',
     label: "Nellie's Garden"
   };
-  const nelliesBsflPage = {
-    href: 'nellies-bsfl.html',
+  const whiteEagleBsflPage = {
+    href: 'white-eagle-bsfl.html',
     label: "White Eagle BSFL"
   };
 
@@ -709,20 +709,20 @@
     navList.appendChild(li);
   };
 
-  const injectNelliesBsflNavLink = () => {
+  const injectWhiteEagleBsflNavLink = () => {
     const navList = qs('.site-nav ul');
     if (!navList) return;
 
-    const already = qsa('a', navList).some((a) => (a.getAttribute('href') || '').includes(nelliesBsflPage.href));
+    const already = qsa('a', navList).some((a) => (a.getAttribute('href') || '').includes(whiteEagleBsflPage.href));
     if (already) return;
 
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = nelliesBsflPage.href;
-    a.textContent = nelliesBsflPage.label;
+    a.href = whiteEagleBsflPage.href;
+    a.textContent = whiteEagleBsflPage.label;
 
     const currentPath = (window.location.pathname || '').split('/').pop() || 'index.html';
-    if (currentPath === nelliesBsflPage.href) {
+    if (currentPath === whiteEagleBsflPage.href) {
       a.classList.add('is-active');
     }
 
@@ -1218,7 +1218,7 @@
     setupNotifyMeButtons();
     syncHeaderHeightVar();
     injectNelliesGardenNavLink();
-    injectNelliesBsflNavLink();
+    injectWhiteEagleBsflNavLink();
     setupPurchaseNavCta();
     syncActiveNavLink();
     setupNavigation();
