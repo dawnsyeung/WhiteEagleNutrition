@@ -15,6 +15,13 @@ import {
   withFragment,
 } from './lib/schema.mjs';
 
+const DRIED_BSFL_PRODUCT_ID = 'gid://shopify/Product/8975496478860';
+const DRIED_BSFL_DESCRIPTION =
+  '100% whole dried black soldier fly larvae (BSFL), with no added ingredients. Offer as a treat or feed topper alongside a complete diet for poultry and other insect-eating animals. For animal feeding only.';
+const DRIED_BSFL_META_DESCRIPTION =
+  'Shop whole dried black soldier fly larvae (BSFL) for poultry and other insect-eating animals. Compare bag and bulk options and check shipping.';
+const DRIED_BSFL_SHIPPING = `          <p><strong>Shipping:</strong> See shipping options and charges in Shopify checkout before you pay. <a href="/shipping">Read our shipping policy</a>. For a 750 lb tote, <a href="/contact">contact us</a> to confirm delivery options before ordering.</p>`;
+
 const ROOT = process.cwd();
 const PRODUCT_FOOTER = await fs.readFile(path.join(ROOT, 'scripts/structured-data/templates/product-footer.html'), 'utf8');
 const DRIED_BSFL_REVIEWS = await fs.readFile(path.join(ROOT, 'scripts/structured-data/templates/dried-bsfl-reviews.html'), 'utf8');
@@ -381,7 +388,7 @@ const buildProductDetailGraph = ({ organization, mappedProduct }) => ({
     buildWebPageSchema({
       pagePath: mappedProduct.detailPath,
       name: `${mappedProduct.title} | White Eagle Nutrition`,
-      description: sanitizeMetaDescription(mappedProduct.description),
+      description: mappedProduct.metaDescription ?? sanitizeMetaDescription(mappedProduct.description),
     }),
     buildBreadcrumbList([
       {
@@ -403,7 +410,7 @@ const buildProductDetailGraph = ({ organization, mappedProduct }) => ({
 
 const renderProductDetailHtml = ({ mappedProduct, jsonLdGraph }) => {
   const firstImage = mappedProduct.images[0] || canonicalUrl('/assets/images/products/basket.png');
-  const metaDescription = sanitizeMetaDescription(mappedProduct.description);
+  const metaDescription = mappedProduct.metaDescription ?? sanitizeMetaDescription(mappedProduct.description);
   const variantCards = mappedProduct.variants
     .map((variant) => {
       const isInStock = variant.availableForSale;
@@ -512,7 +519,7 @@ ${serializeJsonLd(jsonLdGraph)
 
       <section class="values" aria-labelledby="variant-options-heading">
         <div class="container">
-          <h2 id="variant-options-heading">Available options and pricing</h2>
+          <h2 id="variant-options-heading">Available options and pricing</h2>${mappedProduct.id === DRIED_BSFL_PRODUCT_ID ? `\n${DRIED_BSFL_SHIPPING}` : ''}
           <div class="values__grid">
 ${variantCards}
           </div>
@@ -527,7 +534,7 @@ ${imageCards}
           </div>
         </div>
       </section>
-${mappedProduct.id === 'gid://shopify/Product/8975496478860' ? DRIED_BSFL_REVIEWS : ''}
+${mappedProduct.id === DRIED_BSFL_PRODUCT_ID ? DRIED_BSFL_REVIEWS : ''}
     </main>
 
 ${PRODUCT_FOOTER}
@@ -578,12 +585,17 @@ const run = async () => {
       product: productById.get(mapping.productGid),
     }))
     .filter(({ product }) => Boolean(product))
-    .map(({ mapping, product }) => {
+    .map(({ mapping, product: storefrontProduct }) => {
+      const isDriedBsfl = storefrontProduct.id === DRIED_BSFL_PRODUCT_ID;
+      const product = isDriedBsfl
+        ? { ...storefrontProduct, description: DRIED_BSFL_DESCRIPTION }
+        : storefrontProduct;
       const detailPath = `/products/${product.handle}`;
       const detailUrl = canonicalUrl(detailPath);
       const purchaseBaseUrl = `${canonicalUrl('/products')}#${mapping.anchor}`;
       return {
         ...product,
+        ...(isDriedBsfl ? { metaDescription: DRIED_BSFL_META_DESCRIPTION } : {}),
         anchor: mapping.anchor,
         detailPath,
         detailUrl,
